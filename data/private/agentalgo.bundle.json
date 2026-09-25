@@ -1,0 +1,108 @@
+{
+  "project": {
+    "name": "AgentAlgo",
+    "idea": "A 12-agent AI trading desk in the browser, built for Indian F&O: analysts debate, bull vs bear researchers argue, a risk team stress-tests, a portfolio manager decides — and you get one Trade Card (what to buy, entry, stop loss, targets, lots). Research tool only; never places broker orders.",
+    "mode": "incremental",
+    "repoPath": "/Users/shiv/Projects/TradingAgentGithub/AgentAlgo",
+    "tags": "fintech, ai-agents, trading, langgraph, india, f&o",
+    "owner": "Shivhari Lokhande",
+    "deployStatus": "staging"
+  },
+  "phases": [
+    { "phase": 1, "status": "done", "summary": "Vision: bring the TradingAgents (TauricResearch, LangGraph) multi-agent engine to the browser as a multi-user SaaS; positioning = research & decision-support, not advice, no order execution." },
+    { "phase": 2, "status": "done", "summary": "Stack: FastAPI + Python 3.12 backend consuming TradingAgents as a library; React 18 + TypeScript + Vite frontend; Docker Compose; GitHub Actions CI. BYO LLM/data keys → ₹0 platform API cost; Cowork bridge runs the engine on the Claude subscription." },
+    { "phase": 3, "status": "done", "summary": "PRD v1.0 (2026-09-03): feature-parity contract F# table mapping every repo capability to a web feature; personas Ravi / Elena / Marcus; goals G1–G5; non-goals (no brokerage, no billing, no native apps)." },
+    { "phase": 4, "status": "done", "summary": "Architecture: engine graph → analysts → bull/bear → research manager → trader → risk debate → portfolio manager; per-user encrypted keys; decision log with pending→resolved lifecycle + reflections; FTS research library; background loops (queue pump, triggers, schedules, alerts)." },
+    { "phase": 5, "status": "done", "summary": "Built Phases 2–4 of the PRD: HITL pauses, alerts, paper trading, ensembles, triggers, Agent Studio, research library; then the F&O Desk (live NSE option chain, Greeks, delta-targeted strikes, Trade Card, Level Watch) and Scalp Mode + Pine mirror." },
+    { "phase": 6, "status": "done", "summary": "Quality round 3 (2026-09-04): 14 findings incl. 3 High (ensemble 500, HITL wedge after restart, stored XSS) all fixed same day; 58/58 then; README badge now 88 tests passing." },
+    { "phase": 7, "status": "active", "summary": "Docker Compose + CI in place; running locally via backend/run_dev.sh with auto-restart supervisor. Paper-month trial live against Kite quotes (30-day gate before any real-money decision)." },
+    { "phase": 8, "status": "pending", "summary": "" }
+  ],
+  "requirements": [
+    { "priority": "P0", "text": "Paper-month 30-day gate: shadow portfolio with real Kite exits must complete before any live-money feature" },
+    { "priority": "P0", "text": "Scheduled F&O runs must never silently skip (0c1dc10 fixed ^NSEI normalization — add a monitor/alert for zero runs in a session)" },
+    { "priority": "P0", "text": "Tenant isolation on every endpoint (30+ new endpoints reviewed; per-user FTS column still ticketed R3-8)" },
+    { "priority": "P1", "text": "Trade Card: at-trigger premium estimate, fixed-fractional sizing from user capital & risk %, SIMULATED watermark on demo cards" },
+    { "priority": "P1", "text": "Level Watch alerts every 2 min + auto re-analysis on ±0.75% index move" },
+    { "priority": "P1", "text": "Desk Review: grade each agent's contribution against realized outcomes" },
+    { "priority": "P2", "text": "Per-user FTS column for the research library (replace 8× over-fetch mitigation)" },
+    { "priority": "P2", "text": "Order execution / brokerage connectivity (explicit non-goal for v1; Phase 3 candidate)" }
+  ],
+  "sprints": [
+    { "number": 1, "goal": "PRD Phases 2–4: HITL, alerts, paper trading, ensembles, triggers, Agent Studio, research library + Round-3 quality fixes", "startDate": "2026-09-03", "endDate": "2026-09-06", "status": "closed" },
+    { "number": 2, "goal": "F&O Desk + Scalp Mode: option chain, Greeks, Trade Card, Level Watch, Pine mirror, paper-trade shadow portfolio", "startDate": "2026-09-07", "endDate": "2026-09-14", "status": "closed" },
+    { "number": 3, "goal": "Paper month hardening: exit audit corrections, manual Exit, settings whitelist, CI fixes, scheduled-run reliability", "startDate": "2026-09-15", "endDate": "2026-09-28", "status": "active" }
+  ],
+  "stories": [
+    { "title": "Queue pump, HITL pause/resume, alerts, paper trading, ensembles, triggers, Agent Studio, research library (PRD Phases 2–4)", "description": "All Phase 2–4 code reviewed in Round 3.", "points": 13, "status": "done", "assignee": "Arun", "sprintNumber": 1 },
+    { "title": "Round-3 quality fixes: 14 findings (3 High) + 6 regression tests", "description": "Ensemble 500, HITL wedge after restart, stored XSS, FTS 500s, paper double-open, alert spam, EDGAR on event loop…", "points": 8, "status": "done", "assignee": "Divya", "sprintNumber": 1 },
+    { "title": "F&O Desk: live NSE option chain, PCR/max pain/OI walls, India VIX, IV skew, Black-Scholes Greeks", "description": "", "points": 8, "status": "done", "assignee": "Arun", "sprintNumber": 2 },
+    { "title": "Trade Card with delta-targeted strike, at-trigger premium, fixed-fractional lots, SIMULATED watermark", "description": "", "points": 5, "status": "done", "assignee": "Rhea", "sprintNumber": 2 },
+    { "title": "Level Watch auto-armed alerts + ±0.75% re-analysis", "description": "", "points": 3, "status": "done", "assignee": "Nikhil", "sprintNumber": 2 },
+    { "title": "Paper Trade B: shadow portfolio with pre-registered premium run-up gate, real Kite exits, 30-day gate", "description": "d3f9fec, e68cc8b, 980112a", "points": 8, "status": "done", "assignee": "Nikhil", "sprintNumber": 2 },
+    { "title": "Pine Script mirror of the scalp engine for TradingView review", "description": "785d0e4", "points": 3, "status": "done", "assignee": "Arun", "sprintNumber": 2 },
+    { "title": "Modeled exits record the rule's exit time; 16-Sep exit_at repair + audit correction to real option candle closes", "description": "52cc956, 1606439", "points": 3, "status": "done", "assignee": "Nikhil", "sprintNumber": 3 },
+    { "title": "Paper Trade manual Exit button (closes at live Kite bid, outcome MANUAL) + tests", "description": "3e228d4", "points": 3, "status": "done", "assignee": "Rhea", "sprintNumber": 3 },
+    { "title": "Fix settings whitelist (paper_capital / paper_risk_pct Save 422) + regression test", "description": "1cdbf48", "points": 1, "status": "done", "assignee": "Nikhil", "sprintNumber": 3 },
+    { "title": "CI: routable admin email (email-validator rejected .local → 422 broke test_admin)", "description": "2ec5a8c", "points": 1, "status": "done", "assignee": "Rohan", "sprintNumber": 3 },
+    { "title": "Fix normalize_ticker rejecting '^NSEI' — scheduled F&O runs silently skipped since 5-Sep", "description": "0c1dc10. Follow-up: alert when a scheduled session produces zero runs.", "points": 2, "status": "done", "assignee": "Arun", "sprintNumber": 3 },
+    { "title": "Zero-run watchdog: alert if a scheduled F&O session produces no runs", "description": "Prevents a repeat of the 5→17 Sep silent skip.", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 3 },
+    { "title": "Per-user FTS column for research library (retire 8× over-fetch)", "description": "R3-8 follow-up.", "points": 5, "status": "todo", "assignee": "", "sprintNumber": null },
+    { "title": "Desk Review: grade each agent against realized outcomes", "description": "", "points": 5, "status": "todo", "assignee": "", "sprintNumber": null }
+  ],
+  "contracts": {
+    "A": {
+      "language": "en_in",
+      "programming_language": "Python 3.12 / FastAPI backend (TradingAgents LangGraph engine as a library); React 18 + TypeScript + Vite frontend; SQLite/FTS; Docker Compose",
+      "original_requirements": "Bring the full TradingAgents multi-agent research pipeline to the browser as a multi-user SaaS with BYO API keys, live agent observability and a persistent decision memory — then specialise it for Indian F&O with a single Trade Card.",
+      "project_name": "agentalgo",
+      "product_goals": "Full feature parity with the TradingAgents CLI from the web UI (G1)\nMulti-user SaaS with isolated data and per-user encrypted keys (G2)\nLive observability of every agent, message, tool call and report section (G3)",
+      "user_stories": "As Ravi (retail researcher), I want a decision plus the reasoning trail for 2–5 tickers a week using one LLM key\nAs Elena (quant hobbyist), I want to compare providers/models and debate depths and export reports with token cost visible\nAs Marcus (finance lead), I want the team's watchlist run on a schedule and the decision log's accuracy reviewed over time\nAs an Indian F&O trader, I want one Trade Card: trigger, premium to buy, entry, SL, T1/T2, R:R and lots sized from my capital",
+      "competitive_analysis": "TradingAgents CLI (upstream): full engine, Python-only, single user\nOne-prompt LLM chat: one opinion, no debate, no memory\nBroker research tabs: data-rich, no multi-agent reasoning, no decision grading\nPaid signal services: opaque, no reasoning trail, often no risk sizing",
+      "competitive_quadrant": "quadrantChart\n  title Reasoning depth vs Accessibility\n  x-axis CLI / experts only --> Browser, anyone\n  y-axis One opinion --> Multi-agent debate + memory\n  \"TradingAgents CLI\": [0.15, 0.9]\n  \"LLM chat\": [0.9, 0.2]\n  \"Broker research\": [0.7, 0.3]\n  \"Our Target Product\": [0.85, 0.9]",
+      "requirement_analysis": "Hard parts: (1) streaming the LangGraph run state to the browser without touching engine core logic; (2) per-user encrypted BYO keys across ~20 LLM providers; (3) decision log lifecycle pending→resolved with realised return and alpha; (4) NSE option-chain data + Greeks with point-in-time protection; (5) honest paper trading against live Kite quotes before any money is at risk. Reliability risk shown by the 5→17 Sep silent skip of scheduled runs.",
+      "requirement_pool": "P0 Paper-month 30-day gate before live-money features\nP0 Scheduled runs never silently skip (watchdog)\nP0 Tenant isolation on every endpoint\nP1 Trade Card sizing + SIMULATED watermark\nP1 Level Watch + auto re-analysis\nP1 Desk Review agent grading\nP2 Per-user FTS column\nP2 Brokerage connectivity (v1 non-goal)",
+      "ui_design_draft": "Guided run configurator (ticker, date, analyst team, provider/model, debate depth) → live agent board (status, messages, tool calls, report sections streaming) → structured reports + Trade Card → Decision Log and Desk Review. F&O Desk page with option chain, Greeks ladder, Level Watch; Paper Trade page with live portfolio and manual Exit; Agent Studio; Research library with FTS.",
+      "anything_unclear": "Test count: README badge says 88 passing; QUALITY_REPORT round 3 says 58/58 — cite the CI run, not a fixed number. Deployment: Docker Compose exists but day-to-day runs via run_dev.sh with a supervisor → deployStatus = staging."
+    },
+    "B": {
+      "implementation_approach": "FastAPI service wraps the TradingAgents engine as a library (no core changes; service-hardening only). Background loops: queue pump, trigger sweep, schedule sweep, alert dispatcher, paper monitor (10 s poll). SQLite with FTS for the research library. React/Vite SPA consumes REST + streaming endpoints. A Cowork bridge (bridge/cowork_bridge.py) lets the engine run on the Claude subscription at ₹0 API cost. Pine Script mirrors the scalp rules for chart review.",
+      "file_list": "backend/app/\nbackend/tests/\nbackend/scripts/\nbackend/run_dev.sh\nbackend/requirements.txt\nfrontend/src/\nfrontend/vite.config.ts\nbridge/cowork_bridge.py\nbridge/claude_settings.json\npine/agentalgo_scalp_mirror.pine\ndocker-compose.yml\n.github/workflows/ci.yml",
+      "data_structures": "classDiagram\n  class User { +id +email +encryptedKeys[] +paperCapital +paperRiskPct }\n  class Run { +id +userId +ticker +date +analysts[] +provider +model +status +reports[] }\n  class Decision { +runId +rating +pending|resolved +realizedReturn +alpha +reflection }\n  class TradeCard { +runId +trigger +instrument +delta +entry +stopLoss +t1 +t2 +lots +maxLoss +simulated }\n  class PaperTrade { +id +userId +cardId +entryPremium +exitPremium +outcome +pnlAfterCharges }\n  class Ensemble { +id +memberRunIds[] +metaJudge }\n  class Trigger { +id +userId +condition +lastFiredAt }\n  User *-- Run\n  Run *-- Decision\n  Run *-- TradeCard\n  TradeCard *-- PaperTrade\n  User *-- Ensemble\n  User *-- Trigger",
+      "call_flow": "sequenceDiagram\n  participant UI as React SPA\n  participant API as FastAPI\n  participant ENG as TradingAgents graph\n  participant NSE as NSE option chain / Kite\n  UI->>API: POST /runs (ticker, analysts, provider)\n  API->>ENG: start graph (checkpointed)\n  ENG-->>API: agent events\n  API-->>UI: stream status / messages / report sections\n  ENG->>NSE: option chain, VIX, quotes\n  ENG-->>API: portfolio manager verdict\n  API->>API: build Trade Card (delta strike, sizing)\n  API-->>UI: Trade Card + Level Watch armed\n  loop every 10 s\n    API->>NSE: paper monitor quotes\n    API->>API: SL / T1 / T2 exits, pnl after charges\n  end",
+      "anything_unclear": "Module-level File List (repo is large; backend/tests has ~1.7k files incl. fixtures). Per-file detail lives in backend/app."
+    },
+    "C": {
+      "required_packages": "Python 3.12\nFastAPI\nTradingAgents (TauricResearch, LangGraph) as library\nuv (CI installer)\nReact 18\nTypeScript\nVite\nnginx (frontend container)",
+      "other_language_packages": "Pine Script (TradingView mirror)",
+      "logic_analysis": "backend/app/ — API, auth, runs, engine adapter, background loops, F&O desk, paper trading, research library\nbackend/tests/ — pytest suite (CI)\nbackend/scripts/ — maintenance / audit corrections\nbackend/run_dev.sh — uvicorn in own session with auto-restart supervisor\nbackend/requirements.txt — pinned deps\nfrontend/src/ — SPA pages: run configurator, live board, F&O Desk, Paper Trade, Agent Studio, Research\nfrontend/vite.config.ts — build\nbridge/cowork_bridge.py — run the engine via Claude Cowork at ₹0 API cost\nbridge/claude_settings.json — bridge settings\npine/agentalgo_scalp_mirror.pine — TradingView mirror of scalp rules\ndocker-compose.yml — backend + frontend containers\n.github/workflows/ci.yml — backend pytest + frontend build",
+      "task_list": "backend/requirements.txt\nbackend/app/\nbackend/tests/\nbackend/scripts/\nbackend/run_dev.sh\nfrontend/vite.config.ts\nfrontend/src/\nbridge/claude_settings.json\nbridge/cowork_bridge.py\npine/agentalgo_scalp_mirror.pine\ndocker-compose.yml\n.github/workflows/ci.yml",
+      "api_spec": "REST under /api (auth, runs, ensembles, triggers, schedules, alerts, paper, settings, research). OpenAPI served by FastAPI at /docs.",
+      "shared_knowledge": "Research tool only — never places broker orders; carry the upstream disclaimer everywhere. BYO keys; no platform-provided keys. Sizing unified at ₹1L @ 7.5% across signals, scoreboard and paper desk (user decision 8b22be3). Theta cutoff 15:00 (paper-month trial). Paper monitor polls every 10 s. Never present a stale quote as live — at-trigger estimates are labelled.",
+      "anything_unclear": "None open."
+    }
+  },
+  "gate": [
+    { "check": 1, "status": "pass", "note": "Regression tests added with every fix (Round 3: 6 new)" },
+    { "check": 2, "status": "pass", "note": "CI backend pytest green after 2ec5a8c; README badge 88 passing" },
+    { "check": 3, "status": "pending", "note": "No automated browser E2E; manual live-market day-1 checks documented in commits" },
+    { "check": 4, "status": "pass", "note": "CI: backend tests + frontend build on push/PR" },
+    { "check": 5, "status": "pass", "note": "Round 3: stored XSS fixed, tenant isolation reviewed across 30+ endpoints; f-string SQL removed" },
+    { "check": 6, "status": "pass", "note": "EDGAR regex moved off the event loop; paper monitor 10 s poll" },
+    { "check": 8, "status": "fail", "note": "Scheduled F&O runs silently skipped 5→17 Sep (normalize_ticker) — fixed, watchdog still todo" },
+    { "check": 9, "status": "pending", "note": "Coverage % not published" },
+    { "check": 10, "status": "pass", "note": "Vite build + FastAPI boot in CI" }
+  ],
+  "adrs": [
+    { "title": "Consume TradingAgents as a library, no core-logic changes", "decision": "Service-hardening only; parity contract via the F# table in the PRD. Keeps upstream upgrades cheap." },
+    { "title": "BYO LLM and data keys; zero platform API cost", "decision": "Per-user encrypted keys across ~20 providers; the Cowork bridge runs the engine on the Claude subscription for ₹0." },
+    { "title": "Paper month before real money", "decision": "Shadow portfolio with pre-registered premium run-up gate and real Kite exits; 30-day gate; unified sizing ₹1L @ 7.5%; theta cutoff 15:00 for the trial." },
+    { "title": "Never present a stale quote as live", "decision": "Trade Card shows at-trigger delta-adjusted estimates with a marker; simulated cards carry a SIMULATED watermark." },
+    { "title": "Dev backend runs in its own session with a supervisor", "decision": "Root cause of 'app is crashing' was terminal reaping (external SIGKILL); backend/run_dev.sh isolates uvicorn and auto-restarts." }
+  ],
+  "summary": {
+    "isPass": "NO",
+    "todos": "{ \"backend/app/ (scheduler)\": \"Add zero-run watchdog so a silent skip like 5→17 Sep cannot recur\", \"backend/app/ (research)\": \"Per-user FTS column (R3-8)\", \"frontend/src/\": \"Desk Review agent grading page\", \"ops\": \"Publish coverage %; decide prod deploy target after paper-month gate\" }",
+    "cycles": 1
+  }
+}

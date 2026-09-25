@@ -52,6 +52,28 @@ export type Actor = "user" | "claude" | "system" | "engine";
 /** What kind of work a persona is doing in a step. */
 export type StepKind = "ask" | "think" | "analyze" | "decide" | "write" | "design" | "code" | "review" | "test" | "deploy" | "deliver" | "note";
 export const STEP_KINDS: StepKind[] = ["ask", "think", "analyze", "decide", "write", "design", "code", "review", "test", "deploy", "deliver", "note"];
+
+/** Map whatever a model (or a human) called a step onto a known StepKind. Unknown → "note"; empty → "". */
+export function normalizeStep(raw: unknown): StepKind | "" {
+  if (raw == null || raw === "") return "";
+  const s = String(raw).trim().toLowerCase();
+  if ((STEP_KINDS as string[]).includes(s)) return s as StepKind;
+  const synonyms: Array<[RegExp, StepKind]> = [
+    [/^(question|asking|request)/, "ask"],
+    [/^(thought|thinking|reason|plan(ning)?|consider)/, "think"],
+    [/^(analy|investigat|research|assess|inspect|read)/, "analyze"],
+    [/^(decid|decision|choos|select|priorit|scope|approv)/, "decide"],
+    [/^(writ|draft|document|spec|summar|publish)/, "write"],
+    [/^(design|architect|model|diagram|wirefram)/, "design"],
+    [/^(cod|implement|develop|build|program|refactor|fix)/, "code"],
+    [/^(review|lgtm|lbtm|audit|check)/, "review"],
+    [/^(test|qa|verif|validat)/, "test"],
+    [/^(deploy|release|ship|rollout|ci|docker)/, "deploy"],
+    [/^(deliver|done|complet|handover|final)/, "deliver"],
+  ];
+  for (const [re, kind] of synonyms) if (re.test(s)) return kind;
+  return "note";
+}
 export interface Activity {
   id: string;
   seq: number;

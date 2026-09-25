@@ -49,6 +49,25 @@ describe("engine settings", () => {
   });
 });
 
+describe("step normalisation (models invent step names)", () => {
+  it("maps synonyms onto known kinds and unknowns onto note", async () => {
+    const { normalizeStep } = await import("@/lib/types");
+    expect(normalizeStep("coding")).toBe("code");
+    expect(normalizeStep("Implementation")).toBe("code");
+    expect(normalizeStep("testing")).toBe("test");
+    expect(normalizeStep("planning")).toBe("think");
+    expect(normalizeStep("deployment")).toBe("deploy");
+    expect(normalizeStep("banana")).toBe("note");
+    expect(normalizeStep("")).toBe("");
+    expect(normalizeStep(undefined)).toBe("");
+  });
+  it("logActivity stores only known step kinds", async () => {
+    const bridge = await import("@/lib/bridge");
+    const a = bridge.logActivity({ projectId: null, actor: "claude", type: "x", message: "m", step: "coding" as never });
+    expect(a.step).toBe("code");
+  });
+});
+
 describe("llm bridge", () => {
   it("extractJson tolerates fences and prose", () => {
     expect(extractJson<{ a: number }>("Sure!\n```json\n{\"a\":1}\n```\nDone.").a).toBe(1);

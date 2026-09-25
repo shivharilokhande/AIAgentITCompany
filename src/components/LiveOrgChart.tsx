@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Activity, Persona } from "@/lib/types";
 import { OrgChart, type LivePersona } from "./OrgChart";
-import { STEP_META } from "./RunView";
+import { stepMeta } from "./RunView";
 
 export function LiveOrgChart({ projectId, personas, highlight, initialLive }: { projectId: string; personas: Persona[]; highlight: string[]; initialLive: LivePersona | null }) {
   const [live, setLive] = useState<LivePersona | null>(initialLive);
@@ -17,7 +17,7 @@ export function LiveOrgChart({ projectId, personas, highlight, initialLive }: { 
         const a = await fetch(`/api/bridge/activity?command=${cmd.id}&limit=300`, { cache: "no-store" }).then((r) => r.json());
         const acts: Activity[] = a.activity ?? [];
         const last = acts[acts.length - 1];
-        setLive(last?.persona ? { persona: last.persona, label: STEP_META[last.step ?? ""].label || "Working", message: last.message } : null);
+        setLive(last?.persona ? { persona: last.persona, label: stepMeta(last.step).label || "Working", message: last.message } : null);
         setCounts(acts.reduce<Record<string, number>>((acc, x) => { if (x.persona) acc[x.persona] = (acc[x.persona] ?? 0) + 1; return acc; }, {}));
       } catch { /* ignore */ }
     };

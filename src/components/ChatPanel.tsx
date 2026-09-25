@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Activity, Command, CommandKind, Project } from "@/lib/types";
 import { PERSONAS as CORE_PERSONAS } from "@/lib/pipeline";
-import { STEP_META } from "./RunView";
+import { stepMeta } from "./RunView";
 import { Avatar, Badge, Empty } from "./ui";
 import { Icon, Spinner, useToast } from "./system";
 import type { EngineInfo } from "@/lib/settings";
@@ -145,7 +145,7 @@ export function ChatPanel({ project, engine, initialActivity, initialCommands }:
                   )}
                   {body.map((a) => {
                     const p = member(a.persona);
-                    const m = STEP_META[a.step ?? ""];
+                    const m = stepMeta(a.step);
                     const open = showDetail[a.id];
                     return (
                       <div key={a.id} className="flex items-start gap-2.5 animate-fadein">

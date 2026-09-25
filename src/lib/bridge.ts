@@ -4,6 +4,7 @@
 import { getDb, nowIso, uid } from "./db";
 import * as repo from "./repo";
 import type { Command, CommandKind, CommandSource, CommandStatus, Activity, Actor, ProjectBundle, Project, ContractKind } from "./types";
+import { normalizeStep } from "./types";
 
 type Row = Record<string, unknown>;
 const s = (v: unknown): string => (v == null ? "" : String(v));
@@ -95,7 +96,7 @@ export function logActivity(input: LogInput): Activity {
   const commandId = input.commandId ?? (typeof input.meta?.commandId === "string" ? (input.meta.commandId as string) : null);
   db.prepare("INSERT INTO activity (id, seq, project_id, actor, type, message, meta, created_at, persona, phase, step, command_id, detail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
     .run(id, seq, input.projectId ?? null, input.actor, input.type, input.message.slice(0, 4000), JSON.stringify(input.meta ?? {}), nowIso(),
-      input.persona ?? "", input.phase ?? null, input.step ?? "", commandId, (input.detail ?? "").slice(0, 60000));
+      input.persona ?? "", input.phase ?? null, normalizeStep(input.step), commandId, (input.detail ?? "").slice(0, 60000));
   return mapActivity(db.prepare("SELECT * FROM activity WHERE id=?").get(id) as Row);
 }
 export function listActivity(opts: { projectId?: string | null; sinceSeq?: number; limit?: number; commandId?: string | null } = {}): Activity[] {

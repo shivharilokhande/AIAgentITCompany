@@ -25,6 +25,8 @@ export const STEP_META: Record<StepKind | "", { label: string; icon: string; ton
   note: { label: "Note", icon: "doc", tone: "neutral" },
   "": { label: "", icon: "doc", tone: "neutral" },
 };
+/** Safe lookup: rows written before step normalisation (or by external posters) may carry unknown step names. */
+export const stepMeta = (step: string | null | undefined) => STEP_META[(step ?? "") as StepKind | ""] ?? { label: step ? step[0].toUpperCase() + step.slice(1) : "", icon: "doc", tone: "neutral" };
 
 export function RunView({ command: initialCommand, activity: initialActivity, phases, personas, projectId }: { command: Command; activity: Activity[]; phases: PhaseDef[]; personas: Persona[]; projectId: string }) {
   const [command, setCommand] = useState(initialCommand);
@@ -58,7 +60,7 @@ export function RunView({ command: initialCommand, activity: initialActivity, ph
   const personasInvolved = Array.from(new Set(activity.map((a) => a.persona).filter(Boolean)));
   const tone = { queued: "warn", running: "info", done: "good", failed: "bad" }[command.status] as "warn" | "info" | "good" | "bad";
   const personaCounts = activity.reduce<Record<string, number>>((acc, a) => { if (a.persona) acc[a.persona] = (acc[a.persona] ?? 0) + 1; return acc; }, {});
-  const liveInfo = live && currentPersona && last ? { persona: currentPersona.id, label: STEP_META[last.step ?? ""].label || "Working", message: last.message } : null;
+  const liveInfo = live && currentPersona && last ? { persona: currentPersona.id, label: stepMeta(last.step).label || "Working", message: last.message } : null;
 
   return (
     <div className="space-y-4">
@@ -78,14 +80,14 @@ export function RunView({ command: initialCommand, activity: initialActivity, ph
               <Avatar name={currentPersona.name} size={36} />
               <div>
                 <div className="text-sm font-semibold text-fg">{currentPersona.name} <span className="font-normal text-muted">· {currentPersona.role}</span></div>
-                <div className="flex items-center gap-2 text-xs text-muted"><Badge tone={STEP_META[last?.step ?? ""].tone}><Icon name={STEP_META[last?.step ?? ""].icon} className="h-3 w-3" /> {STEP_META[last?.step ?? ""].label || "working"}</Badge> Phase {currentPhase} — {phases.find((p) => p.n === currentPhase)?.name}</div>
+                <div className="flex items-center gap-2 text-xs text-muted"><Badge tone={stepMeta(last?.step).tone}><Icon name={stepMeta(last?.step).icon} className="h-3 w-3" /> {stepMeta(last?.step).label || "working"}</Badge> Phase {currentPhase} — {phases.find((p) => p.n === currentPhase)?.name}</div>
               </div>
             </>
           ) : (
             <div className="text-sm text-muted">{command.status === "queued" ? "Waiting for Claude to pick this up…" : `${personasInvolved.length} personas took part · ${activity.length} steps`}</div>
           )}
           <div className="ml-auto flex flex-wrap gap-1">
-            {Object.entries(stepCounts).map(([k, v]) => <Badge key={k} tone={STEP_META[k as StepKind].tone}>{STEP_META[k as StepKind].label} {v}</Badge>)}
+            {Object.entries(stepCounts).map(([k, v]) => <Badge key={k} tone={stepMeta(k).tone}>{stepMeta(k).label} {v}</Badge>)}
           </div>
         </div>
       </Card>
@@ -129,7 +131,7 @@ export function RunView({ command: initialCommand, activity: initialActivity, ph
                   <ol className="space-y-2 border-l border-border pl-4">
                     {items.map((a) => {
                       const p = byId(a.persona);
-                      const m = STEP_META[a.step];
+                      const m = stepMeta(a.step);
                       const isOpen = open[a.id];
                       return (
                         <li key={a.id} className="relative animate-fadein">

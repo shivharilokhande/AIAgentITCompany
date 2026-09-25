@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Activity, Command, CommandKind, Project } from "@/lib/types";
 import { PERSONAS as CORE_PERSONAS } from "@/lib/pipeline";
-import { STEP_META } from "./RunView";
+import { stepMeta } from "./RunView";
 import { Badge, Card, Empty, Avatar } from "./ui";
 import { Icon, Spinner, useToast } from "./system";
 import type { EngineInfo } from "@/lib/settings";
@@ -130,7 +130,7 @@ export function ClaudePanel({ project, engine, initialActivity, initialCommands,
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted">
                       {a.persona && team.find((p) => p.id === a.persona) ? <span className="font-semibold text-fg">{team.find((p) => p.id === a.persona)!.name} <span className="font-normal">· {team.find((p) => p.id === a.persona)!.role}</span></span> : <Badge tone={ACTOR_TONE[a.actor] ?? "neutral"}>{a.actor}</Badge>}
-                      {a.step && <Badge tone={STEP_META[a.step].tone}><Icon name={STEP_META[a.step].icon} className="h-3 w-3" /> {STEP_META[a.step].label}</Badge>}
+                      {a.step && <Badge tone={stepMeta(a.step).tone}><Icon name={stepMeta(a.step).icon} className="h-3 w-3" /> {stepMeta(a.step).label}</Badge>}
                       {a.phase && <span>P{a.phase}</span>}
                       {!a.step && <span className="mono">{a.type}</span>}
                       {a.commandId && project && <Link href={`/projects/${project.id}/runs/${a.commandId}`} className="text-accent hover:underline">run ↗</Link>}

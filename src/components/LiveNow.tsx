@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { Activity, Command, Persona, PhaseDef } from "@/lib/types";
 import { Avatar, Badge } from "./ui";
 import { Icon, Spinner } from "./system";
-import { STEP_META } from "./RunView";
+import { stepMeta } from "./RunView";
 
 export function LiveNow({ projectId, command: initial, lastStep: initialStep, personas, phases }: { projectId: string; command: Command | null; lastStep: Activity | null; personas: Persona[]; phases: PhaseDef[] }) {
   const [command, setCommand] = useState(initial);
@@ -27,7 +27,7 @@ export function LiveNow({ projectId, command: initial, lastStep: initialStep, pe
   }, [projectId]);
   if (!command) return null;
   const p = personas.find((x) => x.id === step?.persona);
-  const m = STEP_META[step?.step ?? ""];
+  const m = stepMeta(step?.step);
   return (
     <Link href={`/projects/${projectId}/runs/${command.id}`} className="card flex flex-wrap items-center gap-3 border-accent/40 bg-accent/5 p-3 hover:bg-accent/10">
       <Spinner className="h-4 w-4 text-accent" />
