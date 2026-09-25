@@ -7,10 +7,10 @@
 **Run an AI software company from your browser.**<br/>
 One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it down the line → a shipped product out. Watch every step live.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/agentitcompany/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/agentitcompany/actions)
-[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/agentitcompany?logo=git&logoColor=white)](https://github.com/shivharilokhande/agentitcompany/commits/main)
-[![Stars](https://img.shields.io/github/stars/shivharilokhande/agentitcompany?style=flat&logo=github)](https://github.com/shivharilokhande/agentitcompany/stargazers)
-[![License](https://img.shields.io/github/license/shivharilokhande/agentitcompany)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/smartit-console/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/smartit-console/actions)
+[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/smartit-console?logo=git&logoColor=white)](https://github.com/shivharilokhande/smartit-console/commits/main)
+[![Stars](https://img.shields.io/github/stars/shivharilokhande/smartit-console?style=flat&logo=github)](https://github.com/shivharilokhande/smartit-console/stargazers)
+[![License](https://img.shields.io/github/license/shivharilokhande/smartit-console)](LICENSE)
 <br/>
 ![Next.js](https://img.shields.io/badge/Next.js-15-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-20232a?logo=react&logoColor=61dafb)
@@ -365,7 +365,7 @@ Everything the UI does, a script or an agent can do too.
 | `/api/bridge/snapshot` | GET | Repo snapshot for a project (`repo_path`) |
 | `/api/bridge/tick` | POST | Run one engine / watcher cycle now |
 
-Set `BRIDGE_TOKEN` to require `Authorization: Bearer <token>`. `data/run-ai-features.sh` is a scripted example run you can replay against a fresh install.
+Set `BRIDGE_TOKEN` to require `Authorization: Bearer <token>`. `zsh data/demo-run.sh` imports the bundled demo project (`data/demo.bundle.json`) and replays a full persona‑attributed company run you can watch live. Put your own project exports in `data/private/` — it's git‑ignored.
 
 ---
 

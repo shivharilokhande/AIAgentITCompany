@@ -6,3 +6,6 @@ data/*.db-*
 .env
 *.log
 .DS_Store
+
+# your own project exports — never committed
+data/private/

@@ -1,0 +1,91 @@
+{
+  "project": {
+    "name": "Demo: Clinic Queue",
+    "idea": "A walk-in clinic queue app: patients take a token from a kiosk or their phone, see live wait times, and get an SMS when the doctor is ready.",
+    "mode": "greenfield",
+    "repoPath": "",
+    "tags": "demo,healthcare,queue",
+    "owner": "Demo Founder",
+    "deployStatus": "staging"
+  },
+  "phases": [
+    { "phase": 1, "status": "done", "summary": "Must-haves: token issue, live queue, SMS call-in. v2: multi-doctor routing, no-show handling." },
+    { "phase": 2, "status": "done", "summary": "Next.js + Postgres + Twilio. 3 sprints / 60 pts. CFO abort at 5 sprints." },
+    { "phase": 3, "status": "done", "summary": "Contract A: 6 stories, 7 requirements." },
+    { "phase": 4, "status": "done", "summary": "Contract B: 11 files, 4 entities. Contract C ordered. Consistency gate ✓." },
+    { "phase": 5, "status": "active", "summary": "Sprint 2 of 3 in progress." }
+  ],
+  "requirements": [
+    { "priority": "P0", "text": "Issue a numbered token from the kiosk" },
+    { "priority": "P0", "text": "Live queue board with estimated wait" },
+    { "priority": "P0", "text": "SMS the patient when they are next" },
+    { "priority": "P1", "text": "Patients can take a token from their phone (QR at the door)" },
+    { "priority": "P1", "text": "Receptionist can skip / recall a token" },
+    { "priority": "P2", "text": "Route tokens to a specific doctor" },
+    { "priority": "P2", "text": "Daily report: patients seen, average wait" }
+  ],
+  "sprints": [
+    { "number": 1, "goal": "Foundation: schema, token issue, queue board", "startDate": "2026-09-01", "endDate": "2026-09-14", "status": "closed" },
+    { "number": 2, "goal": "SMS call-in and phone tokens", "startDate": "2026-09-15", "endDate": "2026-09-28", "status": "active" },
+    { "number": 3, "goal": "Receptionist controls and daily report", "startDate": "2026-09-29", "endDate": "2026-10-12", "status": "planned" }
+  ],
+  "stories": [
+    { "title": "Postgres schema + repo layer", "points": 5, "status": "done", "assignee": "Nikhil Gupta", "sprintNumber": 1 },
+    { "title": "Kiosk: issue token", "points": 5, "status": "done", "assignee": "Rhea Menon", "sprintNumber": 1 },
+    { "title": "Live queue board (SSE)", "points": 8, "status": "done", "assignee": "Rhea Menon", "sprintNumber": 1 },
+    { "title": "Twilio SMS when patient is next", "points": 5, "status": "in_progress", "assignee": "Arun Patel", "sprintNumber": 2 },
+    { "title": "QR → phone token flow", "points": 8, "status": "in_progress", "assignee": "Rhea Menon", "sprintNumber": 2 },
+    { "title": "E2E: take token → called by SMS", "points": 3, "status": "todo", "assignee": "Divya Srinivasan", "sprintNumber": 2 },
+    { "title": "Receptionist skip / recall", "points": 5, "status": "todo", "assignee": "", "sprintNumber": 3 },
+    { "title": "Daily report", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 3 }
+  ],
+  "contracts": {
+    "A": {
+      "language": "en_us",
+      "programming_language": "TypeScript — Next.js 15, Postgres, Twilio",
+      "original_requirements": "A walk-in clinic queue app with tokens, live wait times and SMS call-in.",
+      "project_name": "clinic_queue",
+      "product_goals": "Cut perceived waiting time\nZero receptionist effort for the happy path\nWorks on a cheap Android tablet kiosk",
+      "user_stories": "As a patient, I want a token so that I know my place in line\nAs a patient, I want an SMS when I am next so that I can wait outside\nAs a receptionist, I want to skip a no-show so that the line keeps moving",
+      "competitive_analysis": "Paper tokens: free, no visibility\nQminder: powerful, expensive\nWhatsApp groups: chaotic",
+      "competitive_quadrant": "quadrantChart\n  title Cost vs Visibility\n  x-axis Cheap --> Expensive\n  y-axis Opaque --> Transparent\n  \"Paper\": [0.1,0.1]\n  \"Qminder\": [0.9,0.9]\n  \"Our Target Product\": [0.2,0.85]",
+      "requirement_analysis": "Hard part is the wait-time estimate; everything else is CRUD plus one SMS webhook.",
+      "requirement_pool": "P0 token issue\nP0 live board\nP0 SMS call-in\nP1 phone tokens\nP1 skip/recall\nP2 per-doctor routing\nP2 daily report",
+      "ui_design_draft": "Kiosk: one big 'Take token' button. Board: now-serving + next 5. Phone: token + live position.",
+      "anything_unclear": "Multiple doctors? → assume one queue in v1."
+    },
+    "B": {
+      "implementation_approach": "Next.js App Router, server actions for mutations, SSE for the board, Twilio webhook for SMS status.",
+      "file_list": "src/lib/db.ts\nsrc/lib/repo.ts\nsrc/lib/actions.ts\nsrc/lib/sms.ts\nsrc/app/kiosk/page.tsx\nsrc/app/board/page.tsx\nsrc/app/t/[token]/page.tsx\nsrc/app/api/stream/route.ts\nsrc/components/Board.tsx",
+      "data_structures": "classDiagram\n  class Clinic { +id +name }\n  class Token { +id +clinicId +number +phone +status +issuedAt +calledAt }\n  Clinic *-- Token",
+      "call_flow": "sequenceDiagram\n  Patient->>Kiosk: tap\n  Kiosk->>actions.ts: issueToken()\n  actions.ts->>repo.ts: insert\n  repo.ts->>Postgres: INSERT\n  Postgres-->>Board: SSE update",
+      "anything_unclear": "None."
+    },
+    "C": {
+      "required_packages": "next@15.5.25\nreact@19.1.1\npg@8.13.1\ntwilio@5",
+      "other_language_packages": "None",
+      "logic_analysis": "src/lib/db.ts — pool\nsrc/lib/repo.ts — Token CRUD\nsrc/lib/actions.ts — issue/call/skip\nsrc/lib/sms.ts — Twilio client\nsrc/app/kiosk/page.tsx — kiosk\nsrc/app/board/page.tsx — board\nsrc/app/t/[token]/page.tsx — phone view\nsrc/app/api/stream/route.ts — SSE\nsrc/components/Board.tsx — UI",
+      "task_list": "src/lib/db.ts\nsrc/lib/repo.ts\nsrc/lib/sms.ts\nsrc/lib/actions.ts\nsrc/components/Board.tsx\nsrc/app/api/stream/route.ts\nsrc/app/board/page.tsx\nsrc/app/kiosk/page.tsx\nsrc/app/t/[token]/page.tsx",
+      "api_spec": "GET /api/stream — SSE of queue state",
+      "shared_knowledge": "Token numbers reset daily per clinic. Phone numbers stored E.164.",
+      "anything_unclear": "None."
+    }
+  },
+  "reviews": [
+    { "file": "src/lib/db.ts", "verdict": "LGTM", "pass": 1 },
+    { "file": "src/lib/repo.ts", "verdict": "LBTM", "pass": 1, "notes": "Q4: skipToken not implemented" },
+    { "file": "src/lib/repo.ts", "verdict": "LGTM", "pass": 2 },
+    { "file": "src/components/Board.tsx", "verdict": "LGTM", "pass": 1 }
+  ],
+  "gate": [
+    { "check": 1, "status": "pass", "note": "All sprint-1 files LGTM" },
+    { "check": 2, "status": "pass", "note": "18 tests green" },
+    { "check": 4, "status": "pending", "note": "is-pass after sprint 2" }
+  ],
+  "adrs": [
+    { "title": "ADR-001 SSE over WebSockets", "decision": "One-way board updates; SSE is simpler and works through the clinic's proxy." },
+    { "title": "ADR-002 Twilio for SMS", "decision": "Reliable delivery receipts; cost acceptable at clinic volume." }
+  ],
+  "summary": { "isPass": "pending", "todos": "{ \"src/lib/sms.ts\": \"retry on 5xx\" }", "cycles": 0 },
+  "replace": false
+}
