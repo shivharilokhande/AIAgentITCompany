@@ -45,7 +45,7 @@ export async function deleteProjectAction(fd: FormData): Promise<void> {
   if (!id) return;
   repo.deleteProject(id);
   revalidatePath("/", "layout");
-  redirect("/");
+  if (str(fd, "redirect") !== "0") redirect("/");
 }
 export async function setDeployAction(fd: FormData): Promise<void> {
   const pid = str(fd, "projectId");

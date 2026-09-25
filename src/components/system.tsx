@@ -3,6 +3,7 @@
 // Client-side primitives: ToastProvider, ActionForm (server action + toast + confirm), Modal, ThemeToggle, Icon.
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode, type FormHTMLAttributes } from "react";
 import { useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 
 /* ---------------- Toasts ---------------- */
 type Toast = { id: number; tone: "good" | "bad" | "info"; text: string };
@@ -41,12 +42,14 @@ type ActionFormProps = Omit<FormHTMLAttributes<HTMLFormElement>, "action"> & {
 /** A <form> bound to a server action that shows a toast on completion and optionally asks for confirmation. */
 export function ActionForm({ action, success = "Saved", confirm: confirmText, resetOnSuccess, children, ...rest }: ActionFormProps) {
   const { push } = useToast();
+  const router = useRouter();
   const [pendingFd, setPendingFd] = useState<FormData | null>(null);
   const ref = useRef<HTMLFormElement>(null);
   const run = async (fd: FormData) => {
     try {
       await action(fd);
       push({ tone: "good", text: success });
+      router.refresh();
       if (resetOnSuccess) ref.current?.reset();
     } catch (e) {
       // Next.js redirect() throws internally; let it propagate.

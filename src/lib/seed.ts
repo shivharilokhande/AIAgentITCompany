@@ -5,9 +5,15 @@ import { getDb } from "./db";
 
 const DEMO_NAME = "Demo: Kanban Task App";
 
+/** Seeds the demo exactly once per database (flag in kv), so deleting it does not bring it back. */
 export function ensureDemoProject(): void {
   if (process.env.SEED_DEMO === "0") return;
-  if (repo.listProjects().some((p) => p.name === DEMO_NAME)) return;
+  const db = getDb();
+  db.exec("CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT NOT NULL)");
+  const seeded = db.prepare("SELECT v FROM kv WHERE k='demo_seeded'").get() as { v: string } | undefined;
+  if (seeded) return;
+  db.prepare("INSERT OR REPLACE INTO kv (k, v) VALUES ('demo_seeded', ?)").run(new Date().toISOString());
+  if (repo.listProjects().length > 0) return; // existing install: don't add a demo next to real projects
 
   const p = repo.createProject({ name: DEMO_NAME, idea: "Build me a task management app with Kanban boards" });
   const pid = p.id;

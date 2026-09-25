@@ -63,8 +63,9 @@ export default function Dashboard() {
                   <Link href={`/projects/${p.id}/quality`} className="text-accent hover:underline">Quality</Link>
                   <Link href={`/projects/${p.id}/claude`} className="text-accent hover:underline">Claude</Link>
                 </div>
-                <ActionForm action={deleteProjectAction} confirm="Delete this item? This cannot be undone." success="Deleted">
+                <ActionForm action={deleteProjectAction} confirm={`Delete “${p.name}” and all its data? This cannot be undone.`} success="Project deleted">
                   <input type="hidden" name="projectId" value={p.id} />
+                  <input type="hidden" name="redirect" value="0" />
                   <button className="text-[11px] text-slate-600 hover:text-bad" type="submit">delete</button>
                 </ActionForm>
               </div>
