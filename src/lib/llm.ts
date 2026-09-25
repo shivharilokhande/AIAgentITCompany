@@ -57,7 +57,7 @@ export async function chatWith(id: ProviderId, input: ChatInput): Promise<ChatRe
     }
     case "openai-chat": {
       const headers: Record<string, string> = r.apiKey ? { authorization: `Bearer ${r.apiKey}` } : {};
-      if (id === "openrouter") { headers["HTTP-Referer"] = "https://github.com/shivharilokhande/smartit-console"; headers["X-Title"] = "SmartIT Console"; }
+      if (id === "openrouter") { headers["HTTP-Referer"] = "https://github.com/shivharilokhande/agentitcompany"; headers["X-Title"] = "AgentITCompany"; }
       const body: Record<string, unknown> = { model: r.model, max_tokens: maxTokens, messages: [{ role: "system", content: input.system }, { role: "user", content: input.user }] };
       if (json) body.response_format = { type: "json_object" };
       let res = await post(`${r.baseUrl}/chat/completions`, headers, body);

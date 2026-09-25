@@ -1,8 +1,8 @@
 services:
-  smartit-console:
+  agentitcompany:
     build: .
-    image: smartit-console:latest
-    container_name: smartit-console
+    image: agentitcompany:latest
+    container_name: agentitcompany
     ports:
       - "3100:3000"
     environment:

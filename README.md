@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="public/favicon.svg" width="72" alt="SmartIT Console" />
+<img src="public/favicon.svg" width="72" alt="AgentITCompany" />
 
-# SmartIT Console
+# AgentITCompany
 
 **Run an AI software company from your browser.**<br/>
 One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it down the line → a shipped product out. Watch every step live.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/smartit-console/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/smartit-console/actions)
-[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/smartit-console?logo=git&logoColor=white)](https://github.com/shivharilokhande/smartit-console/commits/main)
-[![Stars](https://img.shields.io/github/stars/shivharilokhande/smartit-console?style=flat&logo=github)](https://github.com/shivharilokhande/smartit-console/stargazers)
-[![License](https://img.shields.io/github/license/shivharilokhande/smartit-console)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/agentitcompany/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/agentitcompany/actions)
+[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/agentitcompany?logo=git&logoColor=white)](https://github.com/shivharilokhande/agentitcompany/commits/main)
+[![Stars](https://img.shields.io/github/stars/shivharilokhande/agentitcompany?style=flat&logo=github)](https://github.com/shivharilokhande/agentitcompany/stargazers)
+[![License](https://img.shields.io/github/license/shivharilokhande/agentitcompany)](LICENSE)
 <br/>
 ![Next.js](https://img.shields.io/badge/Next.js-15-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-20232a?logo=react&logoColor=61dafb)
@@ -22,7 +22,7 @@ One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it
 
 [**Quick start**](#-quick-start) · [**How it works**](#-how-the-company-works) · [**Live company runs**](#-live-company-runs) · [**Claude Cowork bridge**](#-claude-cowork-bridge) · [**Modules**](#-whats-inside) · [**API**](#-bridge-api) · [**Docs**](#-documentation)
 
-<img src="docs/screenshots/pipeline.png" alt="SmartIT Console — 8-phase pipeline for a project" width="920" />
+<img src="docs/screenshots/pipeline.png" alt="AgentITCompany — 8-phase pipeline for a project" width="920" />
 
 </div>
 
@@ -30,7 +30,7 @@ One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it
 
 ## ✨ What is this?
 
-SmartIT Console is a self‑hosted **project · product · scrum management console** for software that is built by AI agents instead of (or alongside) humans. It is the visual front‑end of the **Smart IT by Shiv** methodology: an autonomous IT company with **8 phases**, **15 personas** (Founder → CTO/CFO/CPO → Directors → Leads → Engineers) and **10 SOPs** adapted from MetaGPT's `Code = SOP(Team)`.
+AgentITCompany is a self‑hosted **project · product · scrum management console** for software that is built by AI agents instead of (or alongside) humans. It is the visual front‑end of the **Smart IT by Shiv** methodology: an autonomous IT company with **8 phases**, **15 personas** (Founder → CTO/CFO/CPO → Directors → Leads → Engineers) and **10 SOPs** that fix the shape of every hand‑off.
 
 Every project you add runs the same pipeline. Every request you make — a question, an analysis, a plan, code, tests, a deployment — becomes a **company run** that flows from the CEO down to the last engineer and back, and you can watch it happen on the org chart in real time.
 
@@ -60,8 +60,8 @@ Every project you add runs the same pipeline. Every request you make — a quest
 ## 🚀 Quick start
 
 ```bash
-git clone https://github.com/shivharilokhande/smartit-console.git
-cd smartit-console
+git clone https://github.com/shivharilokhande/agentitcompany.git
+cd agentitcompany
 npm install                 # no native builds — SQLite comes from Node itself
 npm run dev                 # → http://localhost:3100
 ```
@@ -214,7 +214,7 @@ Need more hands? **Team → Hire** adds engineers with their own capacity; the s
 </details>
 
 <details>
-<summary><b>The 10 SOPs (MetaGPT‑derived)</b></summary>
+<summary><b>The 10 SOPs</b></summary>
 
 | SOP | Name | What it enforces |
 |---|---|---|
@@ -452,5 +452,5 @@ Issues and PRs are welcome. Run `npm run typecheck && npm test` before opening a
 [MIT](LICENSE) © 2026 Shivhari Lokhande
 
 <div align="center">
-<sub>Built with the <b>Smart IT by Shiv</b> skill for Claude · inspired by <a href="https://github.com/FoundationAgents/MetaGPT">MetaGPT</a>'s <code>Code = SOP(Team)</code></sub>
+<sub>Built with the <b>Smart IT by Shiv</b> skill for Claude</sub>
 </div>

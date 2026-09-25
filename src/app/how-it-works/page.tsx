@@ -14,7 +14,7 @@ export default function HowItWorks() {
         <h1 className="text-2xl font-bold text-slate-50">How the company works</h1>
         <p className="max-w-3xl text-sm text-slate-400">
           One rule: the user gives an idea, the company delivers the product, nobody asks the user anything. The org chart says <em>who</em>; the 8 phases say <em>when</em>;
-          the SOP layer (adapted from MetaGPT’s <span className="mono">Code = SOP(Team)</span>) says <em>what shape every handoff must have</em>.
+          the SOP layer says <em>what shape every handoff must have</em>.
         </p>
       </header>
       <Card title="1 · The team — 15 personas in 5 layers">
