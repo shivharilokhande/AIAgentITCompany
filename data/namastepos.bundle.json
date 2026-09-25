@@ -1,0 +1,105 @@
+{
+  "project": {
+    "name": "NamastePOS",
+    "idea": "Mobile-first, offline-ready restaurant POS & billing SaaS for India: billing, KOT/KDS, table & captain modes, QR self-ordering, GST-compliant invoicing, loyalty/wallet, live reports from any Android phone — keeps working when the internet drops.",
+    "mode": "incremental",
+    "repoPath": "/Users/shiv/AI Development/Java Projects/PetPooja Clone",
+    "tags": "saas, restaurant-pos, india, live",
+    "owner": "Shivhari Lokhande",
+    "deployStatus": "production"
+  },
+  "phases": [
+    { "phase": 1, "status": "done", "summary": "Vision locked: 'Run your restaurant, not your software.' Offline-first, phone-is-the-till, GST built in, all-inclusive pricing, growth tools included." },
+    { "phase": 2, "status": "done", "summary": "Stack: Node 22 + Postgres 14 backend, Flutter 3.44 POS app, web dashboard + platform admin, Razorpay subscriptions, Cloudflare R2 for APK. 5-tier plan ladder billed per register." },
+    { "phase": 3, "status": "done", "summary": "PRD in .agents/product-marketing.md v1.0.2: ICP (single-outlet Indian food businesses), JTBD, positioning, proof rules." },
+    { "phase": 4, "status": "done", "summary": "Multi-tenant architecture: tenant-scoped SQL, server-authoritative pricing, idempotent offline order replay, 102 forward-only migrations, 51 gated feature keys." },
+    { "phase": 5, "status": "done", "summary": "Product live in production (namastepos.in, app., api., admin.). 1,569 automated tests passing." },
+    { "phase": 6, "status": "done", "summary": "Quality gates: automated suite, deploy verified by curl /v1/health, CODE_REVIEW_2026-09-05 completed, 2FA on admin, DPDP console." },
+    { "phase": 7, "status": "done", "summary": "Deployed: multi-tenant, auto-deploying. Android APK published; iOS via dev build (App Store pending)." },
+    { "phase": 8, "status": "active", "summary": "Go-to-market in progress via MarketingAlia: latest run overall 77/100. Blocked on founder actions (Razorpay KYC, directory logins)." }
+  ],
+  "requirements": [
+    { "priority": "P0", "text": "Razorpay KYC complete → live billing (revenue-critical, founder action)" },
+    { "priority": "P0", "text": "Fix false plan claims on landing (Advanced ≠ TDS/TCS, Growth ≠ memberships/wallet, Starter = free forever not 7-day trial) — render from live /v1/public/plans" },
+    { "priority": "P0", "text": "Directory listings: 0 of 18 platforms live; Play listing 404s; no LinkedIn page — needs vendor mailbox + founder logins" },
+    { "priority": "P1", "text": "Create social profiles + 512/1024 logo + 2–4 product screenshots" },
+    { "priority": "P1", "text": "Collect first testimonials / case studies (no unsubstantiated proof allowed until then)" },
+    { "priority": "P1", "text": "Reseller / partner recruitment kit (20–30% recurring commission channel)" },
+    { "priority": "P2", "text": "Hindi / regional content lane" },
+    { "priority": "P2", "text": "iOS App Store release (Apple Developer Program)" }
+  ],
+  "sprints": [
+    { "number": 1, "goal": "MarketingAlia EXECUTE: retention, website CRO, pricing honesty", "startDate": "2026-09-04", "endDate": "2026-09-05", "status": "closed" },
+    { "number": 2, "goal": "Unblock listings + billing (founder actions) and ship social/brand assets", "startDate": "2026-09-17", "endDate": "2026-09-30", "status": "active" }
+  ],
+  "stories": [
+    { "title": "Dunning: 4-touch ladder scheduled inside grace window, race-safe (UPDATE WHERE dunning_step < n)", "description": "Replaces one-email-per-payment.failed. Retention 70 → 88.", "points": 8, "status": "done", "assignee": "Nikhil", "sprintNumber": 1 },
+    { "title": "Cancel flow with reason-branched save offer + pause (read-only) + real tenant export", "description": "closing_down gets no pitch; export covers business data, not just DPDP dump.", "points": 5, "status": "done", "assignee": "Nikhil", "sprintNumber": 1 },
+    { "title": "Landing CRO: price rail under hero, sticky compare-table column, 4.6:1 contrast, FAQ 6→9 matching schema", "description": "CRO 74 → 85. Mobile order via flex order so DOM/crawler untouched.", "points": 5, "status": "done", "assignee": "Rhea", "sprintNumber": 1 },
+    { "title": "Trust block rebuilt from checkable facts only", "description": "No ratings, counts, uptime or testimonials that don't exist.", "points": 2, "status": "done", "assignee": "Rhea", "sprintNumber": 1 },
+    { "title": "Correct three false plan claims on landing against live plan feed", "description": "Advanced/TDS-TCS, Growth/memberships-wallet, Starter/free-forever. Pattern finding: page asserts what the feed contradicts.", "points": 3, "status": "review", "assignee": "Rhea", "sprintNumber": 2 },
+    { "title": "Founder: complete Razorpay KYC → enable live subscriptions", "description": "Revenue-critical. Founder-only (logins/payments).", "points": 3, "status": "in_progress", "assignee": "Shivhari", "sprintNumber": 2 },
+    { "title": "Founder: create vendor mailbox at namastepos.in + LinkedIn page", "description": "Cheapest unlock for listings; two platforms need a vendor mailbox.", "points": 2, "status": "todo", "assignee": "Shivhari", "sprintNumber": 2 },
+    { "title": "Submit paste-ready listing pack to Google Business Profile, SoftwareSuggest, Techjockey, G2/Capterra, IndiaMART/Justdial", "description": "Pack, tracker and corrected kit are ready in listings/. Blocked on logins.", "points": 8, "status": "todo", "assignee": "Shivhari", "sprintNumber": 2 },
+    { "title": "Brand assets: 512/1024 logo + 2–4 product screenshots for listings and social", "description": "", "points": 3, "status": "todo", "assignee": "Meera", "sprintNumber": 2 },
+    { "title": "Reseller / partner kit (one-pager, commission terms, onboarding)", "description": "campaigns/reseller-kit exists as draft.", "points": 5, "status": "todo", "assignee": "", "sprintNumber": null },
+    { "title": "First 10 customers offer campaign", "description": "campaigns/first-10-customers-offer.md", "points": 3, "status": "todo", "assignee": "", "sprintNumber": null },
+    { "title": "Hindi / regional content lane (blog + social)", "description": "", "points": 5, "status": "todo", "assignee": "", "sprintNumber": null }
+  ],
+  "contracts": {
+    "A": {
+      "language": "en_in",
+      "programming_language": "TypeScript/Node 22 (backend), Flutter 3.44 (POS app), web dashboard + admin, Postgres 14",
+      "original_requirements": "Restaurant billing that just works — mobile-first, offline-ready, built for India.",
+      "project_name": "namastepos",
+      "product_goals": "Bill fast during the rush even when the WiFi dies (offline-first, idempotent replay)\nGST-correct bills without thinking about CGST/SGST/HSN (server-authoritative pricing, e-invoice ready)\nAll-inclusive transparent pricing: free-forever Starter, paid from ₹299/mo, live reports on every plan, no lock-in",
+      "user_stories": "As a single-outlet owner, I want to bill from my Android phone during a rush so that I never need a PC or live internet\nAs an owner, I want GST/HSN applied per item automatically so that every bill is a valid legal document\nAs a captain, I want to take orders at the table from my phone so that the kitchen sees them instantly (KOT/KDS)\nAs an owner, I want loyalty, memberships, wallet and WhatsApp receipts built in so that diners come back without another tool\nAs a small-chain owner (2–5 outlets), I want HQ-synced menus/plans/staff and consolidated reports",
+      "competitive_analysis": "Legacy desktop POS (annual lock-in): Windows PC + live internet assumed; report paywalls; ₹14–18k/yr upfront\nCommission-taking online-ordering tools: easy start; take a cut of every order\nPaper + calculator: free; no GST correctness, no reports\n(Internal only — never name competitors publicly: Petpooja, Posist/Restroworks, Rista, DotPe)",
+      "competitive_quadrant": "quadrantChart\n  title Hardware dependence vs Pricing transparency\n  x-axis Needs a PC --> Phone is the till\n  y-axis Lock-in / paywalls --> All-inclusive, monthly\n  \"Legacy desktop POS\": [0.15, 0.2]\n  \"Online-ordering tools\": [0.6, 0.35]\n  \"Paper + calculator\": [0.9, 0.9]\n  \"Our Target Product\": [0.85, 0.85]",
+      "requirement_analysis": "Hard parts already solved in production: offline order replay keyed to never double-charge; tenant isolation; server-authoritative pricing with 51 gated feature keys. Current risk is go-to-market, not engineering: listings score 18/100 (blocked on founder logins), billing not live until Razorpay KYC, no proof assets yet (testimonials, screenshots). Landing copy has repeatedly drifted from the live plan feed — render from the API, not from copy.",
+      "requirement_pool": "P0 Razorpay KYC → live billing\nP0 Landing renders plan claims from live /v1/public/plans\nP0 Directory listings live (18 platforms)\nP1 Social profiles + brand assets\nP1 First testimonials / case studies\nP1 Reseller kit\nP2 Hindi/regional content\nP2 iOS App Store",
+      "ui_design_draft": "POS app (Flutter): phone-first till, KOT/KDS, table & captain modes, phone+PIN staff login. Web dashboard: back-office reports, menus, plans, staff (HQ sync for chains). Platform admin console. Landing (namastepos.in): hero → price rail (renders from live plans) → compare table with sticky first column → trust block (facts only) → FAQ (9, schema-matched).",
+      "anything_unclear": "Test count: README badge says 1,569 passing; older internal docs disagree (592 vs 364) → cite the live badge, never a hard-coded number. iOS: dev build only until Apple Developer Program → say 'iOS via dev build'."
+    },
+    "B": {
+      "implementation_approach": "Multi-tenant SaaS. Node 22 API (api.namastepos.in) over Postgres 14 with tenant-scoped SQL and forward-only migrations; Flutter POS app writes orders locally and replays on reconnect with idempotency keys; web dashboard and platform admin as separate front-ends; Razorpay subscriptions with timing-safe webhook HMAC; WhatsApp receipts; QR dine-in; print agent for thermal printers; landing + blog static site.",
+      "file_list": "namastepos_backend/\nnamastepos_flutter/\nnamastepos_dashboard/\nnamastepos_admin/\nnamastepos_landing/\nnamastepos_print_agent/\nops/\nscripts/\ntests/\ndocker-compose.yml",
+      "data_structures": "classDiagram\n  class Tenant { +id +groupId +plan +featureKeys[51] }\n  class Outlet { +id +tenantId +gstin }\n  class Register { +id +outletId +billingSeat }\n  class Staff { +id +tenantId +pin +role }\n  class MenuItem { +id +price +gstRate +hsn }\n  class Order { +id +idempotencyKey +status +offlineCreatedAt }\n  class Invoice { +id +orderId +cgst +sgst +igst +eInvoiceRef }\n  class Subscription { +id +tenantId +razorpaySubId +dunningStep }\n  class LoyaltyAccount { +id +points +walletBalance }\n  Tenant *-- Outlet\n  Outlet *-- Register\n  Tenant *-- Staff\n  Tenant *-- MenuItem\n  Order *-- Invoice\n  Tenant *-- Subscription\n  Tenant *-- LoyaltyAccount",
+      "call_flow": "sequenceDiagram\n  participant App as Flutter POS\n  participant API as Node API\n  participant DB as Postgres\n  App->>App: write order locally (idempotencyKey)\n  App->>API: POST /v1/orders (on reconnect, replay)\n  API->>DB: INSERT ... ON CONFLICT (idempotencyKey) DO NOTHING\n  API->>API: server-authoritative pricing + GST/HSN\n  API-->>App: invoice (CGST/SGST/IGST)\n  API->>WhatsApp: receipt\n  Razorpay->>API: webhook payment.failed (HMAC)\n  API->>DB: UPDATE subscriptions SET dunning_step=n WHERE dunning_step < n",
+      "anything_unclear": "Module-level file list shown (repo is large); per-file Contract B lives in the code repo's own docs/ and CODE_REVIEW_2026-09-05.html."
+    },
+    "C": {
+      "required_packages": "Node 22\nPostgres 14\nFlutter 3.44\nRazorpay (subscriptions + webhooks)\nCloudflare R2 (APK distribution)",
+      "other_language_packages": "Dart (Flutter app)",
+      "logic_analysis": "namastepos_backend/ — API, tenancy, pricing, GST, orders, subscriptions/dunning, DPDP console\nnamastepos_flutter/ — POS app: offline queue, KOT/KDS, captain mode, PIN login\nnamastepos_dashboard/ — owner back-office web app\nnamastepos_admin/ — platform admin console (2FA)\nnamastepos_landing/ — marketing site + blog (renders plans from API)\nnamastepos_print_agent/ — thermal printer bridge\nops/ — deploy, health checks\nscripts/ — tooling\ntests/ — automated suite (1,569)\ndocker-compose.yml — local stack",
+      "task_list": "namastepos_backend/\nnamastepos_flutter/\nnamastepos_dashboard/\nnamastepos_admin/\nnamastepos_landing/\nnamastepos_print_agent/\nops/\nscripts/\ntests/\ndocker-compose.yml",
+      "api_spec": "Public: GET https://api.namastepos.in/v1/health, GET /v1/public/plans (source of truth for pricing/features). Full OpenAPI lives in the code repo docs/.",
+      "shared_knowledge": "Never name competitors publicly. No unsubstantiated claims. Money in ₹ with Indian grouping; GST terms exactly CGST/SGST/IGST, HSN, e-invoice. Verify pricing against /v1/public/plans before quoting. Founder does all logins/payments/OTP himself. Feature counts per plan (2026-09-04): 15/24/35/45/52 → publish '50+ features'.",
+      "anything_unclear": "None open."
+    }
+  },
+  "gate": [
+    { "check": 1, "status": "pass", "note": "Automated suite in repo; CODE_REVIEW_2026-09-05 completed" },
+    { "check": 2, "status": "pass", "note": "1,569 tests passing (README badge)" },
+    { "check": 3, "status": "pass", "note": "Order path verified live; deploy verified by curl /v1/health" },
+    { "check": 4, "status": "pass", "note": "Auto-deploying; health check green" },
+    { "check": 5, "status": "pass", "note": "Tenant-scoped SQL, timing-safe webhook HMAC, 2FA admin, DPDP console" },
+    { "check": 6, "status": "pass", "note": "Landing load 1.8s measured 2026-09-05" },
+    { "check": 7, "status": "pass", "note": "Compare table contrast 1.6:1 → 4.6:1; visually-hidden markers added" },
+    { "check": 8, "status": "pass", "note": "Dunning race fixed (in-order-never-repeats)" },
+    { "check": 9, "status": "pending", "note": "Coverage % not published in README — verify" },
+    { "check": 10, "status": "pass", "note": "Flutter + Node builds green in CI" }
+  ],
+  "adrs": [
+    { "title": "Offline-first with idempotent order replay", "decision": "Orders are written locally on the phone and replayed on reconnect keyed by an idempotency key, so a replay can never double-charge. Consequence: the network can drop mid-service without losing bills." },
+    { "title": "Server-authoritative pricing and GST", "decision": "Prices, GST rates and HSN come from the server, never the client; a bill is a legal document. Landing pricing renders from /v1/public/plans for the same reason." },
+    { "title": "Tenant per outlet, grouped for chains", "decision": "Each outlet is a fully isolated tenant under one group; plans and staff sync from HQ. Consequence: multi-outlet without cross-tenant data risk." },
+    { "title": "Dunning as a scheduled 4-touch ladder", "decision": "Steps advance only via UPDATE WHERE dunning_step < n, scheduled as fractions of the grace window. Replaces one-email-per-payment.failed which sent duplicates." },
+    { "title": "No competitor names in public copy", "decision": "Use 'legacy POS' / 'desktop POS' / 'annual-lock-in POS'. Internal notes only in research/." }
+  ],
+  "summary": {
+    "isPass": "NO",
+    "todos": "{ \"namastepos_landing/\": \"Render plan claims from live /v1/public/plans; four instances of copy contradicting the feed found on 2026-09-05\", \"listings/\": \"0/18 platforms live — blocked on founder logins and vendor mailbox\", \"billing\": \"Razorpay KYC pending — subscriptions not live\" }",
+    "cycles": 1
+  }
+}

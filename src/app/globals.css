@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Design tokens (RGB triples) ---- */
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --bg: 244 246 250;        /* page */
+  --surface: 255 255 255;   /* cards */
+  --surface-2: 246 248 251; /* inset panels, inputs */
+  --border: 226 232 240;
+  --border-2: 203 213 225;
+  --fg: 15 23 42;
+  --fg-2: 51 65 85;
+  --muted: 100 116 139;
+  --muted-2: 148 163 184;
+  --accent: 37 99 235;      /* enterprise blue */
+  --accent-dim: 29 78 216;
+  --accent-fg: 255 255 255;
+  --warn: 217 119 6;
+  --bad: 220 38 38;
+  --good: 22 163 74;
+  --info: 8 145 178;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: 11 15 23;
+  --surface: 17 23 34;
+  --surface-2: 23 31 45;
+  --border: 36 46 63;
+  --border-2: 51 65 85;
+  --fg: 241 245 249;
+  --fg-2: 203 213 225;
+  --muted: 148 163 184;
+  --muted-2: 100 116 139;
+  --accent: 96 165 250;
+  --accent-dim: 59 130 246;
+  --accent-fg: 11 15 23;
+  --warn: 251 191 36;
+  --bad: 248 113 113;
+  --good: 74 222 128;
+  --info: 34 211 238;
+}
+
+html, body { height: 100%; }
+body { @apply bg-bg text-fg antialiased; font-feature-settings: "ss01", "cv11", "tnum"; }
+
+.card { @apply rounded-xl border border-border bg-surface shadow-card; }
+.btn { @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50; }
+.btn-primary { @apply btn bg-accent text-accent-fg hover:bg-accent-dim; }
+.btn-ghost { @apply btn border border-border bg-surface text-fg-2 hover:bg-surface-2 hover:text-fg; }
+.btn-danger { @apply btn border border-bad/30 text-bad hover:bg-bad/10; }
+.btn-sm { @apply px-2 py-1 text-xs; }
+.input { @apply w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-fg placeholder:text-muted-2 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20; }
+.label { @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-muted; }
+.badge { @apply inline-flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-0.5 text-[11px] font-semibold; }
+.tab { @apply rounded-lg px-3 py-1.5 text-sm text-muted hover:bg-surface-2 hover:text-fg; }
+.tab-active { @apply bg-surface-2 text-accent; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.kbd { @apply rounded border border-border-2 bg-surface-2 px-1.5 py-0.5 text-[10px] font-semibold text-muted; }
+.table { @apply w-full text-left text-sm; }
+.table thead th { @apply border-b border-border pb-2 pr-3 text-xs font-semibold uppercase tracking-wide text-muted; }
+.table tbody td { @apply border-b border-border/70 py-2 pr-3 align-top; }
+.table tbody tr:hover td { @apply bg-surface-2/60; }
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-thumb { background: rgb(var(--border-2)); border-radius: 8px; }

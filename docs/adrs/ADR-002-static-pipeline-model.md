@@ -1,0 +1,2 @@
+# ADR-002: Pipeline model is static code; project state is data
+**Status:** Accepted · **Context:** the 8 phases / 15 personas / SOPs are the methodology, identical for every project. **Decision:** `src/lib/pipeline.ts` is the single source of truth for the model; DB stores only per-project status. **Consequences:** changing the methodology is a code change (versioned in git); the visualizer and status view can never drift apart.

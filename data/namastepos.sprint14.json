@@ -1,0 +1,39 @@
+{
+  "project": { "name": "NamastePOS", "idea": "Mobile-first, offline-ready restaurant POS & billing SaaS for India: billing, KOT/KDS, table & captain modes, QR self-ordering, GST-compliant invoicing, loyalty/wallet, live reports from any Android phone — keeps working when the internet drops." },
+  "sprints": [
+    { "number": 2, "goal": "Unblock listings + billing (founder actions) and ship social/brand assets", "startDate": "2026-09-17", "endDate": "2026-09-30", "status": "closed" },
+    { "number": 14, "goal": "Non-AI high value: dynamic UPI QR, update prompt + min-version gate, e-invoice/WhatsApp readiness, reseller kit + referral button, GST toggle (platform + restaurant)", "startDate": "2026-09-17", "endDate": "2026-09-24", "status": "active" },
+    { "number": 15, "goal": "AI features 1–7 (Claude API): menu import, Hinglish WhatsApp digest, ask-your-data, wastage alerts, voice POS, review replies, support bot", "startDate": "2026-09-25", "endDate": "2026-10-08", "status": "planned" }
+  ],
+  "stories": [
+    { "title": "Dynamic amount-locked UPI QR on every bill", "description": "#1 competitor P1 still open. QR encodes exact bill amount; printed + on-screen.", "points": 5, "status": "in_progress", "assignee": "Arun", "sprintNumber": 14 },
+    { "title": "Update-available prompt in app + server min-version gate", "description": "Unlocks safe feature-flag flips; app refuses below min version with upgrade prompt.", "points": 5, "status": "in_progress", "assignee": "Rhea", "sprintNumber": 14 },
+    { "title": "e-invoice wiring behind GSP credentials; WhatsApp behind Meta connect", "description": "Code paths ready, flip on when credentials exist.", "points": 3, "status": "todo", "assignee": "Nikhil", "sprintNumber": 14 },
+    { "title": "Reseller/partner kit + referral share button", "description": "Both marketing items already spec'd in NamastePOS-Marketing/campaigns.", "points": 3, "status": "todo", "assignee": "Meera", "sprintNumber": 14 },
+    { "title": "GST A: platform invoices show no tax lines while platform.gstin is empty", "description": "Replace hard-coded 18% CGST/SGST split; 'GST not applicable — supplier not registered'; landing copy drops 'exclusive of GST'. Auto-flips when GSTIN entered.", "points": 3, "status": "todo", "assignee": "Nikhil", "sprintNumber": 14 },
+    { "title": "GST B: restaurant 'Charge GST on bills' toggle + rate picker (5%/18%) + new unregistered scheme", "description": "Web dashboard Settings → Billing card and app parity; unregistered scheme = 0%, heading 'Invoice' not 'Tax Invoice'; per-item overrides preserved.", "points": 5, "status": "todo", "assignee": "Nikhil", "sprintNumber": 14 },
+    { "title": "Fix prorationRound4 test after migration 108 plan re-seed (CI red on f1da781/67c546c)", "description": "Enterprise ₹799→₹1999 shifted credit-days 7→2. Fixed in ddaead9; 22/22 green.", "points": 1, "status": "done", "assignee": "Divya", "sprintNumber": 14 },
+    { "title": "AI 1: Menu import from photo/PDF/Zomato link → items, prices, variants, GST slab", "description": "Kills #1 onboarding drop-off (typing 80 items). ~2 days.", "points": 8, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 2: Owner's daily WhatsApp digest in Hinglish from day-end report", "description": "~1 day.", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 3: Ask-your-data chat (Claude writes SQL over read-only tenant-scoped views)", "description": "Allowlisted views + row-level tenant filter is the safety design. ~3 days.", "points": 8, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 4: Smart reorder / wastage alerts from inventory", "description": "Statistics + AI-written message. ~1 day.", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 5: Voice POS — Claude item matching on Hinglish transcripts", "description": "~1 day.", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 6: Review reply drafts for Google/Zomato (needs GBP API)", "description": "~1 day.", "points": 3, "status": "todo", "assignee": "", "sprintNumber": 15 },
+    { "title": "AI 7: Support bot on llms-full.txt + docs, in-app and landing", "description": "~2 days.", "points": 5, "status": "todo", "assignee": "", "sprintNumber": 15 }
+  ],
+  "requirements": [
+    { "priority": "P0", "text": "Nightly DB backup to Cloudflare R2 (namastepos-backups) — founder must create bucket + token + GitHub secrets, then run 'DB backup' workflow" },
+    { "priority": "P1", "text": "www.namastepos.in → namastepos.in 301 redirect rule in Cloudflare" },
+    { "priority": "P1", "text": "Restaurant GST toggle (on/off, 5%/18%, unregistered scheme) in web dashboard and app" },
+    { "priority": "P1", "text": "Platform subscription invoices must not show GST while platform is unregistered" }
+  ],
+  "adrs": [
+    { "title": "Supabase (free) over Neon for production Postgres", "decision": "Neon metered hours-awake and paused; Supabase Free pauses only after 7 idle days with no compute-hour cap. Keep-alive pings /v1/health every 5 min so DB is queried continuously. Watch 500 MB storage (≈45 MB used) and 5 GB egress." },
+    { "title": "Render Free for the API with 5-min keep-alive + UptimeRobot", "decision": "Spins down after 15 min idle; ping keeps it warm. 750 instance-hours/month = exactly one 24/7 service — never add a second free service. No SLA, no provider backups → nightly R2 backup is mandatory." },
+    { "title": "CI deploy-api is gated on backend tests; scheduled CI runs only marketing-claims-live", "decision": "On push, deploy-api skips whenever backend fails (safety gate). Scheduled runs only check landing claims vs plan feed; other jobs skipped by design." }
+  ],
+  "gate": [
+    { "check": 2, "status": "pass", "note": "prorationRound4 fixed (ddaead9); 22/22 green after migration 108" },
+    { "check": 4, "status": "pass", "note": "Health check green: status ok, db ok, commit 67c546c" }
+  ]
+}

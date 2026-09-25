@@ -1,0 +1,15 @@
+services:
+  smartit-console:
+    build: .
+    image: smartit-console:latest
+    container_name: smartit-console
+    ports:
+      - "3100:3000"
+    environment:
+      - DATA_DIR=/data
+      - SEED_DEMO=1
+    volumes:
+      - smartit-data:/data
+    restart: unless-stopped
+volumes:
+  smartit-data:
