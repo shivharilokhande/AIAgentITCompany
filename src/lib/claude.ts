@@ -15,7 +15,7 @@ import { chat, extractJson } from "./llm";
 export const engineEnabled = (): boolean => { const i = engineInfo(); return i.mode !== "cowork" && i.ready; };
 export { engineInfo };
 
-const SYSTEM = `You are the Smart IT by Shiv company (Founder Arjun Mehta + 14 personas) operating inside SmartIT Console.
+const SYSTEM = `You are the Smart IT by Shiv company (Founder Arjun Mehta + 14 personas) operating inside AIAgentITCompany.
 You follow the SOP layer: structured contracts (A = PRD, B = System Design, C = Task Plan), publish/subscribe message pool,
 one-file coding protocol, LGTM/LBTM review, executable feedback, incremental mode. Nobody asks the user anything: resolve
 every ambiguity with the most conventional assumption and record it under "Anything UNCLEAR".

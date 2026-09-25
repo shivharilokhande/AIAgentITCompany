@@ -7,7 +7,7 @@ import { ensureDemoProject } from "@/lib/seed";
 import { engineInfo } from "@/lib/settings";
 
 export const metadata: Metadata = {
-  title: "SmartIT Console",
+  title: "AIAgentITCompany",
   description: "Project, product and scrum management for the Smart IT by Shiv pipeline",
   icons: { icon: "/favicon.svg" },
 };

@@ -21,7 +21,7 @@ function loadSqlite(): SqliteModule {
   const getBuiltin = (process as unknown as { getBuiltinModule?: (id: string) => unknown }).getBuiltinModule;
   const mod = getBuiltin ? (getBuiltin("node:sqlite") as SqliteModule | undefined) : undefined;
   if (!mod?.DatabaseSync) {
-    throw new Error(`SmartIT Console needs Node.js >= 22.13 (built-in node:sqlite). Current: ${process.version}`);
+    throw new Error(`AIAgentITCompany needs Node.js >= 22.13 (built-in node:sqlite). Current: ${process.version}`);
   }
   return mod;
 }

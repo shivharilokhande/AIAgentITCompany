@@ -1,11 +1,11 @@
-# Contributing to AgentITCompany
+# Contributing to AIAgentITCompany
 
 Thanks for taking a look. This project is small enough that one good PR changes it — here's how to make yours land quickly.
 
 ## Run it locally
 
 ```bash
-git clone https://github.com/shivharilokhande/agentitcompany.git && cd agentitcompany
+git clone https://github.com/shivharilokhande/AIAgentITCompany.git && cd aiagentitcompany
 npm install            # Node ≥ 22.13, zero native deps
 npm run dev            # http://localhost:3100
 zsh data/demo-run.sh   # optional: import the demo project and replay a live company run

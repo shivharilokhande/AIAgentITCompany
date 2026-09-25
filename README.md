@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="public/favicon.svg" width="72" alt="AgentITCompany" />
+<img src="public/favicon.svg" width="72" alt="AIAgentITCompany" />
 
-# AgentITCompany
+# AIAgentITCompany
 
 **Run an AI software company from your browser.**<br/>
 One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it down the line → a shipped product out. Watch every step live.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/smartit-console/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/smartit-console/actions)
-[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/smartit-console?logo=git&logoColor=white)](https://github.com/shivharilokhande/smartit-console/commits/main)
-[![Stars](https://img.shields.io/github/stars/shivharilokhande/smartit-console?style=flat&logo=github)](https://github.com/shivharilokhande/smartit-console/stargazers)
-[![License](https://img.shields.io/github/license/shivharilokhande/smartit-console)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/shivharilokhande/aiagentitcompany/ci.yml?branch=main&label=CI&logo=githubactions&logoColor=white)](https://github.com/shivharilokhande/aiagentitcompany/actions)
+[![Last commit](https://img.shields.io/github/last-commit/shivharilokhande/aiagentitcompany?logo=git&logoColor=white)](https://github.com/shivharilokhande/aiagentitcompany/commits/main)
+[![Stars](https://img.shields.io/github/stars/shivharilokhande/aiagentitcompany?style=flat&logo=github)](https://github.com/shivharilokhande/aiagentitcompany/stargazers)
+[![License](https://img.shields.io/github/license/shivharilokhande/aiagentitcompany)](LICENSE)
 <br/>
 ![Next.js](https://img.shields.io/badge/Next.js-15-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-20232a?logo=react&logoColor=61dafb)
@@ -32,7 +32,7 @@ One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it
 
 ## ✨ What is this?
 
-AgentITCompany is a self‑hosted **project · product · scrum management console** for software that is built by AI agents instead of (or alongside) humans. It is the visual front‑end of the **Smart IT by Shiv** methodology: an autonomous IT company with **8 phases**, **15 personas** (Founder → CTO/CFO/CPO → Directors → Leads → Engineers) and **10 SOPs** that fix the shape of every hand‑off.
+AIAgentITCompany is a self‑hosted **project · product · scrum management console** for software that is built by AI agents instead of (or alongside) humans. It is the visual front‑end of the **Smart IT by Shiv** methodology: an autonomous IT company with **8 phases**, **15 personas** (Founder → CTO/CFO/CPO → Directors → Leads → Engineers) and **10 SOPs** that fix the shape of every hand‑off.
 
 Every project you add runs the same pipeline. Every request you make — a question, an analysis, a plan, code, tests, a deployment — becomes a **company run** that flows from the CEO down to the last engineer and back, and you can watch it happen on the org chart in real time.
 
@@ -64,13 +64,13 @@ Every project you add runs the same pipeline. Every request you make — a quest
 **One line, Docker:**
 
 ```bash
-git clone https://github.com/shivharilokhande/agentitcompany.git && cd agentitcompany && docker compose up --build
+git clone https://github.com/shivharilokhande/AIAgentITCompany.git && cd aiagentitcompany && docker compose up --build
 ```
 
 **One line, Node ≥ 22.13 (no native builds — SQLite comes from Node itself):**
 
 ```bash
-git clone https://github.com/shivharilokhande/agentitcompany.git && cd agentitcompany && npm install && npm run dev
+git clone https://github.com/shivharilokhande/AIAgentITCompany.git && cd aiagentitcompany && npm install && npm run dev
 ```
 
 Open **http://localhost:3100**. Then, to see a full company run in 60 seconds: `zsh data/demo-run.sh`.
@@ -446,7 +446,7 @@ This repository was itself built by the Smart IT company, so it ships its own de
 
 ## 🤝 Contributing
 
-Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Good places to start are the [`good first issue`](https://github.com/shivharilokhande/agentitcompany/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list and adding an LLM provider (usually a config‑only change). Questions and ideas go in [Discussions](https://github.com/shivharilokhande/agentitcompany/discussions).
+Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Good places to start are the [`good first issue`](https://github.com/shivharilokhande/AIAgentITCompany/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list and adding an LLM provider (usually a config‑only change). Questions and ideas go in [Discussions](https://github.com/shivharilokhande/AIAgentITCompany/discussions).
 
 If this is useful to you, a ⭐ helps other people find it.
 

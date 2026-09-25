@@ -1,4 +1,4 @@
-# VISION — SmartIT Console
+# VISION — AIAgentITCompany
 
 **Original idea (verbatim):** "I want visual of how this work and a complete project, product and scrum management tool and i can use it in each project — build a webapp for this."
 

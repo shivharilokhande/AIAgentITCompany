@@ -1,4 +1,4 @@
-# AgentITCompany — submission kit & tracker
+# AIAgentITCompany — submission kit & tracker
 
 Copy‑paste blocks for directories, lists and launch posts. Keep every claim here truthful to the README.
 
@@ -6,27 +6,27 @@ Copy‑paste blocks for directories, lists and launch posts. Keep every claim he
 
 | Asset | Path / URL |
 |---|---|
-| Repo | https://github.com/shivharilokhande/agentitcompany |
+| Repo | https://github.com/shivharilokhande/AIAgentITCompany |
 | Logo (SVG) | `public/favicon.svg` |
 | Social / OG image 1280×640 | `docs/social-preview.png` |
 | Demo GIF | `docs/demo.gif` |
 | Screenshots | `docs/screenshots/{pipeline,dashboard,how-it-works,scrum,claude,configuration}.png` |
-| Release | https://github.com/shivharilokhande/agentitcompany/releases/tag/v2.2.0 |
+| Release | https://github.com/shivharilokhande/AIAgentITCompany/releases/tag/v2.2.0 |
 | License | MIT |
 
 ## Copy
 
-**Name:** AgentITCompany
+**Name:** AIAgentITCompany
 
 **Tagline (≤ 60 chars):** Run an AI software company from your browser
 
 **One‑liner (≤ 120):** A 15‑persona AI team takes your idea through an 8‑phase pipeline — watch every step live on a scrum board.
 
 **Short (≤ 300):**
-AgentITCompany is a self‑hosted console that runs an AI software company. A Founder, C‑suite, Architect, Engineers, QA and DevOps hand your idea down an 8‑phase pipeline under 10 SOPs, and every step is attributed live to a persona. Scrum board with parallel lanes, contracts (PRD / design / task plan), per‑file LGTM/LBTM review, quality gate. Engine: Claude Cowork, any AI API key (Anthropic, OpenAI/Codex, Gemini, OpenRouter) or a local Ollama model. MIT.
+AIAgentITCompany is a self‑hosted console that runs an AI software company. A Founder, C‑suite, Architect, Engineers, QA and DevOps hand your idea down an 8‑phase pipeline under 10 SOPs, and every step is attributed live to a persona. Scrum board with parallel lanes, contracts (PRD / design / task plan), per‑file LGTM/LBTM review, quality gate. Engine: Claude Cowork, any AI API key (Anthropic, OpenAI/Codex, Gemini, OpenRouter) or a local Ollama model. MIT.
 
 **Long (≤ 800):**
-Most agent frameworks give you a script. AgentITCompany gives you a company. Fifteen personas — Founder, CTO/CFO/CPO, Directors, Architect, Scrum Master, Engineers, QA, DevOps — take an idea through eight phases: vision lock, strategy, specification (PRD contract), architecture (system‑design + task‑plan contracts with a consistency gate), sprint execution (one file at a time, LGTM/LBTM review per file), a 10‑check quality gate, deployment and delivery. Every request you make — a question, a plan, code, tests — becomes a live "company run" you can watch on the org chart and in a chat thread. Manage the work like a real team: sprints, drag‑and‑drop kanban, burndown, parallel lanes, hire more engineer agents, dispatch stories with one click. Choose who does the thinking: your Claude desktop app (Cowork bridge, no key), an API key (Anthropic, OpenAI incl. Codex, Gemini, OpenRouter, any OpenAI‑compatible server) or a local Ollama model for fully offline runs. Self‑hosted Next.js + SQLite with zero native dependencies, REST bridge API, Docker, MIT.
+Most agent frameworks give you a script. AIAgentITCompany gives you a company. Fifteen personas — Founder, CTO/CFO/CPO, Directors, Architect, Scrum Master, Engineers, QA, DevOps — take an idea through eight phases: vision lock, strategy, specification (PRD contract), architecture (system‑design + task‑plan contracts with a consistency gate), sprint execution (one file at a time, LGTM/LBTM review per file), a 10‑check quality gate, deployment and delivery. Every request you make — a question, a plan, code, tests — becomes a live "company run" you can watch on the org chart and in a chat thread. Manage the work like a real team: sprints, drag‑and‑drop kanban, burndown, parallel lanes, hire more engineer agents, dispatch stories with one click. Choose who does the thinking: your Claude desktop app (Cowork bridge, no key), an API key (Anthropic, OpenAI incl. Codex, Gemini, OpenRouter, any OpenAI‑compatible server) or a local Ollama model for fully offline runs. Self‑hosted Next.js + SQLite with zero native dependencies, REST bridge API, Docker, MIT.
 
 **Categories / tags:** AI agents · multi‑agent · developer tools · project management · scrum · self‑hosted · open source · local LLM · Ollama · Claude · OpenAI · Next.js
 
@@ -69,7 +69,7 @@ Most agent frameworks give you a script. AgentITCompany gives you a company. Fif
 
 ### Show HN
 
-**Title:** Show HN: AgentITCompany – run an AI software company from your browser (Claude, Codex or local Ollama)
+**Title:** Show HN: AIAgentITCompany – run an AI software company from your browser (Claude, Codex or local Ollama)
 
 **Text:**
 I built a console where an idea goes in and a 15‑persona AI team — Founder, CTO/CFO/CPO, Architect, Scrum Master, Engineers, QA, DevOps — takes it through 8 phases, and you watch every step happen live on an org chart and a scrum board.
@@ -80,30 +80,30 @@ The engine is pluggable. It can ride on the Claude desktop app (it tails Cowork'
 
 Next.js 15 + Node's built‑in `node:sqlite`, zero native deps, `docker compose up`. MIT.
 
-Repo: https://github.com/shivharilokhande/agentitcompany
+Repo: https://github.com/shivharilokhande/AIAgentITCompany
 Happy to answer anything about the SOP design or the Cowork bridge.
 
 ### r/LocalLLaMA
 
 **Title:** I made a scrum board where a local coder model is the whole engineering team (Ollama, no cloud)
 
-**Text:** Open‑source console: 15 agent personas run an 8‑phase software pipeline; point it at Ollama (`qwen2.5-coder`, `qwen3-coder`, `deepseek-coder`…) and every command becomes a live "company run" you can watch persona by persona. Also works with Claude/OpenAI/Gemini keys if you want. Test‑connection + auto model discovery built in. Curious which local models you'd trust as "architect" vs "engineer". Repo + 60‑second demo script in the README. https://github.com/shivharilokhande/agentitcompany
+**Text:** Open‑source console: 15 agent personas run an 8‑phase software pipeline; point it at Ollama (`qwen2.5-coder`, `qwen3-coder`, `deepseek-coder`…) and every command becomes a live "company run" you can watch persona by persona. Also works with Claude/OpenAI/Gemini keys if you want. Test‑connection + auto model discovery built in. Curious which local models you'd trust as "architect" vs "engineer". Repo + 60‑second demo script in the README. https://github.com/shivharilokhande/AIAgentITCompany
 
 ### r/ClaudeAI
 
 **Title:** Two‑way bridge between Claude Cowork and a scrum board — your Cowork sessions show up as a live org chart
 
-**Text:** Built a self‑hosted console that tails Claude Cowork's local session logs and mirrors what Claude is doing into a project board: each step attributed to a persona (Founder → CTO → Architect → Engineers → QA), live. You can also queue commands from the board and Claude picks them up with "check the console". No API key needed; optional API/Ollama engines too. MIT. https://github.com/shivharilokhande/agentitcompany
+**Text:** Built a self‑hosted console that tails Claude Cowork's local session logs and mirrors what Claude is doing into a project board: each step attributed to a persona (Founder → CTO → Architect → Engineers → QA), live. You can also queue commands from the board and Claude picks them up with "check the console". No API key needed; optional API/Ollama engines too. MIT. https://github.com/shivharilokhande/AIAgentITCompany
 
 ### LinkedIn / X (one post, attach `docs/demo.gif`)
 
 What if your AI coding agent came with a company around it?
 
-AgentITCompany (open source): one idea in → Founder, C‑suite, Architect, Engineers, QA, DevOps each take their step through an 8‑phase pipeline → shipped product out. Live org chart, real scrum board, per‑file code review, quality gate.
+AIAgentITCompany (open source): one idea in → Founder, C‑suite, Architect, Engineers, QA, DevOps each take their step through an 8‑phase pipeline → shipped product out. Live org chart, real scrum board, per‑file code review, quality gate.
 
 Runs on Claude, OpenAI/Codex, Gemini — or fully offline on Ollama.
 
-⭐ https://github.com/shivharilokhande/agentitcompany
+⭐ https://github.com/shivharilokhande/AIAgentITCompany
 
 ### Product Hunt
 
