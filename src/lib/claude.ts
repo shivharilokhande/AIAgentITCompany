@@ -1,15 +1,19 @@
 // src/lib/claude.ts
-// Optional in-app engine: processes queued commands with the Claude API when ANTHROPIC_API_KEY is set.
-// Without a key, commands wait for a Claude Cowork session (see the smartit-console-bridge skill) to pick them up.
+// In-app engine: processes queued commands with whatever LLM bridge is active in Configuration
+// (Anthropic, OpenAI/Codex, Gemini, OpenRouter, custom OpenAI-compatible, or local Ollama).
+// In Cowork mode, commands wait for a Claude Cowork session (see the smartit-console-bridge skill) to pick them up.
 import fs from "node:fs";
 import path from "node:path";
 import * as repo from "./repo";
 import * as bridge from "./bridge";
 import type { Command, ProjectBundle, Activity } from "./types";
 import { PIPELINE } from "./pipeline";
+import { engineInfo } from "./settings";
+import { chat, extractJson } from "./llm";
 
-export const engineEnabled = (): boolean => Boolean(process.env.ANTHROPIC_API_KEY);
-const MODEL = () => process.env.CLAUDE_MODEL ?? "claude-sonnet-5";
+/** True when the console processes commands itself (mode is API or Ollama and the provider is configured). */
+export const engineEnabled = (): boolean => { const i = engineInfo(); return i.mode !== "cowork" && i.ready; };
+export { engineInfo };
 
 const SYSTEM = `You are the Smart IT by Shiv company (Founder Arjun Mehta + 14 personas) operating inside SmartIT Console.
 You follow the SOP layer: structured contracts (A = PRD, B = System Design, C = Task Plan), publish/subscribe message pool,
@@ -109,23 +113,10 @@ function buildUserPrompt(cmd: Command): string {
   return parts.join("\n\n");
 }
 
-async function callClaude(system: string, user: string): Promise<string> {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "content-type": "application/json", "x-api-key": process.env.ANTHROPIC_API_KEY ?? "", "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({ model: MODEL(), max_tokens: 8000, system, messages: [{ role: "user", content: user }] }),
-  });
-  if (!res.ok) throw new Error(`Claude API ${res.status}: ${(await res.text()).slice(0, 300)}`);
-  const data = (await res.json()) as { content: Array<{ type: string; text?: string }> };
-  return data.content.filter((c) => c.type === "text").map((c) => c.text ?? "").join("");
+async function callLlm(system: string, user: string): Promise<string> {
+  return (await chat({ system, user })).text;
 }
-
-function parseJson(text: string): { answer?: string; bundle?: ProjectBundle; activity?: Array<{ type: string; message: string }> } {
-  const t = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
-  const start = t.indexOf("{"), end = t.lastIndexOf("}");
-  const body = start >= 0 && end > start ? t.slice(start, end + 1) : t;
-  return JSON.parse(body);
-}
+const parseJson = extractJson;
 
 /** Which phases a company run visits per command kind (SOP-7). */
 const RUN_PLAN: Record<string, number[]> = {
@@ -160,6 +151,8 @@ export async function processNextCommand(): Promise<Command | null> {
   const phases = RUN_PLAN[cmd.kind] ?? RUN_PLAN.custom;
   const transcript: string[] = [];
   let finalAnswer = "";
+  const info = engineInfo();
+  bridge.logActivity({ projectId: cmd.projectId, actor: "engine", type: "engine.start", message: `Company run started on ${info.label.replace("Engine: ", "")}`, commandId: cmd.id, phase: phases[0], step: "think", persona: "founder" });
   try {
     for (const n of phases) {
       const def = PIPELINE.phases.find((p) => p.n === n)!;
@@ -167,7 +160,7 @@ export async function processNextCommand(): Promise<Command | null> {
       const system = `${SYSTEM}\n\nYou are now executing PHASE ${n} — ${def.name}. Personas on the field: ${personas.map((p) => `${p.id} (${p.name}, ${p.role})`).join("; ")}.\n${PHASE_BRIEF[n]}\nRespond with ONE JSON object: {"steps":[{"persona":"<id>","step":"think|analyze|decide|write|design|code|review|test|deploy|deliver","message":"<one line, what this persona did/decided>","detail":"<optional: reasoning, code, file list, test output>"}], "bundle": <optional partial ProjectBundle with only what this phase produced>}. 2–6 steps. Each step must name a persona from this phase. Be concrete and truthful to the evidence.`;
       const user = `${buildUserPrompt(cmd)}\n\n# Earlier phases in this run\n${transcript.join("\n") || "(none yet)"}`;
       bridge.logActivity({ projectId: cmd.projectId, actor: "engine", type: `phase.${n}.start`, message: `Phase ${n} — ${def.name}: ${personas.map((p) => p.name.split(" ")[0]).join(", ")} on the field`, commandId: cmd.id, phase: n, step: "think", persona: personas[0].id });
-      const raw = await callClaude(system, user);
+      const raw = await callLlm(system, user);
       const out = parseJson(raw) as PhaseOut;
       for (const st of out.steps ?? []) {
         const persona = personas.some((p) => p.id === st.persona) ? st.persona : personas[0].id;

@@ -8,6 +8,7 @@ import { PERSONAS as CORE_PERSONAS } from "@/lib/pipeline";
 import { STEP_META } from "./RunView";
 import { Badge, Card, Empty, Avatar } from "./ui";
 import { Icon, Spinner, useToast } from "./system";
+import type { EngineInfo } from "@/lib/settings";
 
 const KIND_LABEL: Record<CommandKind, string> = { ask: "Ask", fetch_details: "Fetch complete details", run_phase: "Run phase", plan_sprint: "Plan sprint", review: "Review files", sync: "Sync with repo", custom: "Custom" };
 const ACTOR_TONE: Record<string, string> = { user: "accent", claude: "good", engine: "info", system: "neutral" };
@@ -19,8 +20,9 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
   return j as T;
 }
 
-export function ClaudePanel({ project, engine, initialActivity, initialCommands, compact }: { project?: Project | null; engine: "anthropic-api" | "cowork"; initialActivity: Activity[]; initialCommands: Command[]; compact?: boolean }) {
+export function ClaudePanel({ project, engine, initialActivity, initialCommands, compact }: { project?: Project | null; engine: EngineInfo; initialActivity: Activity[]; initialCommands: Command[]; compact?: boolean }) {
   const { push } = useToast();
+  const auto = engine.mode !== "cowork" && engine.ready;
   const [team, setTeam] = useState<Array<{ id: string; name: string; role: string }>>(CORE_PERSONAS);
   useEffect(() => { fetch("/api/bridge/team", { cache: "no-store" }).then((r) => r.json()).then((j) => j.team && setTeam(j.team)).catch(() => {}); }, []);
   const [activity, setActivity] = useState<Activity[]>(initialActivity);
@@ -59,7 +61,7 @@ export function ClaudePanel({ project, engine, initialActivity, initialCommands,
     try {
       await api("/api/bridge/commands", { method: "POST", body: JSON.stringify({ text: t.trim(), kind: k, project: project?.id, source: "app" }) });
       setText("");
-      push({ tone: "good", text: engine === "anthropic-api" ? "Queued — the engine will pick it up in a moment" : "Queued — will run when Claude Cowork checks the console" });
+      push({ tone: "good", text: auto ? `Queued — ${engine.label.replace("Engine: ", "")} will pick it up in a moment` : "Queued — will run when Claude Cowork checks the console" });
       await refresh();
     } catch (e) {
       push({ tone: "bad", text: (e as Error).message });
@@ -83,7 +85,7 @@ export function ClaudePanel({ project, engine, initialActivity, initialCommands,
     <div className={`grid gap-4 ${compact ? "" : "lg:grid-cols-5"}`}>
       {/* Composer + commands */}
       <div className={`space-y-4 ${compact ? "" : "lg:col-span-2"}`}>
-        <Card title={<span className="flex items-center gap-2"><Icon name="spark" className="h-4 w-4 text-accent" /> Ask Claude {project ? `about ${project.name}` : ""}</span>} right={<Badge tone={engine === "anthropic-api" ? "good" : "accent"}>{engine === "anthropic-api" ? "Engine: Claude API" : "Engine: Cowork"}</Badge>}>
+        <Card title={<span className="flex items-center gap-2"><Icon name="spark" className="h-4 w-4 text-accent" /> Ask Claude {project ? `about ${project.name}` : ""}</span>} right={<Link href="/configuration"><Badge tone={engine.mode === "cowork" ? "accent" : engine.ready ? "good" : "warn"}>{engine.label}</Badge></Link>}>
           <div className="mb-2 flex flex-wrap gap-1.5">
             {quick.map((q) => (
               <button key={q.kind} type="button" disabled={busy} onClick={() => send(q.kind, q.text)} className="btn-ghost btn-sm" title={q.text}>
@@ -99,9 +101,11 @@ export function ClaudePanel({ project, engine, initialActivity, initialCommands,
             <button type="button" className="btn-primary self-end" disabled={busy || !text.trim()} onClick={() => send()}>{busy ? <Spinner /> : <Icon name="send" />}</button>
           </div>
           <p className="mt-2 text-[11px] text-muted">
-            {engine === "anthropic-api"
-              ? "The in-app engine processes queued commands with the Claude API using the Smart IT SOPs."
-              : <>Commands wait in the queue. In Claude Cowork say <span className="mono">“check the console”</span> (or run the scheduled task) and Claude picks them up, works, and streams progress here.</>}
+            {auto
+              ? `${engine.reason} Every command becomes a company run with the Smart IT SOPs.`
+              : engine.mode !== "cowork"
+                ? <span className="text-warn">{engine.reason} Until then commands wait for Claude Cowork.</span>
+                : <>Commands wait in the queue. In Claude Cowork say <span className="mono">“check the console”</span> (or run the scheduled task) and Claude picks them up, works, and streams progress here.</>}
             {" "}⌘↵ to send.
           </p>
         </Card>
@@ -173,7 +177,7 @@ function CommandRow({ c, projectId, onDelete }: { c: Command; projectId: string 
 }
 
 /** Small connection card explaining how Cowork talks to this console. */
-export function ConnectionCard({ engine, tokenRequired }: { engine: "anthropic-api" | "cowork"; tokenRequired: boolean }) {
+export function ConnectionCard({ engine, tokenRequired }: { engine: EngineInfo; tokenRequired: boolean }) {
   const [origin, setOrigin] = useState("http://localhost:3100");
   useEffect(() => { setOrigin(window.location.origin); }, []);
   const { push } = useToast();
@@ -183,7 +187,7 @@ export function ConnectionCard({ engine, tokenRequired }: { engine: "anthropic-a
     <Card title={<span className="flex items-center gap-2"><Icon name="link" /> Connection</span>} right={<Badge tone="good">online</Badge>}>
       <dl className="grid gap-2 text-sm sm:grid-cols-2">
         <div><dt className="label">Base URL</dt><dd className="mono text-xs text-fg">{origin}/api/bridge</dd></div>
-        <div><dt className="label">Engine</dt><dd className="text-xs text-fg">{engine === "anthropic-api" ? "Claude API (ANTHROPIC_API_KEY set) — commands auto-process" : "Claude Cowork — commands wait for a Cowork session"}</dd></div>
+        <div><dt className="label">Engine</dt><dd className="text-xs text-fg">{engine.label.replace("Engine: ", "")} — {engine.reason} <Link href="/configuration" className="text-accent hover:underline">Change</Link></dd></div>
         <div><dt className="label">Auth</dt><dd className="text-xs text-fg">{tokenRequired ? "Bearer token required (BRIDGE_TOKEN)" : "Open (local only). Set BRIDGE_TOKEN to require a token."}</dd></div>
         <div><dt className="label">Cowork skill</dt><dd className="text-xs text-fg"><span className="mono">smartit-console-bridge</span> — say “check the console” or “sync &lt;project&gt; to the console”.</dd></div>
       </dl>

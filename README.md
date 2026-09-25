@@ -34,7 +34,7 @@ SmartIT Console is a self‑hosted **project · product · scrum management cons
 
 Every project you add runs the same pipeline. Every request you make — a question, an analysis, a plan, code, tests, a deployment — becomes a **company run** that flows from the CEO down to the last engineer and back, and you can watch it happen on the org chart in real time.
 
-> **Not a demo.** This console is running production work today: it manages NamastePOS (a restaurant POS SaaS, 30 stories, 15 sprints) and AgentAlgo (a 12‑agent trading desk) — both driven from Claude Cowork on the same machine.
+> **Not a demo.** This console is running production work today: it manages [NamastePOS](#) (a restaurant POS SaaS, 30 stories, 15 sprints) and AgentAlgo (a 12‑agent trading desk) — both driven from Claude Cowork on the same machine.
 
 <table>
 <tr>
@@ -194,7 +194,33 @@ Where you see it:
 
 ---
 
-## 🔗 Claude Cowork bridge
+## 🔌 Three ways to power the company
+
+Open **Configuration** in the sidebar and pick a bridge. The queue, the personas and the SOPs are identical whichever one you choose; only *who does the thinking* changes.
+
+| Bridge | What runs the personas | Cost | Privacy | Best for |
+|---|---|---|---|---|
+| **Claude Cowork** *(default)* | Your Claude desktop app, mirrored live by the Session Watcher | Included in your Claude plan | Local logs only | Highest quality; uses Cowork's own tools and files |
+| **AI API key** | The console calls the model itself — **Anthropic Claude**, **OpenAI GPT‑5 / Codex**, **Google Gemini**, **OpenRouter** (Qwen Coder, DeepSeek, Kimi, Codestral, Grok Code…), or **any OpenAI‑compatible server** (LM Studio, vLLM, Groq, Together…) | Pay per token | Sent to the provider you pick | Autonomous runs that finish in seconds, no Cowork session needed |
+| **Local Ollama** | A model on this machine (`qwen2.5-coder`, `qwen3-coder`, `deepseek-coder`, `llama3.1`, `gpt-oss`…) | Free | Nothing leaves your Mac | Offline, unlimited, private |
+
+The Configuration page has **Test connection** (a real round‑trip) and **List models** (auto‑discovers what Ollama has pulled or what your API key can reach) for every provider. Keys are stored in the console's local SQLite database, masked in the UI, and never sent anywhere except the provider they belong to. Environment variables (`ENGINE_MODE`, `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, `OPENROUTER_API_KEY`, `OLLAMA_BASE_URL`, `OLLAMA_MODEL`…) are used as defaults when a field is empty.
+
+```mermaid
+flowchart TB
+    classDef box fill:#f8fafc,stroke:#94a3b8,color:#0f172a
+    classDef hot fill:#eef2ff,stroke:#6366f1,color:#1e1b4b
+    Q[(Command queue)]:::hot --> E{Engine<br/><sub>Configuration</sub>}:::hot
+    E -- cowork --> CW[Claude Cowork<br/><sub>Session Watcher · skill</sub>]:::box
+    E -- api --> A[Anthropic]:::box
+    E -- api --> O[OpenAI · Codex<br/><sub>Responses API</sub>]:::box
+    E -- api --> G[Gemini]:::box
+    E -- api --> R[OpenRouter /<br/>OpenAI‑compatible]:::box
+    E -- ollama --> L[Ollama<br/><sub>localhost:11434</sub>]:::box
+    CW & A & O & G & R & L --> P[8 phases · 15 personas<br/>LGTM/LBTM · quality gate]:::hot --> UI[Live company run]:::hot
+```
+
+### The Claude Cowork bridge in detail
 
 The console and Claude Cowork are linked **both ways** — no API key required.
 
@@ -220,7 +246,7 @@ flowchart LR
 |---|---|
 | **Cowork → Console** | The built‑in **Session Watcher** tails Cowork's local session logs, fuzzy‑matches sessions to projects (`"NamastPOS 2"` → *NamastePOS*), and mirrors every assistant message, file write, command, test run and sub‑agent into the project's live run — classified to a persona/phase/step by content. Idle sessions close their run after 30 min. |
 | **Console → Cowork** | Type in the Claude tab (*Fetch details*, *Run phase*, *Plan sprint*, *Review files*, *Dispatch*, or free text). Commands queue; in Cowork say **"check the console"** (or let the `smartit-console-sync` scheduled task poll every 5 min) and Claude claims the queue, works with the Smart IT SOPs and streams progress back. |
-| **Standalone** | Set `ANTHROPIC_API_KEY` and the console processes its own queue: one Claude call per phase, personas' steps streamed live. |
+| **Standalone** | Switch to *AI API key* or *Local Ollama* in Configuration and the console processes its own queue: one model call per phase, personas' steps streamed live. |
 
 ---
 
@@ -238,6 +264,7 @@ flowchart LR
 | **Project → Quality & Delivery** | Per‑file LGTM/LBTM log, code summary / is‑pass, 10‑check quality gate, ADRs, deployment status. |
 | **Project → Claude** | Chat with the company. Conversation list on the left, persona‑attributed run on the right. |
 | **Claude Bridge** | Global view: command queue, live activity across all projects, bridge health. |
+| **Configuration** | Pick the engine bridge (Cowork · API key · Ollama), manage provider keys/models/URLs, test connections, discover models. |
 
 Plus: light/dark theme, collapsible sidebar, breadcrumbs, **⌘K** command palette, toasts on every action, confirm dialogs on every delete, inline editing everywhere.
 
@@ -257,6 +284,7 @@ Everything the UI does, a script or an agent can do too.
 | `/api/bridge/commands/:id` | GET / PATCH | Claim, progress, finish a command |
 | `/api/bridge/activity` | GET / POST | Live feed (filter by project / command / `sinceSeq`) |
 | `/api/bridge/team` | GET | Roster, capacity, lanes |
+| `/api/bridge/providers` | GET / POST | Engine config (masked) · `{action:"test"\|"models", provider}` |
 | `/api/bridge/snapshot` | GET | Repo snapshot for a project (`repo_path`) |
 | `/api/bridge/tick` | POST | Run one engine / watcher cycle now |
 
@@ -274,8 +302,14 @@ Set `BRIDGE_TOKEN` to require `Authorization: Bearer <token>`. `data/run-ai-feat
 | `COWORK_WATCHER` | `1` | Tail Claude Cowork session logs |
 | `COWORK_SESSIONS_DIR` | `~/Library/Application Support/Claude/local-agent-mode-sessions` | Where those logs are |
 | `COWORK_WATCH_INTERVAL_MS` | `10000` | Watcher poll interval |
-| `ANTHROPIC_API_KEY` | — | Enables the in‑app engine |
-| `CLAUDE_MODEL` | `claude-sonnet-5` | Model for the in‑app engine |
+| `ENGINE_MODE` | `cowork` | Initial bridge: `cowork` · `api` · `ollama` (the Configuration page overrides it) |
+| `ANTHROPIC_API_KEY` / `CLAUDE_MODEL` | — / `claude-sonnet-5` | Anthropic defaults |
+| `OPENAI_API_KEY` / `OPENAI_MODEL` | — / `gpt-5-codex` | OpenAI / Codex defaults (Responses API) |
+| `GEMINI_API_KEY` / `GEMINI_MODEL` | — / `gemini-2.5-pro` | Google Gemini defaults |
+| `OPENROUTER_API_KEY` / `OPENROUTER_MODEL` | — / `qwen/qwen3-coder` | OpenRouter defaults |
+| `CUSTOM_LLM_BASE_URL` / `CUSTOM_LLM_API_KEY` / `CUSTOM_LLM_MODEL` | — | Any OpenAI‑compatible server |
+| `OLLAMA_BASE_URL` / `OLLAMA_MODEL` | `http://localhost:11434` / `qwen2.5-coder:14b` | Local Ollama defaults |
+| `LLM_TIMEOUT_MS` | `180000` | Per‑call timeout (large local models load slowly on first use) |
 | `BRIDGE_TOKEN` | — | Protect the bridge API |
 
 ---
@@ -293,7 +327,9 @@ src/
    ├─ actions.ts   Server Actions (every mutation)
    ├─ bridge.ts    Command queue · activity feed · ProjectBundle import/export
    ├─ cowork.ts    Session Watcher · fuzzy project match · persona classifier
-   ├─ claude.ts    Optional in-app engine (one Claude call per phase)
+   ├─ settings.ts  Engine mode + provider config (SQLite, env fallbacks, masking)
+   ├─ llm.ts       One chat() over Anthropic · OpenAI Responses · Gemini · OpenAI-compatible · Ollama
+   ├─ claude.ts    In-app engine (one model call per phase, personas' steps streamed)
    ├─ team.ts      Roster · capacity · lanes
    └─ dispatch.ts  Assign stories to idle lanes
 tests/unit/        Vitest · 28 tests
@@ -323,7 +359,7 @@ This repository was itself built by the Smart IT company, so it ships its own de
 - [x] Scrum: sprints, kanban, burndown, velocity, parallel lanes, hiring, dispatch
 - [x] Two‑way Claude Cowork bridge (Session Watcher + skill + scheduled task)
 - [x] Live company runs with org‑chart highlighting
-- [x] Optional in‑app engine via the Claude API
+- [x] Three engine bridges: Claude Cowork · AI API keys (Anthropic, OpenAI/Codex, Gemini, OpenRouter, OpenAI‑compatible) · local Ollama
 - [ ] In‑app Mermaid rendering for Contracts B/C diagrams
 - [ ] Repo import → auto‑fill Contract B *File List*
 - [ ] Export a project as its Smart IT delivery package (zip)

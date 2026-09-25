@@ -16,10 +16,11 @@ export async function GET(req: Request) {
 }
 export async function POST(req: Request) {
   const g = guard(req); if (g) return g;
-  const body = await readJson<{ text?: string; kind?: CommandKind; project?: string; source?: "app" | "cowork" }>(req);
+  const body = await readJson<{ text?: string; kind?: CommandKind; project?: string; projectId?: string; source?: "app" | "cowork" }>(req);
   if (!body?.text?.trim()) return err("text required");
-  const project = body.project ? getProject(body.project) ?? getProjectByName(body.project) : null;
-  if (body.project && !project) return err("project not found", 404);
+  const ref = body.project ?? body.projectId;
+  const project = ref ? getProject(ref) ?? getProjectByName(ref) : null;
+  if (ref && !project) return err("project not found", 404);
   const kind = KINDS.includes(body.kind as CommandKind) ? (body.kind as CommandKind) : "ask";
   return json({ ok: true, command: createCommand({ projectId: project?.id ?? null, source: body.source === "cowork" ? "cowork" : "app", kind, text: body.text }) }, 201);
 }

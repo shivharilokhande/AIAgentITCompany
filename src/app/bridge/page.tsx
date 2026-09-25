@@ -1,11 +1,11 @@
 import { listActivity, listCommands, commandStats } from "@/lib/bridge";
-import { engineEnabled } from "@/lib/claude";
+import { engineInfo } from "@/lib/settings";
 import { ClaudePanel, ConnectionCard } from "@/components/ClaudePanel";
 import { Stat } from "@/components/ui";
 
 export default function BridgePage() {
   const stats = commandStats();
-  const engine = engineEnabled() ? "anthropic-api" : "cowork";
+  const engine = engineInfo();
   return (
     <div className="mx-auto max-w-7xl space-y-6 p-6">
       <header>

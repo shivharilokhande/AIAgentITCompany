@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { ToastProvider } from "@/components/system";
 import { listProjects } from "@/lib/repo";
 import { ensureDemoProject } from "@/lib/seed";
-import { engineEnabled } from "@/lib/claude";
+import { engineInfo } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "SmartIT Console",
@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ToastProvider>
-          <AppShell projects={projects} engine={engineEnabled() ? "anthropic-api" : "cowork"}>{children}</AppShell>
+          <AppShell projects={projects} engine={engineInfo()}>{children}</AppShell>
         </ToastProvider>
       </body>
     </html>

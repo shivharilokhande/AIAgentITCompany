@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Project } from "@/lib/types";
 import { Icon, ThemeToggle, Modal } from "./system";
 import { Badge } from "./ui";
+import type { EngineInfo } from "@/lib/settings";
 
 type NavItem = { href: string; label: string; icon: string };
 const NAV: NavItem[] = [
@@ -14,10 +15,11 @@ const NAV: NavItem[] = [
   { href: "/projects", label: "Projects", icon: "grid" },
   { href: "/team", label: "Team", icon: "users" },
   { href: "/bridge", label: "Claude Bridge", icon: "spark" },
+  { href: "/configuration", label: "Configuration", icon: "settings" },
   { href: "/how-it-works", label: "How it works", icon: "flow" },
 ];
 
-export function AppShell({ projects, engine, children }: { projects: Project[]; engine: "anthropic-api" | "cowork"; children: ReactNode }) {
+export function AppShell({ projects, engine, children }: { projects: Project[]; engine: EngineInfo; children: ReactNode }) {
   const path = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
@@ -127,9 +129,9 @@ export function AppShell({ projects, engine, children }: { projects: Project[]; 
           <button onClick={() => setPalette(true)} className="hidden items-center gap-2 rounded-lg border border-border bg-surface-2 px-3 py-1.5 text-sm text-muted hover:text-fg md:flex">
             <Icon name="search" /> Search or jump to… <span className="kbd ml-2">⌘K</span>
           </button>
-          <Link href="/bridge" className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-fg-2 hover:bg-surface-2" title="Claude Bridge status">
-            <span className={`h-2 w-2 rounded-full ${engine === "anthropic-api" ? "bg-good" : "bg-accent"} animate-pulse`} />
-            {engine === "anthropic-api" ? "Engine: Claude API" : "Engine: Cowork"}
+          <Link href="/configuration" className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs text-fg-2 hover:bg-surface-2" title={`${engine.reason} Click to configure.`}>
+            <span className={`h-2 w-2 rounded-full ${engine.mode === "cowork" ? "bg-accent" : engine.ready ? "bg-good" : "bg-warn"} animate-pulse`} />
+            <span className="max-w-[220px] truncate">{engine.label}</span>
           </Link>
           <ThemeToggle />
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 text-xs font-bold text-accent" title="Shivhari">SL</span>

@@ -243,3 +243,30 @@ export async function dispatchAction(fd: FormData): Promise<void> {
   dispatchSprint(pid, sprintId, { max: fd.has("max") ? int(fd, "max", 99) : undefined });
   reval(pid);
 }
+
+/* ---- engine configuration ---- */
+import * as settings from "./settings";
+
+const PROVIDER_IDS = settings.PROVIDERS.map((p) => p.id);
+const providerId = (v: string): settings.ProviderId => oneOf(v, PROVIDER_IDS, "anthropic");
+
+export async function saveEngineModeAction(fd: FormData): Promise<void> {
+  const mode = oneOf(str(fd, "mode"), ["cowork", "api", "ollama"] as const, "cowork");
+  const apiProvider = providerId(str(fd, "apiProvider"));
+  settings.saveSettings({
+    mode,
+    apiProvider: apiProvider === "ollama" ? "anthropic" : apiProvider,
+    maxTokens: Math.min(64_000, Math.max(1000, int(fd, "maxTokens", 8000))),
+    jsonMode: str(fd, "jsonMode") !== "0",
+  });
+  revalidatePath("/", "layout");
+}
+export async function saveProviderAction(fd: FormData): Promise<void> {
+  const id = providerId(str(fd, "provider"));
+  settings.saveProvider(id, { apiKey: str(fd, "apiKey", 500), baseUrl: str(fd, "baseUrl", 500), model: str(fd, "model", 200) });
+  revalidatePath("/", "layout");
+}
+export async function clearProviderKeyAction(fd: FormData): Promise<void> {
+  settings.clearProviderKey(providerId(str(fd, "provider")));
+  revalidatePath("/", "layout");
+}

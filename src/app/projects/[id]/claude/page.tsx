@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getProject } from "@/lib/repo";
 import { listActivity, listCommands } from "@/lib/bridge";
-import { engineEnabled } from "@/lib/claude";
+import { engineInfo } from "@/lib/settings";
 import { ChatPanel } from "@/components/ChatPanel";
 import { Badge } from "@/components/ui";
 
@@ -16,7 +16,7 @@ export default async function ProjectClaudePage({ params }: { params: Promise<{ 
         {project.lastSyncedAt && <span>last sync {new Date(project.lastSyncedAt).toLocaleString()}</span>}
         <span>repo: <span className="mono text-fg-2">{project.repoPath || "— set in Settings"}</span></span>
       </div>
-      <ChatPanel project={project} engine={engineEnabled() ? "anthropic-api" : "cowork"} initialActivity={listActivity({ projectId: id, limit: 600 })} initialCommands={listCommands({ projectId: id, limit: 100 })} />
+      <ChatPanel project={project} engine={engineInfo()} initialActivity={listActivity({ projectId: id, limit: 600 })} initialCommands={listCommands({ projectId: id, limit: 100 })} />
     </div>
   );
 }

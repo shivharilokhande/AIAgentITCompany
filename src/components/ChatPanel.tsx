@@ -9,6 +9,7 @@ import { PERSONAS as CORE_PERSONAS } from "@/lib/pipeline";
 import { STEP_META } from "./RunView";
 import { Avatar, Badge, Empty } from "./ui";
 import { Icon, Spinner, useToast } from "./system";
+import type { EngineInfo } from "@/lib/settings";
 
 const KIND_LABEL: Record<CommandKind, string> = { ask: "Ask", fetch_details: "Fetch complete details", run_phase: "Run phase / build", plan_sprint: "Plan sprint", review: "Review files", sync: "Sync with repo", custom: "Custom" };
 type Member = { id: string; name: string; role: string };
@@ -20,8 +21,9 @@ async function api<T>(url: string, init?: RequestInit): Promise<T> {
   return j as T;
 }
 
-export function ChatPanel({ project, engine, initialActivity, initialCommands }: { project: Project; engine: "anthropic-api" | "cowork"; initialActivity: Activity[]; initialCommands: Command[] }) {
+export function ChatPanel({ project, engine, initialActivity, initialCommands }: { project: Project; engine: EngineInfo; initialActivity: Activity[]; initialCommands: Command[] }) {
   const { push } = useToast();
+  const auto = engine.mode !== "cowork" && engine.ready;
   const [team, setTeam] = useState<Member[]>(CORE_PERSONAS);
   const [activity, setActivity] = useState<Activity[]>(initialActivity);
   const [commands, setCommands] = useState<Command[]>(initialCommands);
@@ -56,7 +58,7 @@ export function ChatPanel({ project, engine, initialActivity, initialCommands }:
     try {
       const r = await api<{ command: Command }>("/api/bridge/commands", { method: "POST", body: JSON.stringify({ text: t.trim(), kind: k, project: project.id, source: "app" }) });
       setText(""); setSelected(r.command.id); setAutoScroll(true);
-      push({ tone: "good", text: engine === "anthropic-api" ? "Sent — the engine is on it" : "Sent — the company picks it up on the next Cowork check" });
+      push({ tone: "good", text: auto ? `Sent — ${engine.label.replace("Engine: ", "")} is on it` : "Sent — the company picks it up on the next Cowork check" });
       await refresh();
     } catch (e) { push({ tone: "bad", text: (e as Error).message }); } finally { setBusy(false); }
   };
@@ -108,7 +110,7 @@ export function ChatPanel({ project, engine, initialActivity, initialCommands }:
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-accent-fg"><Icon name="spark" className="h-4 w-4" /></span>
           <div className="min-w-0 flex-1">
             <div className="truncate text-sm font-semibold text-fg">Smart IT company · {project.name}</div>
-            <div className="text-[11px] text-muted">{engine === "anthropic-api" ? "Engine: Claude API" : "Engine: Claude Cowork"} · every reply is a company run: Founder → C-suite → Product → Architecture → Engineers → QA → DevOps → Delivery</div>
+            <div className="text-[11px] text-muted"><Link href="/configuration" className="hover:text-fg">{engine.label}</Link> · every reply is a company run: Founder → C-suite → Product → Architecture → Engineers → QA → DevOps → Delivery</div>
           </div>
           <label className="flex items-center gap-1 text-[11px] text-muted"><input type="checkbox" checked={autoScroll} onChange={(e) => setAutoScroll(e.target.checked)} /> follow</label>
           {selected !== "all" && <Link href={`/projects/${project.id}/runs/${selected}`} className="btn-ghost btn-sm"><Icon name="flow" className="h-3.5 w-3.5" /> Company run view</Link>}
