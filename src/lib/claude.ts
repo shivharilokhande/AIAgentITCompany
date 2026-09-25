@@ -157,7 +157,9 @@ export async function processNextCommand(): Promise<Command | null> {
     for (const n of phases) {
       const def = PIPELINE.phases.find((p) => p.n === n)!;
       const personas = def.leads.map((id) => PIPELINE.personas.find((p) => p.id === id)!);
-      const system = `${SYSTEM}\n\nYou are now executing PHASE ${n} — ${def.name}. Personas on the field: ${personas.map((p) => `${p.id} (${p.name}, ${p.role})`).join("; ")}.\n${PHASE_BRIEF[n]}\nRespond with ONE JSON object: {"steps":[{"persona":"<id>","step":"think|analyze|decide|write|design|code|review|test|deploy|deliver","message":"<one line, what this persona did/decided>","detail":"<optional: reasoning, code, file list, test output>"}], "bundle": <optional partial ProjectBundle with only what this phase produced>}. 2–6 steps. Each step must name a persona from this phase. Be concrete and truthful to the evidence.`;
+      const system = `${SYSTEM}\n\nYou are now executing PHASE ${n} — ${def.name}. Personas on the field: ${personas.map((p) => `${p.id} (${p.name}, ${p.role})`).join("; ")}.\n${PHASE_BRIEF[n]}\nRespond with ONE JSON object: {"steps":[{"persona":"<id>","step":"<kind>","message":"<one line, what this persona did/decided>","detail":"<optional: reasoning, code, file list, test output>"}], "bundle": <optional partial ProjectBundle with only what this phase produced>}.
+"step" must be exactly ONE word from this list: think, analyze, decide, write, design, code, review, test, deploy, deliver. Example: {"persona":"${personas[0].id}","step":"analyze","message":"..."}.
+2–6 steps. Each step must name a persona from this phase (ids: ${personas.map((p) => p.id).join(", ")}). Be concrete and truthful to the evidence.`;
       const user = `${buildUserPrompt(cmd)}\n\n# Earlier phases in this run\n${transcript.join("\n") || "(none yet)"}`;
       bridge.logActivity({ projectId: cmd.projectId, actor: "engine", type: `phase.${n}.start`, message: `Phase ${n} — ${def.name}: ${personas.map((p) => p.name.split(" ")[0]).join(", ")} on the field`, commandId: cmd.id, phase: n, step: "think", persona: personas[0].id });
       const raw = await callLlm(system, user);
