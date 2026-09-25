@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.smartit.console</string>
+  <key>ProgramArguments</key><array><string>/opt/homebrew/bin/npm</string><string>run</string><string>dev</string></array>
+  <key>WorkingDirectory</key><string>/Users/shiv/AI Development/smartit-console</string>
+  <key>EnvironmentVariables</key><dict><key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string><key>PORT</key><string>3100</string><key>DATA_DIR</key><string>/Users/shiv/AI Development/smartit-console/data</string></dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>/Users/shiv/Library/Logs/smartit-console.log</string>
+  <key>StandardErrorPath</key><string>/Users/shiv/Library/Logs/smartit-console.log</string>
+</dict></plist>
