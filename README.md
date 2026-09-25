@@ -90,6 +90,83 @@ A demo project is created on first run so every screen has data. Delete it from 
 
 ---
 
+## 🧭 How to use it — a 5‑minute walkthrough
+
+### Step 1 · Pick who does the thinking (Configuration)
+
+<img src="docs/screenshots/configuration.png" alt="Configuration page — choose Cowork, API key or Ollama" width="920" />
+
+Open **Configuration** in the sidebar. Choose one of the three cards, then **Save engine**. The badge in the top bar (`Engine: …`) changes immediately and every page follows it.
+
+| You chose… | What to do next | Commands run… |
+|---|---|---|
+| **Claude Cowork bridge** | Nothing else. Keep the Claude desktop app open. | when a Cowork chat says **"check the console"**, or when the `smartit-console-sync` scheduled task polls (every 5 min) |
+| **AI API key** | Paste a key under *3 · AI API providers*, pick a model, click **Test connection**, then select that provider in the *Cloud provider* dropdown and Save engine | **automatically, within seconds** |
+| **Local Ollama** | `ollama serve`, then click **List models** under *2 · Local Ollama*, pick one, **Test connection**, Save engine | **automatically** — speed depends on the model (7B–14B coder models are the sweet spot; an 80B model on CPU will time out) |
+
+> 💡 **Why did my prompt just say "Waiting for the company to pick this up…"?**
+> In Cowork mode the bridge is *pull‑based* — the desktop app has no inbox the console can push into. Either type **"check the console"** in a Cowork chat, wait for the scheduled task, or switch to API/Ollama mode for instant runs.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor You
+    participant UI as Console · Claude tab
+    participant Q as Command queue
+    participant CW as Claude Cowork chat
+    participant W as Session Watcher
+    You->>UI: "any bug?"
+    UI->>Q: queued
+    Note over Q: Cowork mode = pull. Nothing happens until…
+    You->>CW: "check the console"
+    CW->>Q: claim next command
+    CW->>W: works (audit log) + posts persona steps
+    W-->>UI: live: Founder → CTO → BA → Architect → QA → Founder
+    CW->>Q: PATCH done + delivery
+    UI-->>You: answer in the thread · run page
+```
+
+### Step 2 · Add a project
+
+**Dashboard → + New project.** Give it a name, the one‑line idea, and (optionally) the path to its repo on this machine — the repo path is what lets the company read real code. Or, in Cowork, say **"import NamastePOS into the console"** and the `smartit-console-bridge` skill builds the whole bundle from the folder.
+
+### Step 3 · Ask the company anything
+
+Open the project → **Claude** tab. The quick buttons queue the common commands:
+
+| Button | What the company does |
+|---|---|
+| **Fetch details** | Reads the repo and fills phases, requirements, stories, contracts, ADRs from evidence |
+| **Run current phase** | Executes the active phase as its owning personas (Phase 3 → Contract A, Phase 4 → Contracts B + C, Phase 5 → code under SOP‑3/4…) |
+| **Plan sprint** | Creates the next 2‑week sprint and plans backlog stories into it with points |
+| **Review** | SOP‑4 six‑question review, per file, LGTM/LBTM + notes |
+| *free text* | Anything: a question, an analysis, "add offline mode as P0 and plan it", a bug to fix |
+
+Every reply is a **company run**: watch it on the **Pipeline** tab (*Live now* strip + glowing persona on the org chart), in the chat thread, or on the run page (`/projects/:id/runs/:commandId`).
+
+### Step 4 · Run the sprint in parallel
+
+**Scrum** tab → the lanes bar shows `busy / total` lanes (sum of engineer capacity). Click **Dispatch N to idle lanes** and the console assigns To‑Do stories to free engineers and queues one *Build story* command per lane; Claude runs them as concurrent sub‑agents, one persona each. Need more lanes? **Team → Hire** (or say "hire a Flutter engineer" in Cowork).
+
+### Step 5 · Ship
+
+**Quality & Delivery** tab: per‑file LGTM/LBTM log, code summary with `is‑pass`, the 10‑check gate, ADRs, deployment status. When the gate is green, mark Phase 7 → 8 done on the Pipeline tab; the Founder's delivery package is the run result.
+
+<details>
+<summary><b>Talking to the console from Cowork — the phrases the skill understands</b></summary>
+
+| Say… | Effect |
+|---|---|
+| "check the console" | Claim and run every queued command (parallel *Build story* commands run concurrently) |
+| "import PROJECT into the console" / "sync PROJECT to the console" | Build a ProjectBundle from the folder and `POST /import` |
+| "fetch complete details for PROJECT" | Same, then fill contracts/ADRs from evidence |
+| "dispatch" / "build sprint 15" / "run these in parallel" | Dispatch stories to idle lanes and run them |
+| "hire a &lt;role&gt; engineer" | `POST /team` — new lane appears on the org chart |
+| any project work at all ("what AI features can we add?", "fix the loyalty bug") | Runs as a company run and mirrors live to the console |
+</details>
+
+---
+
 ## 🏢 How the company works
 
 ```mermaid
