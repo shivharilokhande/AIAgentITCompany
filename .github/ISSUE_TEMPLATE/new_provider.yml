@@ -1,0 +1,25 @@
+name: 🔌 New LLM provider
+description: Ask for (or offer) support for another model provider
+labels: [provider, good first issue]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Provider
+      placeholder: e.g. Mistral La Plateforme, Groq, Together, Azure OpenAI, Bedrock
+    validations: { required: true }
+  - type: dropdown
+    id: compat
+    attributes:
+      label: API shape
+      options: [OpenAI-compatible /chat/completions (easy — config only), OpenAI Responses API, Anthropic Messages, Something else (needs a new case in llm.ts)]
+    validations: { required: true }
+  - type: input
+    id: docs
+    attributes:
+      label: API docs link
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      placeholder: Default base URL, a good default coding model, anything unusual about auth or JSON mode.

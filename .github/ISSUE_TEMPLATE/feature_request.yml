@@ -1,0 +1,26 @@
+name: ✨ Feature request
+description: Propose something the company or the console should do
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      placeholder: The job, not the button. "When a sprint ends I want…"
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      placeholder: How you imagine it working. Screens, API shape, which persona owns it.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Pipeline / personas / SOPs, Scrum board & lanes, Claude tab / company runs, Engine bridges & providers, Bridge API, Cowork Session Watcher, UI / theme, Docs]
+  - type: checkboxes
+    id: pr
+    attributes:
+      label: Would you like to build it?
+      options:
+        - label: I'd like to open a PR for this

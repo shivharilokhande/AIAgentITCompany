@@ -1,0 +1,32 @@
+name: 🐛 Bug report
+description: Something in the console doesn't behave as documented
+labels: [bug]
+body:
+  - type: dropdown
+    id: engine
+    attributes:
+      label: Engine mode
+      description: Configuration → which bridge was active?
+      options: [Claude Cowork, AI API key (Anthropic), AI API key (OpenAI / Codex), AI API key (Gemini), AI API key (OpenRouter / custom), Local Ollama, Not engine-related]
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: Steps, then what you saw vs. what you expected.
+    validations: { required: true }
+  - type: textarea
+    id: health
+    attributes:
+      label: Output of `curl -s http://localhost:3100/api/bridge/health`
+      render: json
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: macOS 15 · Node 22.13 · Chrome 130 · Docker? · Ollama model?
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console / server log lines (if any)
+      render: shell

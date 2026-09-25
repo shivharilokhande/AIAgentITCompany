@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>AgentITCompany</title>
+<style>
+  html,body{margin:0;width:1280px;height:640px;overflow:hidden;font-family:-apple-system,"Inter",Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b1020;color:#f8fafc}
+  .wrap{position:relative;width:1280px;height:640px;background:radial-gradient(1200px 600px at 10% 0%,#1e2a5a 0%,#0b1020 55%),#0b1020}
+  .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px}
+  .left{position:absolute;left:72px;top:64px;width:640px}
+  .logo{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+  .logo .box{width:52px;height:52px;border-radius:14px;background:#4f6ef7;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(79,110,247,.45)}
+  .logo .box svg{width:30px;height:30px}
+  .logo .t{font-size:15px;letter-spacing:.22em;text-transform:uppercase;color:#93a4ff;font-weight:600}
+  h1{margin:0;font-size:58px;line-height:1.02;font-weight:800;letter-spacing:-.02em}
+  h1 span{color:#93a4ff}
+  p.sub{margin:18px 0 0;font-size:21px;line-height:1.35;color:#c7d0e0;max-width:600px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;max-width:620px}
+  .pill{font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid rgba(147,164,255,.35);background:rgba(79,110,247,.12);color:#dfe5ff;white-space:nowrap}
+  .right{position:absolute;right:64px;top:70px;width:470px}
+  .card{background:#111a33;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px 20px;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+  .card h3{margin:0 0 12px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8b97b8}
+  .org{display:grid;gap:10px}
+  .row{display:flex;gap:10px;justify-content:center}
+  .p{flex:0 0 auto;min-width:118px;padding:9px 12px;border-radius:12px;background:#182347;border:1px solid rgba(255,255,255,.07);font-size:12px;color:#c7d0e0}
+  .p b{display:block;font-size:13px;color:#fff;margin-bottom:2px}
+  .p.on{background:#2a3cff22;border-color:#93a4ff;box-shadow:0 0 0 3px rgba(147,164,255,.25),0 0 30px rgba(79,110,247,.5);color:#eef1ff}
+  .p.done{border-color:rgba(34,197,94,.5)}
+  .p.done b::after{content:" ✓";color:#22c55e}
+  .feed{margin-top:14px;font-size:13px;color:#c7d0e0;display:grid;gap:7px}
+  .feed div{display:flex;gap:8px;align-items:center}
+  .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex:0 0 auto}
+  .dot.live{background:#93a4ff;box-shadow:0 0 0 4px rgba(147,164,255,.25)}
+  .foot{position:absolute;left:72px;bottom:30px;font-size:16px;color:#8b97b8}
+  .foot b{color:#c7d0e0;font-weight:600}
+</style></head>
+<body><div class="wrap"><div class="grid"></div>
+<div class="left">
+  <div class="logo"><div class="box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8z"/></svg></div><div class="t">AgentITCompany</div></div>
+  <h1>Run an AI software company<br/><span>from your browser.</span></h1>
+  <p class="sub">One idea in. A Founder, C‑suite, Architect, Engineers, QA and DevOps hand it down the line. A shipped product out — and you watch every step live.</p>
+  <div class="pills"><span class="pill">8 phases · 15 personas · 10 SOPs</span><span class="pill">Scrum board · parallel lanes</span><span class="pill">Claude Cowork</span><span class="pill">OpenAI / Codex · Gemini</span><span class="pill">Local Ollama</span><span class="pill">Self‑hosted</span></div>
+</div>
+<div class="right"><div class="card">
+  <h3>Live company run · Phase 5</h3>
+  <div class="org">
+    <div class="row"><div class="p done"><b>Arjun Mehta</b>Founder & CEO</div></div>
+    <div class="row"><div class="p done"><b>Vikram Rao</b>CTO</div><div class="p done"><b>Priya Sharma</b>CFO</div><div class="p done"><b>Deepa Krishnan</b>CPO</div></div>
+    <div class="row"><div class="p done"><b>Srinivas Iyengar</b>Architect</div><div class="p done"><b>Kavitha Nair</b>Scrum Master</div></div>
+    <div class="row"><div class="p on"><b>Arun Patel</b>Backend · coding</div><div class="p on"><b>Rhea Menon</b>Frontend · coding</div><div class="p"><b>Divya S.</b>QA</div></div>
+  </div>
+  <div class="feed">
+    <div><span class="dot"></span>Architect · Contract B published — 9 files, gate ✓</div>
+    <div><span class="dot live"></span>Arun Patel · code · src/lib/repo.ts — LGTM pass 2</div>
+    <div><span class="dot live"></span>Rhea Menon · code · Board.tsx — SSE hook</div>
+    <div><span class="dot" style="background:#64748b"></span>Divya · test · waiting for lane 1</div>
+  </div>
+</div></div>
+<div class="foot"><b>github.com/shivharilokhande/agentitcompany</b> &nbsp;·&nbsp; MIT &nbsp;·&nbsp; Next.js 15 · node:sqlite · zero native deps</div>
+</div></body></html>

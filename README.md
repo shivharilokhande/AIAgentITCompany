@@ -22,7 +22,9 @@ One idea in → a CEO, a C‑suite, architects, engineers, QA and DevOps hand it
 
 [**Quick start**](#-quick-start) · [**How it works**](#-how-the-company-works) · [**Live company runs**](#-live-company-runs) · [**Claude Cowork bridge**](#-claude-cowork-bridge) · [**Modules**](#-whats-inside) · [**API**](#-bridge-api) · [**Docs**](#-documentation)
 
-<img src="docs/screenshots/pipeline.png" alt="AgentITCompany — 8-phase pipeline for a project" width="920" />
+<img src="docs/demo.gif" alt="A command typed in the Claude tab becomes a live company run — the org chart lights up persona by persona" width="920" />
+
+<sub>▲ one command in → Founder, C‑suite, Architect, Engineers, QA, DevOps each take their step, live</sub>
 
 </div>
 
@@ -34,7 +36,7 @@ AgentITCompany is a self‑hosted **project · product · scrum management conso
 
 Every project you add runs the same pipeline. Every request you make — a question, an analysis, a plan, code, tests, a deployment — becomes a **company run** that flows from the CEO down to the last engineer and back, and you can watch it happen on the org chart in real time.
 
-> **Not a demo.** This console is running production work today: it manages [NamastePOS](#) (a restaurant POS SaaS, 30 stories, 15 sprints) and AgentAlgo (a 12‑agent trading desk) — both driven from Claude Cowork on the same machine.
+> **Used in production.** This console runs real work today: it manages a restaurant POS SaaS (30 stories, 15 sprints, Flutter + Node) and a 12‑agent trading desk — both driven from Claude Cowork on the same machine. The demo project you get on first run is fictional; the workflow is not.
 
 <table>
 <tr>
@@ -59,20 +61,19 @@ Every project you add runs the same pipeline. Every request you make — a quest
 
 ## 🚀 Quick start
 
-```bash
-git clone https://github.com/shivharilokhande/agentitcompany.git
-cd agentitcompany
-npm install                 # no native builds — SQLite comes from Node itself
-npm run dev                 # → http://localhost:3100
-```
-
-<details>
-<summary><b>Docker</b></summary>
+**One line, Docker:**
 
 ```bash
-docker compose up --build   # → http://localhost:3100 · data persists in the smartit-data volume
+git clone https://github.com/shivharilokhande/agentitcompany.git && cd agentitcompany && docker compose up --build
 ```
-</details>
+
+**One line, Node ≥ 22.13 (no native builds — SQLite comes from Node itself):**
+
+```bash
+git clone https://github.com/shivharilokhande/agentitcompany.git && cd agentitcompany && npm install && npm run dev
+```
+
+Open **http://localhost:3100**. Then, to see a full company run in 60 seconds: `zsh data/demo-run.sh`.
 
 <details>
 <summary><b>Run it forever on macOS (LaunchAgent)</b></summary>
@@ -445,7 +446,9 @@ This repository was itself built by the Smart IT company, so it ships its own de
 
 ## 🤝 Contributing
 
-Issues and PRs are welcome. Run `npm run typecheck && npm test` before opening a PR; every file in a PR gets the same LGTM/LBTM review the company gives its own code.
+Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Good places to start are the [`good first issue`](https://github.com/shivharilokhande/agentitcompany/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) list and adding an LLM provider (usually a config‑only change). Questions and ideas go in [Discussions](https://github.com/shivharilokhande/agentitcompany/discussions).
+
+If this is useful to you, a ⭐ helps other people find it.
 
 ## 📄 License
 
