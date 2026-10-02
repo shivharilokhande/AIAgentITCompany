@@ -35,12 +35,21 @@ export function listSessions(maxAgeMs = 3 * 86_400_000): CoworkSession[] {
       try {
         const m = JSON.parse(fs.readFileSync(full, "utf8")) as Record<string, unknown>;
         const last = Number(m.lastActivityAt ?? 0);
-        if (Date.now() - last > maxAgeMs) continue;
         const id = String(m.sessionId ?? e.name.replace(/\.json$/, ""));
-        const sdir = path.join(dir, id);
+        // The session folder is named by the full id ("local_<uuid>"), the bare uuid, or — in current Cowork builds —
+        // the first 8 hex chars of the uuid ("d6941130"). Try each.
+        const bare = id.replace(/^local_/, "");
+        const candidates = [id, bare, bare.slice(0, 8), `local_${bare}`];
+        const sdir = candidates.map((c) => path.join(dir, c)).find((p) => fs.existsSync(path.join(p, "audit.jsonl")));
+        if (!sdir) continue;
         const audit = path.join(sdir, "audit.jsonl");
-        if (!fs.existsSync(audit)) continue;
-        out.push({ id, title: String(m.title ?? ""), cwd: String(m.cwd ?? ""), folders: Array.isArray(m.userSelectedFolders) ? (m.userSelectedFolders as unknown[]).map(String) : [], initialMessage: String(m.initialMessage ?? ""), lastActivityAt: last, dir: sdir, auditFile: audit });
+        // metadata lastActivityAt lags the audit log; the log's mtime is the real "last seen"
+        let lastSeen = last;
+        try { lastSeen = Math.max(last, fs.statSync(audit).mtimeMs); } catch { /* keep metadata value */ }
+        if (Date.now() - lastSeen > maxAgeMs) continue;
+        const folders = Array.isArray(m.userSelectedFolders) ? (m.userSelectedFolders as unknown[]).map(String) : [];
+        if (m.folderMountNames && typeof m.folderMountNames === "object") for (const k of Object.keys(m.folderMountNames as Record<string, string>)) if (!folders.includes(k)) folders.push(k);
+        out.push({ id, title: String(m.title ?? ""), cwd: String(m.cwd ?? ""), folders, initialMessage: String(m.initialMessage ?? ""), lastActivityAt: lastSeen, dir: sdir, auditFile: audit });
       } catch { /* skip */ }
     }
   };
@@ -52,16 +61,23 @@ const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 /** Fuzzy: "NamastPOS 2" ↔ "NamastePOS" — normalized containment, or ≤1 edit on the name, or shared repo folder. */
 export function matchProject(session: CoworkSession, projects: Project[]): Project | null {
   const title = norm(session.title);
-  const hay = [title, norm(session.initialMessage), ...session.folders.map(norm)].join("|");
-  for (const p of projects) {
+  const usable = projects.filter((p) => norm(p.name).length >= 3);
+  const samePath = (a: string, b: string) => { const x = a.replace(/\/+$/, ""), y = b.replace(/\/+$/, ""); return x === y || x.startsWith(y + "/") || y.startsWith(x + "/"); };
+  // 1. Strongest signal: the session has the project's repo folder attached (or its folder is named after the project).
+  for (const p of usable) {
+    if (p.repoPath && session.folders.some((f) => samePath(f, p.repoPath))) return p;
+    if (session.folders.some((f) => norm(path.basename(f)) === norm(p.name))) return p;
+  }
+  // 2. The session title names the project (containment, or ≤1 edit on a title token: "NamastPOS 2" → NamastePOS).
+  for (const p of usable) {
     const name = norm(p.name);
-    if (!name || name.length < 3) continue;
-    if (hay.includes(name)) return p;
-    if (p.repoPath && session.folders.some((f) => f.startsWith(p.repoPath) || p.repoPath.startsWith(f))) return p;
-    // one-edit tolerance on the title tokens (NamastPOS vs NamastePOS)
-    for (const tok of session.title.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length >= 4)) {
-      if (editDistance(norm(tok), name) <= 1) return p;
-    }
+    if (title.includes(name)) return p;
+    for (const tok of session.title.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length >= 4)) if (editDistance(norm(tok), name) <= 1) return p;
+  }
+  // 3. Weaker: the first user message names the project, or a project tag appears in the title.
+  const first = norm(session.initialMessage);
+  for (const p of usable) {
+    if (first.includes(norm(p.name))) return p;
     for (const tag of p.tags.split(",").map((t) => norm(t)).filter((t) => t.length >= 4)) if (title.includes(tag)) return p;
   }
   return null;
@@ -193,6 +209,12 @@ export function syncSession(session: CoworkSession, project: Project, existing?:
       if (isToolResult) continue;
       const t = textOf(content);
       if (!t || t === w.lastUserText) continue;
+      // Sub-agent hand-backs and system reminders arrive in the user slot but are not human instructions.
+      if (/^\s*(<agent-message|\[Subagent hand-back\]|<system-reminder|<task-notification|<local-command)/i.test(t)) {
+        const persona = /qa|test/i.test(t.slice(0, 400)) ? "qa" : /deploy|docker|ci\b/i.test(t.slice(0, 400)) ? "devops" : "be";
+        if (w.commandId) { bridge.logActivity({ projectId: project.id, actor: "claude", type: "phase.5.deliver", message: `Sub-agent handed back: ${t.replace(/<[^>]+>|\[Subagent hand-back\]/g, "").trim().split("\n").find((l) => l.trim())?.slice(0, 200) ?? "result"}`, detail: t.length > 200 ? t.slice(0, 20000) : "", commandId: w.commandId, persona, phase: 5, step: "deliver", meta: { session: session.title } }); posted++; }
+        continue;
+      }
       // new human instruction → close previous run, open a new one
       if (w.commandId) { const prev = bridge.getCommand(w.commandId); if (prev && prev.status === "running") bridge.updateCommand(prev.id, { status: "done", result: lastAssistantText || "Session moved on to the next request." }); }
       w.commandId = null;

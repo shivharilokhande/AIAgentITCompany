@@ -1,0 +1,1515 @@
+{
+ "project": {
+  "name": "GharHisab",
+  "idea": "Privacy-first, local-first household finance app for Indian families: know what you have, what you owe, what is coming. The phone owns the encrypted financial ledger; the cloud owns only platform operations.",
+  "mode": "incremental",
+  "repoPath": "/Users/shiv/AI Development/GharHisab",
+  "tags": "flutter,spring-boot,nextjs,fintech,privacy,local-first",
+  "owner": "Shivhari Lokhande",
+  "deployStatus": "not_deployed"
+ },
+ "phases": [
+  {
+   "phase": 1,
+   "status": "done",
+   "summary": "Vision locked: household financial OS; 7 product principles; MVP scope (PRD \u00a75)."
+  },
+  {
+   "phase": 2,
+   "status": "done",
+   "summary": "Flutter + Spring Boot modular monolith + Next.js admin; 20 sprints / 772 pts / 145 stories; 4 parallel tracks."
+  },
+  {
+   "phase": 3,
+   "status": "done",
+   "summary": "PRD, BRD, functional spec, UX spec, 145 user stories with ACs (docs/01\u201303, user-stories/)."
+  },
+  {
+   "phase": 4,
+   "status": "done",
+   "summary": "System architecture, HLD/LLD, data model, API spec, security & threat model, 12 ADRs, execution order (docs/04\u201312, 17, 19, 25)."
+  },
+  {
+   "phase": 5,
+   "status": "active",
+   "summary": "S0 and S1 closed & accepted (16 stories, 59 tests, 4 goldens). S2 active: GH-020 encrypted ledger landed 2 Oct."
+  }
+ ],
+ "requirements": [
+  {
+   "priority": "P0",
+   "text": "Authentication and household creation"
+  },
+  {
+   "priority": "P0",
+   "text": "Accounts, categories, transactions and transfers"
+  },
+  {
+   "priority": "P0",
+   "text": "Recurring bills/payments and calendar"
+  },
+  {
+   "priority": "P0",
+   "text": "Budgets and goals"
+  },
+  {
+   "priority": "P0",
+   "text": "Loans, EMIs and credit cards"
+  },
+  {
+   "priority": "P0",
+   "text": "Investments and net worth"
+  },
+  {
+   "priority": "P0",
+   "text": "Encrypted local ledger (SQLCipher) \u2014 financial data never leaves the phone"
+  },
+  {
+   "priority": "P0",
+   "text": "Deterministic money engines (integer minor units)"
+  },
+  {
+   "priority": "P1",
+   "text": "Family sharing via end-to-end encrypted sync"
+  },
+  {
+   "priority": "P1",
+   "text": "User-controlled encrypted backup file"
+  },
+  {
+   "priority": "P1",
+   "text": "On-device auto-capture from SMS and Gmail"
+  },
+  {
+   "priority": "P1",
+   "text": "Notifications"
+  },
+  {
+   "priority": "P1",
+   "text": "AI assistant via stateless gateway"
+  },
+  {
+   "priority": "P2",
+   "text": "Analytics (no financial values)"
+  },
+  {
+   "priority": "P2",
+   "text": "Admin portal operational tooling"
+  }
+ ],
+ "sprints": [
+  {
+   "number": 0,
+   "goal": "Foundation & tooling: monorepo, flavors, Spring Boot skeleton, admin scaffold, CI, security scans",
+   "startDate": "2026-09-30",
+   "endDate": "2026-10-01",
+   "status": "closed"
+  },
+  {
+   "number": 1,
+   "goal": "Design system & app shell: theme, Money, MoneyText/Input, core widgets, bottom nav, routing",
+   "startDate": "2026-10-01",
+   "endDate": "2026-10-02",
+   "status": "closed"
+  },
+  {
+   "number": 2,
+   "goal": "Encrypted vault & security: SQLCipher ledger, vault unlock, key management",
+   "startDate": "2026-10-02",
+   "endDate": "2026-10-15",
+   "status": "active"
+  },
+  {
+   "number": 3,
+   "goal": "Authentication & Onboarding",
+   "startDate": "2026-10-16",
+   "endDate": "2026-10-29",
+   "status": "planned"
+  },
+  {
+   "number": 4,
+   "goal": "Accounts & Transactions \u00b7 Auto-Capture (SMS, Email, iOS)",
+   "startDate": "2026-10-30",
+   "endDate": "2026-11-12",
+   "status": "planned"
+  },
+  {
+   "number": 5,
+   "goal": "Authentication & Onboarding \u00b7 Accounts & Transactions \u00b7 Backup & Restore \u00b7 Auto-Capture (SMS, Email, iOS)",
+   "startDate": "2026-11-13",
+   "endDate": "2026-11-26",
+   "status": "planned"
+  },
+  {
+   "number": 6,
+   "goal": "Accounts & Transactions \u00b7 Backup & Restore \u00b7 Auto-Capture (SMS, Email, iOS) \u00b7 Settings, Profile & Subscriptions",
+   "startDate": "2026-11-27",
+   "endDate": "2026-12-10",
+   "status": "planned"
+  },
+  {
+   "number": 7,
+   "goal": "Auto-Capture (SMS, Email, iOS) \u00b7 Bills, Recurring Payments & Calendar \u00b7 Notifications",
+   "startDate": "2026-12-11",
+   "endDate": "2026-12-24",
+   "status": "planned"
+  },
+  {
+   "number": 8,
+   "goal": "Authentication & Onboarding \u00b7 Bills, Recurring Payments & Calendar \u00b7 Budgets",
+   "startDate": "2026-12-25",
+   "endDate": "2027-01-07",
+   "status": "planned"
+  },
+  {
+   "number": 9,
+   "goal": "Budgets \u00b7 Goals \u00b7 Backend Operational Services",
+   "startDate": "2027-01-08",
+   "endDate": "2027-01-21",
+   "status": "planned"
+  },
+  {
+   "number": 10,
+   "goal": "Cash-Flow Forecast & Reports \u00b7 Admin Portal (Web)",
+   "startDate": "2027-01-22",
+   "endDate": "2027-02-04",
+   "status": "planned"
+  },
+  {
+   "number": 11,
+   "goal": "Cash-Flow Forecast & Reports \u00b7 Loans & Credit Cards \u00b7 Backend Operational Services \u00b7 Admin Portal (Web)",
+   "startDate": "2027-02-05",
+   "endDate": "2027-02-18",
+   "status": "planned"
+  },
+  {
+   "number": 12,
+   "goal": "Loans & Credit Cards \u00b7 Investments & Net Worth",
+   "startDate": "2027-02-19",
+   "endDate": "2027-03-04",
+   "status": "planned"
+  },
+  {
+   "number": 13,
+   "goal": "Authentication & Onboarding \u00b7 Family & Sharing (E2EE)",
+   "startDate": "2027-03-05",
+   "endDate": "2027-03-18",
+   "status": "planned"
+  },
+  {
+   "number": 14,
+   "goal": "Family & Sharing (E2EE)",
+   "startDate": "2027-03-19",
+   "endDate": "2027-04-01",
+   "status": "planned"
+  },
+  {
+   "number": 15,
+   "goal": "Accounts & Transactions \u00b7 Auto-Capture (SMS, Email, iOS) \u00b7 Family & Sharing (E2EE) \u00b7 Notifications \u00b7 Admin Portal (Web)",
+   "startDate": "2027-04-02",
+   "endDate": "2027-04-15",
+   "status": "planned"
+  },
+  {
+   "number": 16,
+   "goal": "AI Assistant \u00b7 Settings, Profile & Subscriptions \u00b7 Backend Operational Services \u00b7 Admin Portal (Web)",
+   "startDate": "2027-04-16",
+   "endDate": "2027-04-29",
+   "status": "planned"
+  },
+  {
+   "number": 17,
+   "goal": "Settings, Profile & Subscriptions \u00b7 Backend Operational Services \u00b7 Admin Portal (Web)",
+   "startDate": "2027-04-30",
+   "endDate": "2027-05-13",
+   "status": "planned"
+  },
+  {
+   "number": 18,
+   "goal": "Admin Portal (Web) \u00b7 Hardening, QA & Release",
+   "startDate": "2027-05-14",
+   "endDate": "2027-05-27",
+   "status": "planned"
+  },
+  {
+   "number": 19,
+   "goal": "Hardening, QA & Release",
+   "startDate": "2027-05-28",
+   "endDate": "2027-06-10",
+   "status": "planned"
+  }
+ ],
+ "stories": [
+  {
+   "title": "GH-001 \u00b7 a monorepo (apps/mobile, apps/admin, services/api, packages/*, infrastructure, docs)",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want a monorepo (apps/mobile, apps/admin, services/api, packages/*, infrastructure, docs) so that all code lives in one versioned place.\n\nAcceptance criteria:\nFolders per CLAUDE.md \u00a711\nDocs/ renamed to docs/\nREADME with setup steps\n\nDepends on: \u2014",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-002 \u00b7 Flutter project with flavors (dev/staging/prod) and lints",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Flutter project with flavors (dev/staging/prod) and lints so that builds are reproducible.\n\nAcceptance criteria:\nflutter analyze clean\nvery_good_analysis lints\nflavors build on Android+iOS\n\nDepends on: GH-001",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-003 \u00b7 Spring Boot 21 modular-monolith skeleton",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Spring Boot 21 modular-monolith skeleton so that backend modules have clear boundaries.\n\nAcceptance criteria:\nModules: identity, membership, subscription, entitlements, flags, support, notification, audit, sync-relay, ai-gateway\nArchUnit rule forbids ledger entities\n\nDepends on: GH-001",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-004 \u00b7 Next.js admin skeleton (TS, Tailwind, shadcn, TanStack)",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Next.js admin skeleton (TS, Tailwind, shadcn, TanStack) so that admin work can start in parallel.\n\nAcceptance criteria:\nApp router, auth guard stub, lint/typecheck in CI\n\nDepends on: GH-001",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-005 \u00b7 docker-compose for Postgres, Redis, LocalStack",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want docker-compose for Postgres, Redis, LocalStack so that backend runs locally without AWS.\n\nAcceptance criteria:\n`docker compose up` starts all deps\nseed scripts\n\nDepends on: GH-003",
+   "points": 2,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-006 \u00b7 CI pipelines (mobile, admin, api) with privacy gate",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want CI pipelines (mobile, admin, api) with privacy gate so that regressions and privacy leaks are blocked.\n\nAcceptance criteria:\nFormat, analyze, test, build per app\nforbidden-entity/log-field lint fails build\nosv-scanner\n\nDepends on: GH-002,GH-003,GH-004",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-007 \u00b7 Fastlane to TestFlight + Play internal track",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Fastlane to TestFlight + Play internal track so that real phones get builds from sprint 1.\n\nAcceptance criteria:\nSigned builds from CI on main\nsecrets in CI vault\n\nDepends on: GH-006",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-008 \u00b7 shared design tokens package (JSON \u2192 Dart + Tailwind)",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want shared design tokens package (JSON \u2192 Dart + Tailwind) so that mobile and admin stay visually consistent.\n\nAcceptance criteria:\nColors, radii, spacing, type scale from design.md \u00a71.4\ngenerated code committed\n\nDepends on: GH-001",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-009 \u00b7 logging/redaction foundation",
+   "description": "E00 Foundation & Tooling \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want logging/redaction foundation so that financial values never reach logs or crash reports.\n\nAcceptance criteria:\nRedacting logger on mobile+api\nunit tests prove amounts/notes are masked\nCrashlytics scrubber\n\nDepends on: GH-002,GH-003",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 0
+  },
+  {
+   "title": "GH-010 \u00b7 theme (light, dark-ready) from tokens",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want theme (light, dark-ready) from tokens so that screens never hard-code colors.\n\nAcceptance criteria:\nThemeData + extensions\nInter font with tabular figures\ntext scaling to 200% verified\n\nDepends on: GH-008",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-011 \u00b7 bottom navigation Home \u00b7 Transactions \u00b7 (+) \u00b7 Plans \u00b7 More",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: ref 06,04,36\n\nStory: As a user, I want bottom navigation Home \u00b7 Transactions \u00b7 (+) \u00b7 Plans \u00b7 More so that I can reach every area in one tap.\n\nAcceptance criteria:\nActive green state\nlabels\nFAB opens quick-add sheet\nsemantics labels\n\nDepends on: GH-010",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-012 \u00b7 go_router route table + deep links",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want go_router route table + deep links so that navigation is typed and testable.\n\nAcceptance criteria:\nAll routes from IMPLEMENTATION_MATRIX registered\nguards for vault lock and auth\n\nDepends on: GH-002",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-013 \u00b7 core widgets: AppScaffold, AppHeader, SectionHeader, cards, chips, buttons",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: ref all\n\nStory: As a developer, I want core widgets: AppScaffold, AppHeader, SectionHeader, cards, chips, buttons so that features compose, not duplicate.\n\nAcceptance criteria:\nGolden tests for each widget at 1x/2x text\n44px targets\n\nDepends on: GH-010",
+   "points": 8,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-014 \u00b7 MoneyText + MoneyInput widgets",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: ref all\n\nStory: As a developer, I want MoneyText + MoneyInput widgets so that amounts always render in \u20b9 Indian grouping.\n\nAcceptance criteria:\n\u20b91,23,456.78\nsign + color + arrow\nprivacy-mode masking\nnumeric keypad input in minor units\n\nDepends on: GH-016",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-015 \u00b7 state widgets: Loading skeleton, Empty, Error, Offline banner",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want state widgets: Loading skeleton, Empty, Error, Offline banner so that every screen has the 5 states.\n\nAcceptance criteria:\nReusable\nretry callback\ninput preserved on error\n\nDepends on: GH-013",
+   "points": 3,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-016 \u00b7 Money value object (integer minor units)",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Money value object (integer minor units) so that financial math is exact.\n\nAcceptance criteria:\nAdd/sub/mul/div/percent/allocate\nHALF_UP/HALF_EVEN explicit\nproperty tests (glados)\n\nDepends on: GH-002",
+   "points": 5,
+   "status": "done",
+   "assignee": "",
+   "sprintNumber": 1
+  },
+  {
+   "title": "GH-017 \u00b7 charts kit on fl_chart (line, bar, donut, progress)",
+   "description": "E01 Design System & App Shell \u00b7 P0 \u00b7 screen: ref 06,27,36,37\n\nStory: As a developer, I want charts kit on fl_chart (line, bar, donut, progress) so that charts look like references.\n\nAcceptance criteria:\nLine w/ projected label, grouped bar, donut w/ center total, progress bars\ngoldens\n\nDepends on: GH-013",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-018 \u00b7 privacy mode toggle",
+   "description": "E01 Design System & App Shell \u00b7 P1 \u00b7 screen: ref 06 (eye icon)\n\nStory: As a user, I want privacy mode toggle so that I can hide amounts in public.\n\nAcceptance criteria:\nEye icon masks all MoneyText as \u20b9 \u2022\u2022\u2022\u2022\npersists per device\n\nDepends on: GH-014",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-020 \u00b7 Drift + SQLCipher database with schema v1",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Drift + SQLCipher database with schema v1 so that the ledger is encrypted at rest.\n\nAcceptance criteria:\nAll entities from 05_DATA_MODEL \u00a76\nkey from secure storage\nDB file unreadable without key (test)\n\nDepends on: GH-002",
+   "points": 8,
+   "status": "in_progress",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-021 \u00b7 migration framework + tests",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want migration framework + tests so that upgrades never lose data.\n\nAcceptance criteria:\nMigration test harness from every prior version\npre-migration backup hook\n\nDepends on: GH-020",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-022 \u00b7 set app PIN / biometric on first launch",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: new: Vault setup\n\nStory: As a user, I want set app PIN / biometric on first launch so that only I can open my finances.\n\nAcceptance criteria:\n6-digit PIN + Face ID/fingerprint\nkey in Keychain/Keystore ThisDeviceOnly\n\nDepends on: GH-020",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-023 \u00b7 lock screen and auto-lock",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: new: Lock screen\n\nStory: As a user, I want lock screen and auto-lock so that my data is safe if I leave my phone.\n\nAcceptance criteria:\nAuto-lock 2 min / background 30 s\nback-off after 5 fails\nworks offline\n\nDepends on: GH-022",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-024 \u00b7 OS backup exclusion, snapshot blur, FLAG_SECURE, clipboard clear",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want OS backup exclusion, snapshot blur, FLAG_SECURE, clipboard clear so that data does not leak via OS features.\n\nAcceptance criteria:\nallowBackup=false\niOS excluded\napp-switcher blur\ntests/checklist\n\nDepends on: GH-020",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-025 \u00b7 repository + use-case base layer with Riverpod",
+   "description": "E02 Encrypted Local Vault & Security \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want repository + use-case base layer with Riverpod so that widgets never touch DAOs.\n\nAcceptance criteria:\nBase classes, providers, error mapping\narchitecture lint\n\nDepends on: GH-020",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 2
+  },
+  {
+   "title": "GH-030 \u00b7 splash screen",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: ref 13\n\nStory: As a user, I want splash screen so that the app feels premium at launch.\n\nAcceptance criteria:\nLogo, tagline, illustration\nGet Started / Sign In\n<1 s to interactive\n\nDepends on: GH-013",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-031 \u00b7 feature intro carousel",
+   "description": "E03 Authentication & Onboarding \u00b7 P1 \u00b7 screen: ref 16\n\nStory: As a user, I want feature intro carousel so that I understand what GharHisab does.\n\nAcceptance criteria:\n3 slides, skip, Next\ndots indicator\n\nDepends on: GH-030",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-032 \u00b7 create account with email/mobile + password",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: ref 21,32\n\nStory: As a user, I want create account with email/mobile + password so that I can start using the app.\n\nAcceptance criteria:\nCognito sign-up\npassword rules shown live\nGoogle/Apple sign-in buttons\n\nDepends on: GH-040",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-033 \u00b7 verify mobile via OTP",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: ref 21,32\n\nStory: As a user, I want verify mobile via OTP so that my account is secured.\n\nAcceptance criteria:\n6-digit OTP, resend timer, error states\n\nDepends on: GH-032",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-034 \u00b7 log in and forgot/reset password",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: ref 32\n\nStory: As a user, I want log in and forgot/reset password so that I can recover access.\n\nAcceptance criteria:\nLogin, forgot (OTP), set new password, success screen\n\nDepends on: GH-040",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-035 \u00b7 complete profile (name, DOB, gender, marital status, location)",
+   "description": "E03 Authentication & Onboarding \u00b7 P1 \u00b7 screen: ref 32\n\nStory: As a user, I want complete profile (name, DOB, gender, marital status, location) so that the app personalises defaults.\n\nAcceptance criteria:\nOptional fields\nstored locally only\n\nDepends on: GH-020",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-036 \u00b7 \"Restore from backup?\" step",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: new\n\nStory: As a user, I want \"Restore from backup?\" step so that I keep my data on a new phone.\n\nAcceptance criteria:\nShown after vault setup\npicks .ghbackup\nvalidates passphrase\n\nDepends on: GH-063",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-037 \u00b7 As a family head, I want create household (name, type, currency)",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: ref 47 step 1\n\nStory: As a family head, I want create household (name, type, currency) so that my family has one account.\n\nAcceptance criteria:\nFamily/Couple/Friends/Other\nINR default\nserver stores membership metadata only\n\nDepends on: GH-041",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-038 \u00b7 As a family head, I want add family members during onboarding",
+   "description": "E03 Authentication & Onboarding \u00b7 P1 \u00b7 screen: ref 47 step 2\n\nStory: As a family head, I want add family members during onboarding so that everyone can join.\n\nAcceptance criteria:\nAdd spouse/child/parent cards\ninvite later\nexpected-child support\n\nDepends on: GH-130",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 13
+  },
+  {
+   "title": "GH-039 \u00b7 set preferences (goals focus, notifications)",
+   "description": "E03 Authentication & Onboarding \u00b7 P1 \u00b7 screen: ref 47 step 3\n\nStory: As a user, I want set preferences (goals focus, notifications) so that my home screen fits me.\n\nAcceptance criteria:\nGoal chips\nnotification toggles\ndone screen (\"You're all set\")\n\nDepends on: GH-037",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-040 \u00b7 Cognito integration + token storage + refresh",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Cognito integration + token storage + refresh so that sessions are secure.\n\nAcceptance criteria:\nflutter_secure_storage\nrefresh in background\nlogout keeps vault (ADR-007)\n\nDepends on: GH-003",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-041 \u00b7 API: /auth, /me, /households (membership metadata)",
+   "description": "E03 Authentication & Onboarding \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want API: /auth, /me, /households (membership metadata) so that identity and household exist server-side.\n\nAcceptance criteria:\nOpenAPI\nidempotency keys\nRFC7807 errors\nno financial fields (contract test)\n\nDepends on: GH-003",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 3
+  },
+  {
+   "title": "GH-050 \u00b7 add account (bank, card, wallet, cash, other)",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 25\n\nStory: As a user, I want add account (bank, card, wallet, cash, other) so that my money sources are tracked.\n\nAcceptance criteria:\nTypes grid\nbank picker\nmanual details\nnickname\ncopy says \"Auto-track from SMS/Gmail on this phone\"\n\nDepends on: GH-025",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-051 \u00b7 accounts & cards list grouped by type",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 30\n\nStory: As a user, I want accounts & cards list grouped by type so that I see all balances in one place.\n\nAcceptance criteria:\nBank/Credit/Other sections with totals\nfilters All/Bank/Cards/Wallets/Loans\nderived balances\n\nDepends on: GH-050",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-052 \u00b7 add transaction (expense/income/transfer)",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 23\n\nStory: As a user, I want add transaction (expense/income/transfer) so that I record money movement fast.\n\nAcceptance criteria:\nAmount, date/time, category/sub, merchant, account w/ available, person/space, notes, recurring toggle, attachment\ncommit <150 ms\n\nDepends on: GH-050",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-053 \u00b7 add expense with split and receipt",
+   "description": "E04 Accounts & Transactions \u00b7 P1 \u00b7 screen: ref 18\n\nStory: As a user, I want add expense with split and receipt so that shared bills are easy.\n\nAcceptance criteria:\nSingle/Split tabs\ncategory grid\nreceipt photo\nsplit between members\n\nDepends on: GH-052",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-054 \u00b7 transactions list with filters and date groups",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 04\n\nStory: As a user, I want transactions list with filters and date groups so that I find any transaction.\n\nAcceptance criteria:\nSearch\nAll/Income/Expense/Transfer\nmonth picker\ntotals cards\nday headers w/ net\npagination\n\nDepends on: GH-052",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-055 \u00b7 transaction details with actions",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 11\n\nStory: As a user, I want transaction details with actions so that I can review and fix entries.\n\nAcceptance criteria:\nEdit/Split/Duplicate/Move/Delete\npayment details\ntags\nnotes\nreceipt\nprev/next \"1 of 245\"\n\nDepends on: GH-054",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-056 \u00b7 categories and sub-categories management",
+   "description": "E04 Accounts & Transactions \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a user, I want categories and sub-categories management so that categories match my life.\n\nAcceptance criteria:\nSystem + custom\nicon/color\nmerge\nreorder\n\nDepends on: GH-052",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-057 \u00b7 balance derivation + snapshot cache",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want balance derivation + snapshot cache so that balances are always correct.\n\nAcceptance criteria:\nBalance = opening + \u03a3 entries\nsnapshot rebuilt deterministically\ntransfer entries sum to 0 (tests)\n\nDepends on: GH-020",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-058 \u00b7 quick-add sheet from (+)",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 06 FAB\n\nStory: As a user, I want quick-add sheet from (+) so that common entries take 3 taps.\n\nAcceptance criteria:\nExpense/Income/Transfer/Bill/Goal shortcuts\nlast-used account\n\nDepends on: GH-011",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-059 \u00b7 statement import (CSV/XLS/PDF) with column mapping",
+   "description": "E04 Accounts & Transactions \u00b7 P1 \u00b7 screen: new\n\nStory: As a user, I want statement import (CSV/XLS/PDF) with column mapping so that I bring history in quickly.\n\nAcceptance criteria:\nMap columns\npreview\nde-dup\npassword PDF on device\nimport job metadata only to server\n\nDepends on: GH-052",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-060 \u00b7 home dashboard",
+   "description": "E04 Accounts & Transactions \u00b7 P0 \u00b7 screen: ref 06\n\nStory: As a user, I want home dashboard so that I see where I stand at a glance.\n\nAcceptance criteria:\nGreeting + household switcher\navailable balance\nincome/expense/savings/investments KPIs\nforecast mini-chart\nupcoming 7 days\nmonthly budget\nrecent\ngoals\n\nDepends on: GH-051,GH-054",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-061 \u00b7 receipt OCR on device",
+   "description": "E04 Accounts & Transactions \u00b7 P2 \u00b7 screen: ref 18 (AI toggle)\n\nStory: As a user, I want receipt OCR on device so that cash bills are captured without typing.\n\nAcceptance criteria:\nML Kit/Vision extracts merchant, date, total\nuser confirms\n\nDepends on: GH-053",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-063 \u00b7 create encrypted .ghbackup file",
+   "description": "E05 Backup & Restore \u00b7 P0 \u00b7 screen: new: Backup screen\n\nStory: As a user, I want create encrypted .ghbackup file so that I can recover if I lose my phone.\n\nAcceptance criteria:\nArgon2id + AES-GCM\npassphrase strength meter\nsave via share sheet/Files\n\nDepends on: GH-020",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-064 \u00b7 restore from .ghbackup",
+   "description": "E05 Backup & Restore \u00b7 P0 \u00b7 screen: new\n\nStory: As a user, I want restore from .ghbackup so that my data returns on a new phone.\n\nAcceptance criteria:\nValidate version\nwrong passphrase error\nmigrations run\nround-trip tests\n\nDepends on: GH-063",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-065 \u00b7 backup reminders and last-backup status",
+   "description": "E05 Backup & Restore \u00b7 P1 \u00b7 screen: ref 05 (Data Backup row)\n\nStory: As a user, I want backup reminders and last-backup status so that I don't forget to back up.\n\nAcceptance criteria:\nShows last backup age\nnudge after 30 days\n\nDepends on: GH-063",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-066 \u00b7 export CSV/PDF and delete all local data",
+   "description": "E05 Backup & Restore \u00b7 P1 \u00b7 screen: ref 05 (Manage Data)\n\nStory: As a user, I want export CSV/PDF and delete all local data so that I control my data.\n\nAcceptance criteria:\nHuman-readable export\nconfirmed full wipe\n\nDepends on: GH-020",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-070 \u00b7 SMS permission explainer (Android)",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P0 \u00b7 screen: new: /capture/sms\n\nStory: As a user, I want SMS permission explainer (Android) so that I trust why SMS access is needed.\n\nAcceptance criteria:\nPlain-language screen before OS dialog\napp fully usable if denied\n\nDepends on: GH-052",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-071 \u00b7 on-device bank SMS parser library v1",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want on-device bank SMS parser library v1 so that SMS become transactions accurately.\n\nAcceptance criteria:\nTop 15 banks + UPI apps + card issuers\n\u226595% on 2,000-sample synthetic corpus\nOTP/personal ignored\n\nDepends on: GH-016",
+   "points": 13,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-072 \u00b7 auto-captured review inbox",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P0 \u00b7 screen: new: /transactions/inbox\n\nStory: As a user, I want auto-captured review inbox so that I approve what was captured.\n\nAcceptance criteria:\nConfirm/edit/discard\nbulk approve\nauto-post toggle for high confidence\n\nDepends on: GH-071",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 5
+  },
+  {
+   "title": "GH-073 \u00b7 de-duplication across SMS, email, import",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want de-duplication across SMS, email, import so that nothing is counted twice.\n\nAcceptance criteria:\nKey last4+amount+time\u00b12min+ref\ntests incl. cross-source\n\nDepends on: GH-071",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-074 \u00b7 merchant\u2192category learning on device",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want merchant\u2192category learning on device so that categories get smarter.\n\nAcceptance criteria:\nCorrections stored locally\napplied to future captures\n\nDepends on: GH-071",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-075 \u00b7 90-day SMS backfill",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P1 \u00b7 screen: new\n\nStory: As a user, I want 90-day SMS backfill so that my forecast works on day one.\n\nAcceptance criteria:\nUser chooses range\nprogress\ncancel\n\nDepends on: GH-071",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-076 \u00b7 connect Gmail (on-device OAuth)",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P1 \u00b7 screen: new: /capture/gmail\n\nStory: As a user, I want connect Gmail (on-device OAuth) so that bank emails are captured on iPhone and Android.\n\nAcceptance criteria:\ngmail.readonly\nnarrow query\ntoken in secure storage\ndisconnect revokes\n\nDepends on: GH-071",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-077 \u00b7 connect Outlook / IMAP email",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P2 \u00b7 screen: new: /capture/email\n\nStory: As a user, I want connect Outlook / IMAP email so that non-Gmail users are covered.\n\nAcceptance criteria:\nGraph Mail.Read / IMAP on device\n\nDepends on: GH-076",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-078 \u00b7 iOS Shortcut setup guide + App Intent",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P1 \u00b7 screen: new: /capture/ios-shortcut\n\nStory: As a user, I want iOS Shortcut setup guide + App Intent so that iPhone bank SMS are captured automatically.\n\nAcceptance criteria:\nNative App Intent\ninstall shortcut link\nMessage trigger \"Run Immediately\" guide\nprototype spike first\n\nDepends on: GH-071",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-079 \u00b7 share/paste SMS text into the app",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P2 \u00b7 screen: new\n\nStory: As a user, I want share/paste SMS text into the app so that I can capture any message manually.\n\nAcceptance criteria:\nShare extension + paste detection prompt\n\nDepends on: GH-071",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-080 \u00b7 capture settings",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P1 \u00b7 screen: new: /settings/capture\n\nStory: As a user, I want capture settings so that I control sources and auto-post.\n\nAcceptance criteria:\nToggle sources\nauto-post\nbackfill\nlast sync\n\nDepends on: GH-072",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-081 \u00b7 Google Play SMS declaration + Google OAuth verification submissions",
+   "description": "E06 Auto-Capture (SMS, Email, iOS) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want Google Play SMS declaration + Google OAuth verification submissions so that store approvals don't block launch.\n\nAcceptance criteria:\nDeclaration form, demo video, listing copy\nOAuth verification started by sprint 4\n\nDepends on: GH-007",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 4
+  },
+  {
+   "title": "GH-085 \u00b7 add bill / recurring payment",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P0 \u00b7 screen: ref 35\n\nStory: As a user, I want add bill / recurring payment so that I never miss a payment.\n\nAcceptance criteria:\nCategory grid\nname, amount, due date, frequency (one-time/monthly/quarterly/yearly)\naccount\npayee\nreminder offset\nlocal notification only (no WhatsApp/email in v3)\n\nDepends on: GH-052",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-086 \u00b7 recurrence engine (RFC 5545 subset)",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want recurrence engine (RFC 5545 subset) so that occurrences generate correctly.\n\nAcceptance criteria:\nIdempotent keys\nmonth-end rule\nleap-year tests\n\nDepends on: GH-016",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-087 \u00b7 bills & payments screen",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P0 \u00b7 screen: ref 08\n\nStory: As a user, I want bills & payments screen so that I see what's due and overdue.\n\nAcceptance criteria:\nTabs Upcoming/All/Recurring/Calendar\ntotals due/overdue/upcoming\nPay (mark paid \u2192 transaction) / Schedule\n\nDepends on: GH-085",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-088 \u00b7 recurring payments & subscriptions",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P0 \u00b7 screen: ref 28\n\nStory: As a user, I want recurring payments & subscriptions so that I control subscriptions.\n\nAcceptance criteria:\nTotal per month\nUpcoming/Active/Calendar/History\nsubscription toggles\n\nDepends on: GH-085",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-089 \u00b7 financial calendar",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P1 \u00b7 screen: ref 31\n\nStory: As a user, I want financial calendar so that I see the month's money events.\n\nAcceptance criteria:\nMonth grid with dots\nday list\nupcoming events\nadd event\n\nDepends on: GH-086",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-090 \u00b7 smart recurring suggestions",
+   "description": "E07 Bills, Recurring Payments & Calendar \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a user, I want smart recurring suggestions so that EMIs/rent need no capture.\n\nAcceptance criteria:\nAfter 2 matching entries suggest recurring\n\nDepends on: GH-086,GH-071",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-095 \u00b7 budget & planning screen",
+   "description": "E08 Budgets \u00b7 P0 \u00b7 screen: ref 36\n\nStory: As a user, I want budget & planning screen so that I control monthly spending.\n\nAcceptance criteria:\nDonut used/total\ncategory budgets with % bars\ntabs Monthly/Spending/Trends/Insights\nremaining card\n\nDepends on: GH-017",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-096 \u00b7 set/edit category budgets with rollover",
+   "description": "E08 Budgets \u00b7 P0 \u00b7 screen: ref 36 (Add Category)\n\nStory: As a user, I want set/edit category budgets with rollover so that budgets fit my habits.\n\nAcceptance criteria:\nLimit, warn %, rollover policy\nmonth copy\n\nDepends on: GH-095",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-097 \u00b7 budget vs actual",
+   "description": "E08 Budgets \u00b7 P0 \u00b7 screen: ref 17\n\nStory: As a user, I want budget vs actual so that I see where I overspent.\n\nAcceptance criteria:\nTotals\ngrouped bar chart\ncategory table w/ difference + status\nbudget progress chips\n\nDepends on: GH-095",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-098 \u00b7 budget engine",
+   "description": "E08 Budgets \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want budget engine so that numbers are deterministic.\n\nAcceptance criteria:\nExcludes transfers/goal contributions\nchild categories\ntz-aware\ntests\n\nDepends on: GH-016",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 8
+  },
+  {
+   "title": "GH-100 \u00b7 add goal",
+   "description": "E09 Goals \u00b7 P0 \u00b7 screen: ref 19\n\nStory: As a user, I want add goal so that I plan for big things.\n\nAcceptance criteria:\nGoal type grid\nname/desc/image\ntarget + date\nmonthly contribution w/ \"reach in X\"\nlinked account\nreminder\n\nDepends on: GH-016",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-101 \u00b7 goal details with projection and milestones",
+   "description": "E09 Goals \u00b7 P0 \u00b7 screen: ref 38\n\nStory: As a user, I want goal details with projection and milestones so that I stay motivated.\n\nAcceptance criteria:\nSaved vs target\n% bar\ntime left\ncontribution\nprojected growth chart\nmilestones\nAdd funds\n\nDepends on: GH-100",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-102 \u00b7 goal projection engine",
+   "description": "E09 Goals \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want goal projection engine so that projections are correct.\n\nAcceptance criteria:\nRequired monthly = ceil(remaining/months)\non-track rule\ntests\n\nDepends on: GH-016",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-103 \u00b7 goals list on Plans + home",
+   "description": "E09 Goals \u00b7 P0 \u00b7 screen: ref 06 (Goals card)\n\nStory: As a user, I want goals list on Plans + home so that I see all goals together.\n\nAcceptance criteria:\nCards with progress\nsort by priority\n\nDepends on: GH-100",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-110 \u00b7 forecast engine cf-1 (isolate)",
+   "description": "E10 Cash-Flow Forecast & Reports \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want forecast engine cf-1 (isolate) so that forecasts are trustworthy and fast.\n\nAcceptance criteria:\nPer 21_FINANCIAL_ENGINES \u00a76\nlow/expected/high\nwarnings\ngolden scenario tests\n<1 s\n\nDepends on: GH-086,GH-098,GH-102",
+   "points": 13,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-111 \u00b7 cash-flow forecast screen",
+   "description": "E10 Cash-Flow Forecast & Reports \u00b7 P0 \u00b7 screen: ref 27\n\nStory: As a user, I want cash-flow forecast screen so that I know if I'll be short.\n\nAcceptance criteria:\nIncome/expense/net KPIs\n12-month bars + net line\nsummary (ending, surplus, tightest month)\nmonthly table\nhorizon picker 7/30/90/180/365\n\nDepends on: GH-110",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-112 \u00b7 forecast assumptions + \"why\" explanations",
+   "description": "E10 Cash-Flow Forecast & Reports \u00b7 P0 \u00b7 screen: new\n\nStory: As a user, I want forecast assumptions + \"why\" explanations so that I trust the forecast.\n\nAcceptance criteria:\nAssumption sheet\nper-warning reason\nconfidence label\n\nDepends on: GH-110",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-113 \u00b7 reports & analytics",
+   "description": "E10 Cash-Flow Forecast & Reports \u00b7 P1 \u00b7 screen: ref 33\n\nStory: As a user, I want reports & analytics so that I understand my money.\n\nAcceptance criteria:\nTabs Overview/Income/Expenses/Investments/Net worth\nincome vs expense\nbreakdown donut\nsavings rate\ncategory trend\ntop insights\n\nDepends on: GH-017",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-114 \u00b7 forecast warnings as local notifications",
+   "description": "E10 Cash-Flow Forecast & Reports \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a user, I want forecast warnings as local notifications so that I'm warned early.\n\nAcceptance criteria:\nBalance below buffer / bill with insufficient funds\n\nDepends on: GH-110,GH-140",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-120 \u00b7 loans & EMI screen",
+   "description": "E11 Loans & Credit Cards \u00b7 P1 \u00b7 screen: ref 26\n\nStory: As a user, I want loans & EMI screen so that I track all loans.\n\nAcceptance criteria:\nOutstanding/EMI/count KPIs\ntabs Active/Schedule/Prepayment calc\nloan cards w/ progress\nprepayment insight\nEMI history chart\nupcoming EMIs\n\nDepends on: GH-121",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-121 \u00b7 EMI + amortization engine",
+   "description": "E11 Loans & Credit Cards \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want EMI + amortization engine so that loan math is exact.\n\nAcceptance criteria:\nEMI formula\nfinal instalment absorbs residue\nprepay reduce tenure/EMI\ntests\n\nDepends on: GH-016",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-122 \u00b7 add/edit loan",
+   "description": "E11 Loans & Credit Cards \u00b7 P1 \u00b7 screen: new (form)\n\nStory: As a user, I want add/edit loan so that I record a new loan.\n\nAcceptance criteria:\nPrincipal, rate, tenure, start, account\nauto-creates recurring EMI\n\nDepends on: GH-121",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-123 \u00b7 credit card details",
+   "description": "E11 Loans & Credit Cards \u00b7 P1 \u00b7 screen: ref 09\n\nStory: As a user, I want credit card details so that I manage card usage and dues.\n\nAcceptance criteria:\nCard visual\nlimit/used/available\noutstanding + due date\nactions\ntabs Transactions/Bills/Rewards/Insights\n\nDepends on: GH-051",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-125 \u00b7 investments & portfolio",
+   "description": "E12 Investments & Net Worth \u00b7 P1 \u00b7 screen: ref 39\n\nStory: As a user, I want investments & portfolio so that I see my wealth growing.\n\nAcceptance criteria:\nTotal value + gain\ntabs Overview/MF/Stocks/Gold/Other\ninvested/returns/XIRR/today\nallocation donut\ngoal-wise allocation\nholdings table\n\nDepends on: GH-126",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-126 \u00b7 holdings model + XIRR/gain engine",
+   "description": "E12 Investments & Net Worth \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want holdings model + XIRR/gain engine so that returns are correct.\n\nAcceptance criteria:\nUnits 6dp scaled int\nXIRR Newton method w/ tests\nmanual valuation\n\nDepends on: GH-016",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-127 \u00b7 investment details (SIP)",
+   "description": "E12 Investments & Net Worth \u00b7 P1 \u00b7 screen: ref 10\n\nStory: As a user, I want investment details (SIP) so that I track each fund.\n\nAcceptance criteria:\nCurrent value, invested, XIRR\nNAV chart ranges\nSIP details\noverview stats\ntransaction table\n\nDepends on: GH-125",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-128 \u00b7 add investment / record valuation",
+   "description": "E12 Investments & Net Worth \u00b7 P1 \u00b7 screen: new (form)\n\nStory: As a user, I want add investment / record valuation so that holdings stay current.\n\nAcceptance criteria:\nManual add\nupdate NAV/price\nstale >30 days flag\n\nDepends on: GH-126",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-129 \u00b7 net worth",
+   "description": "E12 Investments & Net Worth \u00b7 P1 \u00b7 screen: ref 37\n\nStory: As a user, I want net worth so that I see my overall financial health.\n\nAcceptance criteria:\nTotal + trend\nassets/liabilities/change KPIs\nallocation and liability donuts\ntrend bars\ntop assets\n\nDepends on: GH-126,GH-121",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 12
+  },
+  {
+   "title": "GH-130 \u00b7 As a family head, I want invite members by link/QR and approve devices",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: new: /family/devices\n\nStory: As a family head, I want invite members by link/QR and approve devices so that my family joins securely.\n\nAcceptance criteria:\nInvite link/QR\nhead approves each device\ndevice list\n\nDepends on: GH-131",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 13
+  },
+  {
+   "title": "GH-131 \u00b7 device keys + space keys (X25519/Ed25519, XChaCha20)",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want device keys + space keys (X25519/Ed25519, XChaCha20) so that shared data is end-to-end encrypted.\n\nAcceptance criteria:\nKeys in Keychain/Keystore\nwrap per device\ncrypto unit tests\nsecurity review\n\nDepends on: GH-020",
+   "points": 13,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 13
+  },
+  {
+   "title": "GH-132 \u00b7 sync relay API + envelope store with TTL",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want sync relay API + envelope store with TTL so that phones exchange ciphertext only.\n\nAcceptance criteria:\nEndpoints per 06_API_SPEC\nobject store TTL 30 d\nserver never parses payload (test)\n\nDepends on: GH-003",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 13
+  },
+  {
+   "title": "GH-133 \u00b7 sync engine (HLC, append-only ledger, conflicts, offline queue)",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want sync engine (HLC, append-only ledger, conflicts, offline queue) so that everyone sees the same shared data.\n\nAcceptance criteria:\nConvergence tests across 3 simulated devices\nconflict surfaced in UI\n\nDepends on: GH-131,GH-132",
+   "points": 13,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-134 \u00b7 As a family head, I want sharing controls (space \u00d7 member matrix)",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: new: /family/sharing\n\nStory: As a family head, I want sharing controls (space \u00d7 member matrix) so that I decide who sees what.\n\nAcceptance criteria:\nDefault spaces Private/Family/Adults/Kids\ntoggle per member\nview/contributor/manager\n\nDepends on: GH-133",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-135 \u00b7 As a family head, I want sharing rules by module/category/account",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: new: /family/spaces/:id\n\nStory: As a family head, I want sharing rules by module/category/account so that records go to the right space automatically.\n\nAcceptance criteria:\nRules e.g. Loans\u2192Adults, Education\u2192Kids\ncreator may only narrow\n\nDepends on: GH-134",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-136 \u00b7 As a child member, I want child view limited to granted spaces",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a child member, I want child view limited to granted spaces so that kids see school fees, not EMIs.\n\nAcceptance criteria:\nChild device never receives Adults key (test)\nchild home/forecast from visible data only\n\nDepends on: GH-134",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-137 \u00b7 family / household screen",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P1 \u00b7 screen: ref 07\n\nStory: As a user, I want family / household screen so that we manage money together.\n\nAcceptance criteria:\nMembers row\nhousehold budget\nhousehold expenses\nupcoming family expenses\nshared to-dos\nfamily insights\n\nDepends on: GH-134",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-138 \u00b7 profile + family members list",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P1 \u00b7 screen: ref 24\n\nStory: As a user, I want profile + family members list so that I manage my profile and see members.\n\nAcceptance criteria:\nProfile details, financial profile, preferences\nmembers with role tags\n\nDepends on: GH-130",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 13
+  },
+  {
+   "title": "GH-139 \u00b7 As a family head, I want remove member / rotate keys / co-admin",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: new: /family/members/:id\n\nStory: As a family head, I want remove member / rotate keys / co-admin so that access changes are safe.\n\nAcceptance criteria:\nKey rotation on removal\npurge instruction\nco-admin assignment\nhonest UI copy\n\nDepends on: GH-133",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-142 \u00b7 sync status",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P1 \u00b7 screen: new: /settings/sync\n\nStory: As a user, I want sync status so that I know family data is up to date.\n\nAcceptance criteria:\nLast sync per space\npending changes\nerrors\n\nDepends on: GH-133",
+   "points": 2,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-143 \u00b7 As a family head, I want child profile with parental consent (DPDP)",
+   "description": "E13 Family & Sharing (E2EE) \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a family head, I want child profile with parental consent (DPDP) so that children are protected.\n\nAcceptance criteria:\nConsent recorded\nminimal analytics\nAI off by default\n\nDepends on: GH-130",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 14
+  },
+  {
+   "title": "GH-140 \u00b7 local notification scheduler",
+   "description": "E14 Notifications \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want local notification scheduler so that reminders work offline.\n\nAcceptance criteria:\nflutter_local_notifications + tz\nreschedule on writes\niOS 64 cap handling\ngeneric lock-screen text\n\nDepends on: GH-086",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 7
+  },
+  {
+   "title": "GH-141 \u00b7 notifications & activity screen",
+   "description": "E14 Notifications \u00b7 P1 \u00b7 screen: ref 03\n\nStory: As a user, I want notifications & activity screen so that I see everything that happened.\n\nAcceptance criteria:\nTabs All/Transactions/Bills/Investments/Alerts\nToday/This week/Earlier\nmark all read\nsettings link\n\nDepends on: GH-140",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-144 \u00b7 push via FCM/APNs (type + opaque id only)",
+   "description": "E14 Notifications \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want push via FCM/APNs (type + opaque id only) so that security/invite/support events reach me.\n\nAcceptance criteria:\nDevice registration API\npayload lint forbids amounts\n\nDepends on: GH-041",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-150 \u00b7 AI gateway (stateless, zero retention)",
+   "description": "E15 AI Assistant \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want AI gateway (stateless, zero retention) so that LLM calls don't leak data.\n\nAcceptance criteria:\nNo body logging (test)\nrate limit per plan\nprovider ZDR\n\nDepends on: GH-003",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-151 \u00b7 Ask GharHisab chat",
+   "description": "E15 AI Assistant \u00b7 P1 \u00b7 screen: ref 34\n\nStory: As a user, I want Ask GharHisab chat so that I get answers about my money.\n\nAcceptance criteria:\nGreeting\nquick actions\nchat with charts from local engines\nsuggestion chips\ninput + mic\n\nDepends on: GH-150",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-152 \u00b7 context consent sheet",
+   "description": "E15 AI Assistant \u00b7 P1 \u00b7 screen: new\n\nStory: As a user, I want context consent sheet so that I see exactly what is sent.\n\nAcceptance criteria:\nLists aggregate fields\nremove fields\nper-request approve\n\nDepends on: GH-151",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-153 \u00b7 AI draft actions (e.g. create budget)",
+   "description": "E15 AI Assistant \u00b7 P2 \u00b7 screen: \u2014\n\nStory: As a user, I want AI draft actions (e.g. create budget) so that AI helps but I stay in control.\n\nAcceptance criteria:\nDraft card \u2192 confirm \u2192 local use case writes\n\nDepends on: GH-151",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-154 \u00b7 AI insight cards on budget/forecast/reports",
+   "description": "E15 AI Assistant \u00b7 P2 \u00b7 screen: ref 17,27,36\n\nStory: As a user, I want AI insight cards on budget/forecast/reports so that I get timely tips.\n\nAcceptance criteria:\nDeterministic rule-based insights first\nLLM phrasing optional\n\nDepends on: GH-110",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-160 \u00b7 settings & security screen",
+   "description": "E16 Settings, Profile & Subscriptions \u00b7 P0 \u00b7 screen: ref 05\n\nStory: As a user, I want settings & security screen so that I control the app.\n\nAcceptance criteria:\nProfile card\nfamily\ncurrency/region\nappearance\nnotifications\nstart screen\napp lock\nbiometrics\nchange PIN\ndevices\nbackup\ndata & privacy\nhelp\nversion\nlogout\n\nDepends on: GH-023",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 6
+  },
+  {
+   "title": "GH-161 \u00b7 subscription plans & purchase (Free/Plus/Family)",
+   "description": "E16 Settings, Profile & Subscriptions \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a user, I want subscription plans & purchase (Free/Plus/Family) so that I unlock premium features.\n\nAcceptance criteria:\nApp Store / Play Billing\nserver receipt validation\nsigned entitlement token, 14-day offline grace\n\nDepends on: GH-162",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-162 \u00b7 entitlements API + feature gating",
+   "description": "E16 Settings, Profile & Subscriptions \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want entitlements API + feature gating so that plans control features, never data access.\n\nAcceptance criteria:\nJWS token\ngates in app\nexpiry never blocks reading/export\n\nDepends on: GH-041",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-163 \u00b7 help & support tickets in app",
+   "description": "E16 Settings, Profile & Subscriptions \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a user, I want help & support tickets in app so that I can get help.\n\nAcceptance criteria:\nCreate ticket with operational context only\noptional user-attached export\n\nDepends on: GH-170",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-170 \u00b7 support tickets API",
+   "description": "E17 Backend Operational Services \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want support tickets API so that support works end-to-end.\n\nAcceptance criteria:\nTickets, messages, attachments (non-financial), SLA fields\n\nDepends on: GH-003",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-171 \u00b7 subscriptions/billing webhooks (Razorpay/App stores)",
+   "description": "E17 Backend Operational Services \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want subscriptions/billing webhooks (Razorpay/App stores) so that entitlements stay correct.\n\nAcceptance criteria:\nIdempotent webhooks\nplan changes\naudit\n\nDepends on: GH-162",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-172 \u00b7 feature flags service",
+   "description": "E17 Backend Operational Services \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want feature flags service so that we roll out safely.\n\nAcceptance criteria:\nFlags by platform/plan/%\nclient SDK cached\n\nDepends on: GH-003",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-173 \u00b7 audit & security events",
+   "description": "E17 Backend Operational Services \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want audit & security events so that privileged actions are traceable.\n\nAcceptance criteria:\nImmutable audit table\nadmin action logging\n\nDepends on: GH-003",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-174 \u00b7 notifications/announcements service",
+   "description": "E17 Backend Operational Services \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want notifications/announcements service so that admin can message users.\n\nAcceptance criteria:\nSegments, channels (push/in-app/email), scheduling\ntemplates without amounts\n\nDepends on: GH-144",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-175 \u00b7 privacy-safe aggregate analytics",
+   "description": "E17 Backend Operational Services \u00b7 P1 \u00b7 screen: \u2014\n\nStory: As a developer, I want privacy-safe aggregate analytics so that we learn without spying.\n\nAcceptance criteria:\nAllow-listed events\nk\u226550 aggregates\nunknown fields rejected (test)\n\nDepends on: GH-003",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-176 \u00b7 admin RBAC + MFA step-up + 2-person rule",
+   "description": "E17 Backend Operational Services \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want admin RBAC + MFA step-up + 2-person rule so that admins have least privilege.\n\nAcceptance criteria:\nRoles per 12_RBAC\nno VIEW_CUSTOMER_FINANCIAL_DATA (test)\n\nDepends on: GH-173",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 9
+  },
+  {
+   "title": "GH-180 \u00b7 As a platform admin, I want admin login + 2FA challenge",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: new (style of 01)\n\nStory: As a platform admin, I want admin login + 2FA challenge so that only verified admins enter.\n\nAcceptance criteria:\nCognito admin pool\nTOTP/FIDO2\nlockout\n\nDepends on: GH-176",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-181 \u00b7 As a platform admin, I want admin dashboard",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: ref 43\n\nStory: As a platform admin, I want admin dashboard so that I see platform health.\n\nAcceptance criteria:\nUsers/households/MRR/subscriptions KPIs\ngrowth, revenue, plan distribution\nfeature usage\nsignups\nplatform health\nrecent users\nno Transactions nav\n\nDepends on: GH-180",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 10
+  },
+  {
+   "title": "GH-182 \u00b7 As a platform admin, I want users list + detail drawer",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: new (style of 01/12)\n\nStory: As a platform admin, I want users list + detail drawer so that I manage accounts.\n\nAcceptance criteria:\nSearch/filter\nstatus\nsuspend (MFA step-up)\ndevices\nno financial data\n\nDepends on: GH-176",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-183 \u00b7 As a platform admin, I want households (metadata)",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: new\n\nStory: As a platform admin, I want households (metadata) so that I support families.\n\nAcceptance criteria:\nMembers count, plan, devices, last sync status only\n\nDepends on: GH-182",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-184 \u00b7 As a platform admin, I want security: auth policies, 2FA, login activity",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: ref 01\n\nStory: As a platform admin, I want security: auth policies, 2FA, login activity so that accounts stay secure.\n\nAcceptance criteria:\nUsers table w/ 2FA status\n2FA policy\nlogin activity\nsecurity policies\n\nDepends on: GH-180",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 11
+  },
+  {
+   "title": "GH-185 \u00b7 As a platform admin, I want subscriptions & billing",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 02\n\nStory: As a platform admin, I want subscriptions & billing so that I manage revenue operations.\n\nAcceptance criteria:\nKPIs\nrevenue trend\nplan distribution\npayment status\nsubscriptions table\ndetail drawer (provider + last4 only)\n\nDepends on: GH-171",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-186 \u00b7 As a platform admin, I want plans & pricing",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 42\n\nStory: As a platform admin, I want plans & pricing so that I manage plans.\n\nAcceptance criteria:\nPlan cards\nplans table\nedit drawer w/ features\n\nDepends on: GH-162",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 17
+  },
+  {
+   "title": "GH-187 \u00b7 As a platform admin, I want roles & permissions",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: ref 12\n\nStory: As a platform admin, I want roles & permissions so that access is controlled.\n\nAcceptance criteria:\nRoles table\nrole detail\npermission matrix (no Transactions module)\n\nDepends on: GH-176",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-188 \u00b7 As a platform admin, I want feature flags",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 15\n\nStory: As a platform admin, I want feature flags so that I roll out features.\n\nAcceptance criteria:\nFeature table w/ rollout %\ndetail drawer\ntargeting\nchangelog\n\nDepends on: GH-172",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 15
+  },
+  {
+   "title": "GH-189 \u00b7 As a platform admin, I want support & tickets",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 20\n\nStory: As a platform admin, I want support & tickets so that I resolve user issues.\n\nAcceptance criteria:\nKPIs\ntickets table\nconversation drawer\ninternal notes\n\nDepends on: GH-170",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 16
+  },
+  {
+   "title": "GH-190 \u00b7 As a platform admin, I want import / sync job monitor",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 22 + 29 (re-purposed)\n\nStory: As a platform admin, I want import / sync job monitor so that I spot capture/sync failures.\n\nAcceptance criteria:\nJob status, counts, error codes, sync health\nno account numbers or rows\n\nDepends on: GH-132",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-191 \u00b7 As a platform admin, I want notifications & announcements",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 45\n\nStory: As a platform admin, I want notifications & announcements so that I communicate with users.\n\nAcceptance criteria:\nKPIs\ntable\ncompose drawer\nchannels\nschedule\n\nDepends on: GH-174",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-192 \u00b7 As a platform admin, I want analytics & reports (privacy-safe)",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 46\n\nStory: As a platform admin, I want analytics & reports (privacy-safe) so that I understand adoption.\n\nAcceptance criteria:\nRevenue, users, households, feature adoption\nspend/transaction charts removed\nk\u226550\n\nDepends on: GH-175",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-193 \u00b7 As a platform admin, I want system settings",
+   "description": "E18 Admin Portal (Web) \u00b7 P1 \u00b7 screen: ref 40\n\nStory: As a platform admin, I want system settings so that I configure the platform.\n\nAcceptance criteria:\nGeneral, security, integrations, data retention (operational only), danger zone\n\nDepends on: GH-173",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-194 \u00b7 As a platform admin, I want audit logs",
+   "description": "E18 Admin Portal (Web) \u00b7 P0 \u00b7 screen: new\n\nStory: As a platform admin, I want audit logs so that I review privileged actions.\n\nAcceptance criteria:\nFilterable immutable log\nexport\n\nDepends on: GH-173",
+   "points": 3,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-200 \u00b7 security review + pen test (mobile, API, sync crypto)",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want security review + pen test (mobile, API, sync crypto) so that we launch safely.\n\nAcceptance criteria:\nExternal review\nall highs fixed\n\nDepends on: GH-133",
+   "points": 8,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-201 \u00b7 performance pass (10k-transaction fixture)",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want performance pass (10k-transaction fixture) so that the app stays fast.\n\nAcceptance criteria:\nHome <500 ms\nsave <150 ms\nforecast <1 s\nlist jank-free\n\nDepends on: GH-110",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 19
+  },
+  {
+   "title": "GH-202 \u00b7 accessibility audit (TalkBack, VoiceOver, 200% text)",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want accessibility audit (TalkBack, VoiceOver, 200% text) so that everyone can use it.\n\nAcceptance criteria:\nAll customer screens pass checklist\ncontrast AA\n\nDepends on: GH-013",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 19
+  },
+  {
+   "title": "GH-203 \u00b7 privacy negative-test suite",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want privacy negative-test suite so that privacy guarantees are proven.\n\nAcceptance criteria:\nAdmin cannot read transactions/balances/etc.\nno amounts in logs/analytics/crash\nno-upload network test\n\nDepends on: GH-176",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 18
+  },
+  {
+   "title": "GH-204 \u00b7 visual fidelity review vs 47 references",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want visual fidelity review vs 47 references so that UI matches the design.\n\nAcceptance criteria:\nSide-by-side review per screen\ndeviations recorded\n\nDepends on: GH-202",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 19
+  },
+  {
+   "title": "GH-205 \u00b7 airplane-mode E2E suite",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want airplane-mode E2E suite so that offline really works.\n\nAcceptance criteria:\nAll CLAUDE.md \u00a722 flows offline in integration_test\n\nDepends on: GH-203",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 19
+  },
+  {
+   "title": "GH-206 \u00b7 store listings, privacy labels, DPDP notice, release candidate",
+   "description": "E19 Hardening, QA & Release \u00b7 P0 \u00b7 screen: \u2014\n\nStory: As a developer, I want store listings, privacy labels, DPDP notice, release candidate so that we can ship.\n\nAcceptance criteria:\nApp Store/Play listings\ndata safety forms\nRC build signed off\n\nDepends on: GH-204",
+   "points": 5,
+   "status": "todo",
+   "assignee": "",
+   "sprintNumber": 19
+  }
+ ],
+ "contracts": {
+  "A": {
+   "language": "en_in",
+   "programming_language": "Dart/Flutter (mobile) \u00b7 Java 21/Spring Boot (API) \u00b7 TypeScript/Next.js (admin)",
+   "original_requirements": "Household financial operating system for Indian families with privacy by architecture.",
+   "project_name": "gharhisab",
+   "product_goals": "Know what you have\nKnow what you owe\nKnow what is coming\nKeep control of your financial records",
+   "user_stories": "As a developer, I want a monorepo (apps/mobile, apps/admin, services/api, packages/*, infrastructure, docs) so that all code lives in one versioned place.\nAs a developer, I want Flutter project with flavors (dev/staging/prod) and lints so that builds are reproducible.\nAs a developer, I want Spring Boot 21 modular-monolith skeleton so that backend modules have clear boundaries.\nAs a developer, I want Next.js admin skeleton (TS, Tailwind, shadcn, TanStack) so that admin work can start in parallel.\nAs a developer, I want docker-compose for Postgres, Redis, LocalStack so that backend runs locally without AWS.\nAs a developer, I want CI pipelines (mobile, admin, api) with privacy gate so that regressions and privacy leaks are blocked.\nAs a developer, I want Fastlane to TestFlight + Play internal track so that real phones get builds from sprint 1.\nAs a developer, I want shared design tokens package (JSON \u2192 Dart + Tailwind) so that mobile and admin stay visually consistent.",
+   "requirement_pool": "P0 GH-001 E00 Foundation & Tooling\nP0 GH-002 E00 Foundation & Tooling\nP0 GH-003 E00 Foundation & Tooling\nP0 GH-004 E00 Foundation & Tooling\nP0 GH-005 E00 Foundation & Tooling\nP0 GH-006 E00 Foundation & Tooling\nP0 GH-007 E00 Foundation & Tooling\nP0 GH-008 E00 Foundation & Tooling\nP0 GH-009 E00 Foundation & Tooling\nP0 GH-010 E01 Design System & App Shell\nP0 GH-011 E01 Design System & App Shell\nP0 GH-012 E01 Design System & App Shell\nP0 GH-013 E01 Design System & App Shell\nP0 GH-014 E01 Design System & App Shell\nP0 GH-015 E01 Design System & App Shell\nP0 GH-016 E01 Design System & App Shell\nP0 GH-017 E01 Design System & App Shell\nP1 GH-018 E01 Design System & App Shell\nP0 GH-020 E02 Encrypted Local Vault & Security\nP0 GH-021 E02 Encrypted Local Vault & Security",
+   "requirement_analysis": "Hard parts: encrypted local ledger with deterministic money engines; E2E-encrypted family sync; on-device auto-capture. Everything else is CRUD on-device.",
+   "ui_design_draft": "47 reference screens in design/ (SCREEN_MANIFEST.md); design tokens \u2192 Dart + Tailwind.",
+   "anything_unclear": "Play/App Store accounts pending (GH-207 blocked)."
+  },
+  "B": {
+   "implementation_approach": "Monorepo. Mobile: Flutter \u00b7 Riverpod \u00b7 go_router \u00b7 Drift + SQLCipher. API: Java 21 Spring Boot modular monolith \u00b7 PostgreSQL (operational data only). Admin: Next.js \u00b7 shadcn/ui \u00b7 TanStack. Shared OpenAPI contract and design tokens.",
+   "file_list": "apps/mobile\napps/admin\nservices/api\npackages/design-tokens\npackages/api-contracts\ninfrastructure/docker\ndocs/\ndesign/",
+   "data_structures": "See docs/05_DATA_MODEL.md and docs/10_LLD.md",
+   "call_flow": "See docs/12_SEQUENCE_DIAGRAMS.md",
+   "anything_unclear": "None recorded."
+  },
+  "C": {
+   "required_packages": "Flutter, Riverpod, go_router, Drift, SQLCipher (SQLite3MultipleCiphers)\nSpring Boot, PostgreSQL, Redis\nNext.js, shadcn/ui, TanStack Query/Table, RHF+Zod, Playwright",
+   "logic_analysis": "docs/25_EXECUTION_ORDER.md \u2014 145 items after all dependencies, 4 parallel tracks",
+   "task_list": "GH-001 (S0, 3p) As a developer, I want a monorepo (apps/mobile, apps/admin, services/api, packages/*, infr\nGH-002 (S0, 3p) As a developer, I want Flutter project with flavors (dev/staging/prod) and lints\nGH-003 (S0, 5p) As a developer, I want Spring Boot 21 modular-monolith skeleton\nGH-004 (S0, 3p) As a developer, I want Next.js admin skeleton (TS, Tailwind, shadcn, TanStack)\nGH-005 (S0, 2p) As a developer, I want docker-compose for Postgres, Redis, LocalStack\nGH-006 (S0, 5p) As a developer, I want CI pipelines (mobile, admin, api) with privacy gate\nGH-007 (S0, 5p) As a developer, I want Fastlane to TestFlight + Play internal track\nGH-008 (S0, 3p) As a developer, I want shared design tokens package (JSON \u2192 Dart + Tailwind)\nGH-009 (S0, 3p) As a developer, I want logging/redaction foundation\nGH-010 (S1, 3p) As a developer, I want theme (light, dark-ready) from tokens\nGH-011 (S1, 5p) As a user, I want bottom navigation Home \u00b7 Transactions \u00b7 (+) \u00b7 Plans \u00b7 More\nGH-012 (S1, 5p) As a developer, I want go_router route table + deep links\nGH-013 (S1, 8p) As a developer, I want core widgets: AppScaffold, AppHeader, SectionHeader, cards, chips, \nGH-014 (S1, 5p) As a developer, I want MoneyText + MoneyInput widgets\nGH-015 (S1, 3p) As a developer, I want state widgets: Loading skeleton, Empty, Error, Offline banner\nGH-016 (S1, 5p) As a developer, I want Money value object (integer minor units)\nGH-017 (S2, 8p) As a developer, I want charts kit on fl_chart (line, bar, donut, progress)\nGH-018 (S2, 2p) As a user, I want privacy mode toggle\nGH-020 (S2, 8p) As a developer, I want Drift + SQLCipher database with schema v1\nGH-021 (S2, 5p) As a developer, I want migration framework + tests\nGH-022 (S2, 5p) As a user, I want set app PIN / biometric on first launch\nGH-023 (S2, 5p) As a user, I want lock screen and auto-lock\nGH-024 (S2, 3p) As a developer, I want OS backup exclusion, snapshot blur, FLAG_SECURE, clipboard clear\nGH-025 (S2, 5p) As a developer, I want repository + use-case base layer with Riverpod\nGH-030 (S3, 2p) As a user, I want splash screen\nGH-031 (S8, 3p) As a user, I want feature intro carousel\nGH-032 (S3, 8p) As a user, I want create account with email/mobile + password\nGH-033 (S3, 5p) As a user, I want verify mobile via OTP\nGH-034 (S3, 5p) As a user, I want log in and forgot/reset password\nGH-035 (S8, 3p) As a user, I want complete profile (name, DOB, gender, marital status, location)",
+   "api_spec": "packages/api-contracts (OpenAPI 3); docs/15_API_SPEC.md",
+   "shared_knowledge": "Money is integer minor units, never double. No financial values in logs/analytics/crash reports. Conventional commits.",
+   "anything_unclear": "None recorded."
+  }
+ },
+ "reviews": [
+  {
+   "file": "apps/mobile (S1 review pass 1)",
+   "verdict": "LBTM",
+   "pass": 1,
+   "notes": "4 blockers: Inter bundling, iOS deep links, MoneyInput max error, AsyncValueView"
+  },
+  {
+   "file": "apps/mobile (S1 review pass 2)",
+   "verdict": "LGTM",
+   "pass": 2,
+   "notes": "All blockers fixed (3b26250)"
+  }
+ ],
+ "gate": [
+  {
+   "check": 2,
+   "status": "pass",
+   "note": "59 unit/widget tests, 4 goldens, 1 integration test (S1)"
+  },
+  {
+   "check": 5,
+   "status": "pass",
+   "note": "OSV + Trivy scans blocking in CI (GH-006)"
+  }
+ ],
+ "adrs": [
+  {
+   "title": "ADR-001: Flutter for customer mobile",
+   "decision": "**Decision:** Flutter + Dart.  \n**Reason:** Strong cross-platform rendering consistency, mature mobile tooling, and a good fit for the 47-screen UI-heavy product."
+  },
+  {
+   "title": "ADR-002: Local financial source of truth",
+   "decision": "**Decision:** Encrypted on-device SQLite is authoritative.  \n**Reason:** Privacy, offline-first behavior, reduced breach blast radius, and clear product trust model."
+  },
+  {
+   "title": "ADR-003: SQLCipher",
+   "decision": "**Decision:** Encrypt the local SQLite database.  \n**Reason:** Financial records are sensitive even when the device filesystem is protected."
+  },
+  {
+   "title": "ADR-004: Spring Boot modular monolith",
+   "decision": "**Decision:** Start modular.  \n**Reason:** Lower operational complexity and easier transactional/authorization reasoning."
+  },
+  {
+   "title": "ADR-005: PostgreSQL operational-only",
+   "decision": "**Decision:** PostgreSQL stores platform metadata, not the customer financial ledger.  \n**Reason:** Enforces the privacy boundary structurally."
+  },
+  {
+   "title": "ADR-006: Deterministic financial engines",
+   "decision": "**Decision:** Money calculations are code-owned, not LLM-owned.  \n**Reason:** Reproducibility, auditability, and correctness."
+  },
+  {
+   "title": "ADR-007: Local vault unlock independent of cloud auth",
+   "decision": "**Decision:** Biometric/PIN unlocks a device key; Cognito governs only online operations.  \n**Reason:** Offline-first; expired tokens must never block access to the user's own ledger."
+  },
+  {
+   "title": "ADR-008: Family sharing via end-to-end encrypted sync (Accepted 2026-10-01)",
+   "decision": "**Decision:** Each member has their own phone and local vault. Shared records sync phone-to-phone as E2EE envelopes (space keys wrapped per device); the server relays ciphertext with a 30-day TTL and holds no keys. The family head controls which spaces each member can see. Full spec: `22_FAMILY_SHARING.md`.  \n**Reason:** Product owner requirement (no shared phones; head controls visibility, e.g. children see school fees but not EMIs).  \n**Privacy note:** This is data category 4 (\"explicitly consented cloud financial data\", `16_ROADMAP.md`) in **ciphertext-only** form. It amends CLAUDE.md \u00a75 narrowly: no plaintext financial data, no relational financial columns, no admin visibility, ciphertext stored outside PostgreSQL with TTL."
+  },
+  {
+   "title": "ADR-009: User-controlled encrypted backup file",
+   "decision": "**Decision:** `.ghbackup` (Argon2id + AES-256-GCM) saved wherever the user chooses; no server copy.  \n**Reason:** Mitigates device-loss data loss without creating a server ledger."
+  },
+  {
+   "title": "ADR-010: Stateless AI gateway",
+   "decision": "**Decision:** Cloud LLM calls pass through a zero-retention gateway with per-request consent and aggregate-only context.  \n**Reason:** Keeps provider keys off-device while preserving the privacy boundary."
+  },
+  {
+   "title": "ADR-011: On-device auto-capture from SMS and Gmail (Accepted 2026-10-01)",
+   "decision": "**Decision:** Android reads bank SMS under Play's SMS-based money management exception; Gmail is read via on-device OAuth (`gmail.readonly`). All parsing, de-duplication and categorisation happen on the phone; raw messages are not stored or uploaded. iOS uses Gmail + import fallbacks. Spec: `23_AUTO_CAPTURE.md`.  \n**Reason:** Manual entry fatigue is the top retention risk; on-device capture keeps the privacy model intact.\n\n**ADR-011 addendum (iOS):** iPhone uses a Shortcuts Message-trigger automation calling our App Intent, plus email (Gmail/Outlook/IMAP), share-sheet and family Android capture. Prototype in Phase 4."
+  },
+  {
+   "title": "ADR-012: SQLCipher-format ledger via SQLite3MultipleCiphers (Accepted 2026-10-02, GH-020)",
+   "decision": "**Context:** CLAUDE.md \u00a74/\u00a715 require Drift over SQLCipher. Since drift 2.32 / `sqlite3` 3.x, `sqlcipher_flutter_libs` is no longer supported; Drift's documented path bundles SQLite3MultipleCiphers (sqlite3mc) through `sqlite3` build hooks.\n**Decision:** Bundle sqlite3mc (`hooks.user_defines.sqlite3.source: sqlite3mc` in `apps/mobile/pubspec.yaml`) and run it in **SQLCipher v4 mode** (`PRAGMA cipher='sqlcipher'; PRAGMA legacy=4`) before `PRAGMA key`. The key is 256 random bits from `Random.secure()`, stored in iOS Keychain (`unlocked_this_device`, not synchronizable) / Android Keystore-backed storage, never derived from a password or PIN, never transmitted. The opener refuses to run if the cipher is not linked, never deletes a file on a *wrong* key, and resets the ledger only when the key is *missing* (reinstall/wipe \u2014 recovery only via `.ghbackup`, ADR-009).\n**Reason:** Keeps the SQLCipher on-disk format and cipher (AES-256-CBC + HMAC-SHA512, PBKDF2-SHA512) the architecture specifies, on the maintained library path, and lets host-side `flutter test` exercise the real encryption (open-without-key test).\n**Consequences:** iOS/Android build the native library from source via hooks (no CocoaPods/Gradle step). A future switch to sqlite3mc's default ChaCha20 scheme would be a rekey migration (GH-021) with its own ADR."
+  }
+ ],
+ "summary": {
+  "isPass": "pending",
+  "todos": "{ \"GH-207\": \"blocked on Play/App Store accounts\", \"S2\": \"encrypted vault in progress\" }",
+  "cycles": 2
+ },
+ "replace": false
+}
